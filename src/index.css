@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@tailwind utilities;
+
+@import "tailwindcss";
+
+.font-quicksand {
+  font-family: 'Quicksand', sans-serif;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Default Light Mode */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* Dark Mode */
+.dark body {
+  background-color: #121212;
+  color: white;
+}
