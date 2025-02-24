@@ -48,7 +48,7 @@ const Teacher = ({ setSelectedTeacher }) => {
 
   const handleEdit = (teacher) => {
     setSelectedTeacher(teacher);
-    navigate("/school/teacher/addTeacher");
+    navigate("/dashboard/teacher/addTeacher");
   };
 
   return (
@@ -78,7 +78,7 @@ const Teacher = ({ setSelectedTeacher }) => {
           {/* Add Button */}
           <button
             className="bg-blue-500 text-white p-2.5 rounded-lg flex items-center justify-center"
-            onClick={() => navigate("/school/teacher/addTeacher")}
+            onClick={() => navigate("/dashboard/teacher/addTeacher")}
           >
             <Plus className="w-5 h-5" />
           </button>

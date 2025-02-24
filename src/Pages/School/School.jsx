@@ -47,7 +47,7 @@ const School = ({ setSelectedSchool }) => {
   );
   const handleEdit = (school) => {
     setSelectedSchool(school);
-    navigate("/school/addSchool");
+    navigate("/dashboard/school/addSchool");
   };
 
   return (
@@ -77,7 +77,7 @@ const School = ({ setSelectedSchool }) => {
           {/* Add Button */}
           <button
             className="bg-blue-500 text-white p-2.5 rounded-lg flex items-center justify-center"
-            onClick={() => navigate("/school/addSchool")}
+            onClick={() => navigate("/dashboard/school/addSchool")}
           >
             <Plus className="w-5 h-5" />
           </button>

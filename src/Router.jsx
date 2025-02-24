@@ -49,35 +49,35 @@ const Router = () => {
         <Route element={<BarLayout />}>
           <Route path="/dashboard" element={<DashBoard />} />
           <Route
-            path="school"
+            path="dashboard/school"
             element={<School setSelectedSchool={setSelectedSchool} />}
           />
           <Route
-            path="school/teacher"
+            path="dashboard/teacher"
             element={<Teacher setSelectedTeacher={setSelectedTeacher} />}
           />
           <Route
-            path="school/student"
+            path="dashboard/student"
             element={<Student setSelectedStudent={setSelectedStudent} />}
           />
           <Route
-            path="school/parent"
+            path="dashboard/parent"
             element={<Parent setSelectedParent={setSelectedParent}/>}
           />
           <Route
-            path="school/addSchool"
+            path="dashboard/school/addSchool"
             element={<AddSchool selectedSchool={selectedSchool} />}
           />
           <Route
-            path="school/teacher/addTeacher"
+            path="dashboard/teacher/addTeacher"
             element={<AddTeacher selectedTeacher={selectedTeacher} />}
           />
           <Route
-            path="school/student/addStudent"
+            path="dashboard/student/addStudent"
             element={<AddStudent selectedStudent={selectedStudent} />}
           />
           <Route
-            path="school/parent/addParent"
+            path="dashboard/parent/addParent"
             element={<AddParent selectedParent={selectedParent}/>}
           />
         </Route>

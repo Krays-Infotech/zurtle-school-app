@@ -46,7 +46,7 @@ const Parent = ({setSelectedParent}) => {
 
   const handleEdit = (parent) =>{
     setSelectedParent(parent);
-    navigate("/school/parent/addParent")
+    navigate("/dashboard/parent/addParent")
 
   }
 
@@ -76,7 +76,7 @@ const Parent = ({setSelectedParent}) => {
 
           <button
             className="bg-blue-500 text-white p-2.5 rounded-lg flex items-center justify-center"
-            onClick={() => navigate("/school/parent/addParent")}
+            onClick={() => navigate("/dashboard/parent/addParent")}
           >
             <Plus className="w-5 h-5" />
           </button>

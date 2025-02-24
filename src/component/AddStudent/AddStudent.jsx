@@ -35,7 +35,7 @@ const AddStudent = ({ selectedStudent }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
-    navigate("/school/student");
+    navigate("/dashboard/student");
   };
 
   return (
@@ -43,7 +43,7 @@ const AddStudent = ({ selectedStudent }) => {
       <div className="bg-white rounded-xl shadow-xl p-6 w-[80%] ml-auto transition-transform transform duration-300">
         <div className="flex items-center space-x-2 border-b-2 border-[#F5F6FA] pb-3 mb-6">
           <MdCancel
-            onClick={() => navigate("/school")}
+            onClick={() => navigate("/dashboard/student")}
             className="text-[#735CFC]"
             size={20}
           />
@@ -172,7 +172,7 @@ const AddStudent = ({ selectedStudent }) => {
           <div className="flex justify-between col-span-2 mt-4">
             <button
               type="button"
-              onClick={() => navigate("/school/student")}
+              onClick={() => navigate("/dashboard/student")}
               className="bg-gray-400 text-white px-4 py-2 rounded-md"
             >
               Cancel

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
   FaHome,
-  FaSchool,
   FaChalkboardTeacher,
   FaUserGraduate,
   FaUserTie,
+  FaSchool,
 } from "react-icons/fa";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
@@ -16,25 +16,25 @@ const menuItems = [
     title: "Dashboards",
     icon: <FaHome className="w-5 h-5" />,
     path: "/dashboard",
-  },
-  {
-    title: "Schools",
-    icon: <FaSchool className="w-4 h-4" />,
-    path: "/school",
     submenu: [
+        {
+            name: "School",
+            path: "/dashboard/school",
+            icon: <FaSchool className="w-4 h-4" />,
+          },
       {
         name: "Teacher",
-        path: "/school/teacher",
+        path: "/dashboard/teacher",
         icon: <FaChalkboardTeacher className="w-4 h-4" />,
       },
       {
         name: "Student",
-        path: "/school/student",
+        path: "dashboard/student",
         icon: <FaUserGraduate className="w-4 h-4" />,
       },
       {
         name: "Parent",
-        path: "/school/parent",
+        path: "/dashboard/parent",
         icon: <FaUserTie className="w-4 h-4" />,
       },
     ],
@@ -52,15 +52,14 @@ const Sidebar = ({ isCollapsed }) => {
     } else {
       setOpenMenus((prev) => ({
         ...prev,
-        [item.title]: !prev[item.title], 
+        [item.title]: !prev[item.title],
       }));
-      
       if (!openMenus[item.title]) {
-        navigate(item.path); 
+        navigate(item.path);
       }
     }
   };
-  
+
   return (
     <motion.div
       animate={{ width: isCollapsed ? "80px" : "250px" }}
@@ -75,7 +74,7 @@ const Sidebar = ({ isCollapsed }) => {
         <img src={profile} alt="Logo" className="w-10 h-10" />
         {!isCollapsed && (
           <h2 className="ml-2 text-xl font-bold font-quicksand text-black">
-            School
+            Dashboard
           </h2>
         )}
       </div>
