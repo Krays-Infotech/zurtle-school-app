@@ -108,6 +108,7 @@ const Student = ({ setSelectedStudent }) => {
                 <tr
                   key={student.studentId}
                   className="hover:bg-gray-50 border-b border-[#F3F4F6]"
+                  onClick={() => navigate("/studentDashboard")}
                 >
                   <td className="p-3 text-left">
                     <input

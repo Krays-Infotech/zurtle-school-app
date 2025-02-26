@@ -1,0 +1,7 @@
+const Configuration = {
+    baseUrl: "",
+
+    apis: {
+        
+    }
+}

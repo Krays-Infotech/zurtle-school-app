@@ -13,6 +13,7 @@ import AddParent from "./component/AddParent/AddParent";
 import Login from "./Pages/Login/Login.jsx";
 import DashBoard from "./Pages/DashBoard/DashBoard";
 import Sidebar from "./component/SideBar/Sidebar";
+import StudentDashboard from "./Pages/DashBoard/StudentDashBoard.jsx";
 
 
 const BarLayout = () => {
@@ -48,6 +49,7 @@ const Router = () => {
         {/* Protected With BarLayout */}
         <Route element={<BarLayout />}>
           <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/studentDashboard" element={<StudentDashboard />} />
           <Route
             path="dashboard/school"
             element={<School setSelectedSchool={setSelectedSchool} />}
