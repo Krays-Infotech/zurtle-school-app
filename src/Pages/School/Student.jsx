@@ -53,7 +53,7 @@ const Student = ({ setSelectedStudent }) => {
 
   return (
     <div className="flex font-quicksand">
-      <div className="bg-white rounded-xl shadow-lg p-6 w-[80%] ml-auto">
+    <div className="bg-white rounded-xl shadow-lg p-6 w-full sm:w-[95%] md:w-[80%] ml-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-extrabold text-gray-700 flex items-center">

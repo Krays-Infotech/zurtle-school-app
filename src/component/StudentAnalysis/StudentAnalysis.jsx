@@ -17,22 +17,21 @@ const data = [
 ];
 
 const StudentAnalysisChart = () => {
-    return (
-      <div className="bg-white shadow-md rounded-lg p-5 w-[600px] ">
-        <h2 className="text-lg font-semibold text-gray-700">Student Analysis</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data}>
-            <XAxis dataKey="month" stroke="#ccc" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="thisYear" stroke="#6b46c1" strokeWidth={2} dot={{ r: 4 }} />
-            <Line type="monotone" dataKey="previousYear" stroke="#ccc" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-    );
-  };
-  
+  return (
+    <div className="bg-white shadow-md rounded-lg p-5 w-full max-w-lg ">
+      <h2 className="text-lg font-semibold text-gray-700 text-center">Student Analysis</h2>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={data}>
+          <XAxis dataKey="month" stroke="#ccc" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="thisYear" stroke="#6b46c1" strokeWidth={2} dot={{ r: 4 }} />
+          <Line type="monotone" dataKey="previousYear" stroke="#ccc" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
 
 export default StudentAnalysisChart;

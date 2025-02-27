@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid, AreaChart, Area } from "recharts";
+import {XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid, AreaChart, Area } from "recharts";
 
 const data = [
   { name: "Week 1", Tests: 3, Assignments: 2, Projects: 1 },
@@ -7,6 +7,7 @@ const data = [
   { name: "Week 3", Tests: 2, Assignments: 5, Projects: 2 },
   { name: "Week 4", Tests: 5, Assignments: 4, Projects: 3 },
   { name: "Week 5", Tests: 4, Assignments: 6, Projects: 8 },
+  { name: "Week 6", Tests: 8, Assignments: 3, Projects: 4},
 ];
 
 const StudentActivity = () => {

@@ -38,10 +38,11 @@ const DashBoard = () => {
 
   return (
     <div className="flex">
-      <main className="p-4 ml-56 font-quicksand min-h-screen">
-        <div className="flex flex-wrap gap-4 w-full justify-start items-center">
+      <main className="p-4 md:ml-56 font-quicksand min-h-screen w-full">
+        {/* Dashboard Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {dashboardData.map((item) => (
-            <div key={item.id} className="bg-white shadow-md rounded-lg p-5 w-60 h-45 flex flex-col gap-2">
+            <div key={item.id} className="bg-white shadow-md rounded-lg p-5 flex flex-col gap-2">
               <div className={`w-12 h-12 flex items-center justify-center rounded-lg ${item.bgColor}`}>
                 {item.icon}
               </div>
@@ -50,7 +51,8 @@ const DashBoard = () => {
             </div>
           ))}
         </div>
-        <div className="mt-4">
+
+       <div className="mt-4">
             <StudentAnalysisChart className="w-1/4"/> 
         </div>
         <div className="mt-4">

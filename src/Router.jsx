@@ -19,7 +19,7 @@ import StudentDashboard from "./Pages/DashBoard/StudentDashBoard.jsx";
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   return (
-    <div className="flex h-screen">
+    <div className="">
       <Sidebar isCollapsed={isSidebarCollapsed} />
       <div className="flex-1 flex flex-col">
         <Navbar
