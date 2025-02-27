@@ -133,4 +133,230 @@
     { id: 19, studentId: "STU1019", motherName: "Anjali Sharma", fatherName: "Mahesh Sharma", address: "777, Sapphire Road, Mysore", phone: "9876543228", email: "parent19@example.com" },
     { id: 20, studentId: "STU1020", motherName: "Ritu Jain", fatherName: "Sanjeev Jain", address: "888, Maroon Street, Dehradun", phone: "9876543229", email: "parent20@example.com", }
   ];
+
+  export const dummyQuestions = [
+    {
+      id: "q1",
+      question: "Teach children how to read",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q2",
+      question: "Fix a broken faucet",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q3",
+      question: "Conduct biological research",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q4",
+      question: "Supervise the activities of children at a camp",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q5",
+      question: "Run a toy store",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q6",
+      question: "Handle customers' bank transactions",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q7",
+      question: "Operate a calculator",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q8",
+      question: "Do research on plants or animals",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q9",
+      question: "Manage a clothing store",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q10",
+      question: "Write books or plays",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+  
+    {
+      id: "q11",
+      question: "Do volunteer work at a non-profit organization",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+  
+    {
+      id: "q12",
+      question: "Write a song",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+  
+    {
+      id: "q13",
+      question: "Study animal behavior",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q14",
+      question: "Sell restaurant franchises to individuals",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q15",
+      question: "Study whales and other types of marine life",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q16",
+      question: "Assemble electronic parts",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q17",
+      question: "Operate a grinding machine in a factory",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q18",
+      question: "Manage the operations of a hotel",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q19",
+      question: "Perform stunts for a movie or television show",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+    {
+      id: "q20",
+      question: "Design sets for plays",
+      options: [
+        "Dislike",
+        "Slightly dislike",
+        "Neutral",
+        "Slightly enjoy",
+        "Enjoy",
+      ],
+    },
+  ]
     

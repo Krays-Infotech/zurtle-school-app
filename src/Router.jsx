@@ -12,8 +12,9 @@ import Parent from "./Pages/School/Parent";
 import AddParent from "./component/AddParent/AddParent";
 import Login from "./Pages/Login/Login.jsx";
 import DashBoard from "./Pages/DashBoard/DashBoard";
-import Sidebar from "./component/SideBar/Sidebar";
-import StudentDashboard from "./Pages/DashBoard/StudentDashBoard.jsx";
+import Sidebar from "./component/Sidebar/Sidebar";
+import StudentDashboard from "./Pages/DashBoard/StudentDashBoard";
+import GetAssement from "./component/GetAssement/GetAssement";
 
 
 const BarLayout = () => {
@@ -82,6 +83,7 @@ const Router = () => {
             path="dashboard/parent/addParent"
             element={<AddParent selectedParent={selectedParent}/>}
           />
+          <Route path="/getAssement" element={<GetAssement />} />
         </Route>
       </Routes>
     </BrowserRouter>
