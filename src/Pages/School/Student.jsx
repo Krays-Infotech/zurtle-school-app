@@ -11,10 +11,11 @@ const Student = ({ setSelectedStudent }) => {
   const [search, setSearch] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [students, setStudents] = useState(studentList); 
   const pageSize = 10;
 
   // Filter data based on search value
-  const filteredData = studentList.filter((student) =>
+  const filteredData = students.filter((student) =>
     student.studentName.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -49,6 +50,11 @@ const Student = ({ setSelectedStudent }) => {
   const handleEdit = (student) => {
     setSelectedStudent(student);
     navigate("/dashboard/student/addStudent");
+  };
+
+  // Handle delete functionality
+  const handleDelete = (studentId) => {
+    setStudents((prevStudents) => prevStudents.filter((student) => student.studentId !== studentId));
   };
 
   return (
@@ -140,14 +146,20 @@ const Student = ({ setSelectedStudent }) => {
                   </td>
                   <td className="py-4 px-4 text-sm text-gray-600 flex gap-2">
                     <button
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         handleEdit(student);
                       }}
                       className="bg-green-100 text-green-500 p-2 rounded-lg hover:bg-green-200 transition"
                     >
                       <Edit size={16} />
                     </button>
-                    <button className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(student.studentId)}}
+                      className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition"
+                    >
                       <Trash size={16} />
                     </button>
                   </td>

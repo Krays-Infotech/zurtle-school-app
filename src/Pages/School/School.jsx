@@ -11,10 +11,11 @@ const School = ({ setSelectedSchool }) => {
   const [search, setSearch] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [schools, setSchools] = useState(schoolList); 
   const pageSize = 10;
 
   // Filter data based on search value
-  const filteredData = schoolList.filter((school) =>
+  const filteredData = schools.filter((school) =>
     school.schoolName.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -45,14 +46,20 @@ const School = ({ setSelectedSchool }) => {
   const isAllSelected = paginatedData.every((school) =>
     selectedRows.includes(school.schoolId)
   );
+
   const handleEdit = (school) => {
     setSelectedSchool(school);
     navigate("/dashboard/school/addSchool");
   };
 
+  // Handle delete functionality
+  const handleDelete = (schoolId) => {
+    setSchools((prevSchools) => prevSchools.filter((school) => school.schoolId !== schoolId));
+  };
+
   return (
     <div className="flex font-quicksand">
-    <div className="bg-white rounded-xl shadow-lg p-6 w-full sm:w-[95%] md:w-[80%] ml-auto">
+      <div className="bg-white rounded-xl shadow-lg p-6 w-full sm:w-[95%] md:w-[80%] ml-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-extrabold text-gray-700 flex items-center">
@@ -85,8 +92,8 @@ const School = ({ setSelectedSchool }) => {
 
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="w-full  rounded-lg">
-            <thead className="bg-gray-100 ">
+          <table className="w-full rounded-lg">
+            <thead className="bg-gray-100">
               <tr>
                 <th className="p-3 text-left">
                   <input
@@ -107,10 +114,7 @@ const School = ({ setSelectedSchool }) => {
             </thead>
             <tbody>
               {paginatedData.map((school) => (
-                <tr
-                  key={school.schoolId}
-                  className="hover:bg-gray-50 border-b border-[#F3F4F6]"
-                >
+                <tr key={school.schoolId} className="hover:bg-gray-50 border-b border-[#F3F4F6]">
                   <td className="p-3 text-left">
                     <input
                       type="checkbox"
@@ -118,30 +122,18 @@ const School = ({ setSelectedSchool }) => {
                       onChange={() => onSelectRow(school.schoolId)}
                     />
                   </td>
-                  <td className="p-3 text-left text-gray-600 text-sm">
-                    {school.schoolId}
-                  </td>
+                  <td className="p-3 text-left text-gray-600 text-sm">{school.schoolId}</td>
                   <td
-                   className="p-3 text-left text-blue-600 text-sm cursor-pointer underline"
-                   onClick={() => navigate("/dashboard")}
-                   >
-                  {school.registerNo}
-                </td>
-                  <td className="p-3 text-left text-gray-600 text-sm">
-                    {school.schoolName}
+                    className="p-3 text-left text-blue-600 text-sm cursor-pointer underline"
+                    onClick={() => navigate("/dashboard")}
+                  >
+                    {school.registerNo}
                   </td>
-                  <td className="p-3 text-left text-gray-600 text-sm">
-                    {school.studentsCount}
-                  </td>
-                  <td className="p-3 text-left text-gray-600 text-sm">
-                    {school.principalName}
-                  </td>
-                  <td className="p-3 text-left text-gray-600 text-sm">
-                    {school.contactNo}
-                  </td>
-                  <td className="p-3 text-left text-gray-600 text-sm">
-                    {school.address}
-                  </td>
+                  <td className="p-3 text-left text-gray-600 text-sm">{school.schoolName}</td>
+                  <td className="p-3 text-left text-gray-600 text-sm">{school.studentsCount}</td>
+                  <td className="p-3 text-left text-gray-600 text-sm">{school.principalName}</td>
+                  <td className="p-3 text-left text-gray-600 text-sm">{school.contactNo}</td>
+                  <td className="p-3 text-left text-gray-600 text-sm">{school.address}</td>
                   <td className="py-4 px-4 text-sm text-gray-600 flex gap-2">
                     <button
                       onClick={() => handleEdit(school)}
@@ -149,7 +141,10 @@ const School = ({ setSelectedSchool }) => {
                     >
                       <Edit size={16} />
                     </button>
-                    <button className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition">
+                    <button
+                      onClick={() => handleDelete(school.schoolId)}
+                      className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition"
+                    >
                       <Trash size={16} />
                     </button>
                   </td>

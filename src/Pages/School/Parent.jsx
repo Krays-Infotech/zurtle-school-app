@@ -10,10 +10,11 @@ const Parent = ({setSelectedParent}) => {
   const [search, setSearch] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [parents, setParents] = useState(parentList); 
   const pageSize = 10;
 
   // Filter data based on search
-  const filteredData = parentList.filter((parent) =>
+  const filteredData = parents.filter((parent) =>
     parent.studentId.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -47,8 +48,12 @@ const Parent = ({setSelectedParent}) => {
   const handleEdit = (parent) =>{
     setSelectedParent(parent);
     navigate("/dashboard/parent/addParent")
-
   }
+
+  // Handle delete functionality
+  const handleDelete = (studentId) => {
+    setParents((prevParents) => prevParents.filter((parent) => parent.studentId !== studentId));
+  };
 
   return (
     <div className="flex font-quicksand">
@@ -121,9 +126,12 @@ const Parent = ({setSelectedParent}) => {
             <button onClick ={()=>handleEdit(parent)}className="bg-green-100 text-green-500 p-2 rounded-lg hover:bg-green-200 transition">
               <Edit size={16} />
             </button>
-            <button className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition">
-              <Trash size={16} />
-            </button>
+            <button
+                      onClick={() => handleDelete(parent.studentId)}
+                      className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition"
+                    >
+                      <Trash size={16} />
+                    </button>
           </td>
         </tr>
       ))}

@@ -11,10 +11,11 @@ const Teacher = ({ setSelectedTeacher }) => {
   const [search, setSearch] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [teachers, setTeachers] = useState(teacherList); 
   const pageSize = 10;
 
   // Filter data based on search value
-  const filteredData = teacherList.filter((teacher) =>
+  const filteredData = teachers.filter((teacher) =>
     teacher.teacherName.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -50,6 +51,11 @@ const Teacher = ({ setSelectedTeacher }) => {
     setSelectedTeacher(teacher);
     navigate("/dashboard/teacher/addTeacher");
   };
+
+    // Handle delete functionality
+    const handleDelete = (teacherId) => {
+      setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.teacherId !== teacherId));
+    };
 
   return (
     <div className="flex font-quicksand">
@@ -147,7 +153,10 @@ const Teacher = ({ setSelectedTeacher }) => {
                     >
                       <Edit size={16} />
                     </button>
-                    <button className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition">
+                    <button
+                      onClick={() => handleDelete(teacher.teacherId)}
+                      className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition"
+                    >
                       <Trash size={16} />
                     </button>
                   </td>
