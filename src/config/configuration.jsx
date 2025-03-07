@@ -1,6 +1,5 @@
 const configuration = {
-    baseUrl: "http://localhost:8080/",
-
+    baseUrl: "https://java.expolarity.ai/api/",
     apis: {
         login: "zurtle/api/school/auth/login",
         createTeacher: "zurtle/api/school/teacher",
