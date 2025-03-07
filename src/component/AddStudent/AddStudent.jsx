@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
-const AddStudent = ({ selectedStudent }) => {
+const AddStudent = ({  }) => {
   const navigate = useNavigate();
+  const selectedStudent = useSelector((state) => state.school.selectedStudent);
   const [formData, setFormData] = useState({
     studentId: "",
     studentName: "",
@@ -39,7 +41,7 @@ const AddStudent = ({ selectedStudent }) => {
   };
 
   return (
-    <div className="flex font-quicksand">
+    <div className="flex font-quicksand pt-16">
       <div className="bg-white rounded-xl shadow-xl p-6 w-[80%] ml-auto transition-transform transform duration-300">
         <div className="flex items-center space-x-2 border-b-2 border-[#F5F6FA] pb-3 mb-6">
           <MdCancel

@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { Search, Plus, Edit, Trash } from "lucide-react";
 import { schoolList } from "../../utils/data";
 import { FaSchool } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { setSelectedSchool } from "../../Redux/Reducers/School/schoolSlice";
 
-const School = ({ setSelectedSchool }) => {
+const School = ({  }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [search, setSearch] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
@@ -48,7 +51,7 @@ const School = ({ setSelectedSchool }) => {
   );
 
   const handleEdit = (school) => {
-    setSelectedSchool(school);
+    dispatch(setSelectedSchool(school));
     navigate("/dashboard/school/addSchool");
   };
 
@@ -58,7 +61,7 @@ const School = ({ setSelectedSchool }) => {
   };
 
   return (
-    <div className="flex font-quicksand">
+    <div className="flex font-quicksand pt-16">
       <div className="bg-white rounded-xl shadow-lg p-6 w-full sm:w-[95%] md:w-[80%] ml-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
@@ -70,13 +73,12 @@ const School = ({ setSelectedSchool }) => {
 
         {/* Search Bar and Button */}
         <div className="flex justify-between items-center mb-6">
-          {/* Search Input */}
-          <div className="relative w-72 h-10">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 z-10" />
+          {/* Search Input */}<div className="w-72 h-10 flex items-center border border-[#F3F4F6] rounded-lg px-3">
+          <Search className="text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search schools..."
-              className="pl-12 pr-4 py-2 border-[#F3F4F6] border rounded-lg w-full focus:ring focus:ring-blue-300"
+              className="flex-1 pl-3 py-2 outline-none"
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>

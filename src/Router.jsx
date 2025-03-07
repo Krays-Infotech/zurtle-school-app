@@ -27,7 +27,7 @@ const BarLayout = () => {
           toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         />
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-6 bg-[#F5F6FA]">
+        <div className="flex-1 overflow-y-auto p-6 bg-[#F5F6FA] min-h-screen">
           <Outlet />
         </div>
       </div>
@@ -36,10 +36,6 @@ const BarLayout = () => {
 };
 
 const Router = () => {
-  const [selectedSchool, setSelectedSchool] = useState(null);
-  const [selectedTeacher, setSelectedTeacher] = useState(null);
-  const [selectedStudent, setSelectedStudent] = useState(null);
-  const [selectedParent, setSelectedParent] = useState(null);
 
   return (
     <BrowserRouter>
@@ -53,35 +49,35 @@ const Router = () => {
           <Route path="/studentDashboard" element={<StudentDashboard />} />
           <Route
             path="dashboard/school"
-            element={<School setSelectedSchool={setSelectedSchool} />}
+            element={<School  />}
           />
           <Route
             path="dashboard/teacher"
-            element={<Teacher setSelectedTeacher={setSelectedTeacher} />}
+            element={<Teacher  />}
           />
           <Route
             path="dashboard/student"
-            element={<Student setSelectedStudent={setSelectedStudent} />}
+            element={<Student  />}
           />
           <Route
             path="dashboard/parent"
-            element={<Parent setSelectedParent={setSelectedParent}/>}
+            element={<Parent />}
           />
           <Route
             path="dashboard/school/addSchool"
-            element={<AddSchool selectedSchool={selectedSchool} />}
+            element={<AddSchool />}
           />
           <Route
             path="dashboard/teacher/addTeacher"
-            element={<AddTeacher selectedTeacher={selectedTeacher} />}
+            element={<AddTeacher  />}
           />
           <Route
             path="dashboard/student/addStudent"
-            element={<AddStudent selectedStudent={selectedStudent} />}
+            element={<AddStudent  />}
           />
           <Route
             path="dashboard/parent/addParent"
-            element={<AddParent selectedParent={selectedParent}/>}
+            element={<AddParent/>}
           />
           <Route path="/getAssement" element={<GetAssement />} />
         </Route>

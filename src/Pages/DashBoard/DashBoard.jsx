@@ -37,7 +37,7 @@ const DashBoard = () => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex pt-10">
       <main className="p-4 md:ml-56 font-quicksand min-h-screen w-full">
         {/* Dashboard Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

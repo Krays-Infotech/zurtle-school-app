@@ -40,7 +40,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white text-black shadow-md w-full">
+    <nav className="bg-white text-black  w-full fixed top-0 left-0 ">
       <div className="h-17 flex flex-wrap items-center justify-between px-4 md:px-6 border-b border-[#F5F6FA]">
         <div className="flex items-center space-x-4 md:space-x-6 ml-auto">
           {/* Notification Icon */}

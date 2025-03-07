@@ -6,7 +6,7 @@ import StudentActivity from "../../component/StudentActivity/StudentActivity";
 
 const StudentDashBoard = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen pt-16">
       <main className="md:ml-56 font-quicksand w-full">
         
         {/* Student Profile Section */}
