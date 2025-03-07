@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, Bell, Settings, Moon, Sun, Maximize, Minimize, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import profile from "../../assets/profile.jpeg";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [darkMode, setDarkMode] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
@@ -39,8 +42,13 @@ const Navbar = () => {
     }
   };
 
+  const logoutPage = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
-    <nav className="bg-white text-black  w-full fixed top-0 left-0 ">
+    <nav className="bg-white text-black w-full fixed top-0 left-0">
       <div className="h-17 flex flex-wrap items-center justify-between px-4 md:px-6 border-b border-[#F5F6FA]">
         <div className="flex items-center space-x-4 md:space-x-6 ml-auto">
           {/* Notification Icon */}
@@ -69,7 +77,9 @@ const Navbar = () => {
                   Profile
                 </Link>
                 <hr className="border-gray-200 dark:border-gray-600" />
-                <button className="font-quicksand block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <button 
+                  onClick={logoutPage}
+                  className="font-quicksand block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700">
                   Logout
                 </button>
               </div>

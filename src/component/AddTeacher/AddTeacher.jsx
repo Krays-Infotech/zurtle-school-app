@@ -1,48 +1,112 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { createTeacher } from "../../Redux/Reducers/Teacher/CreateTeacherSlice";
+import { updateTeacher } from "../../Redux/Reducers/Teacher/UpdateTeacherSlice";
 
-const AddTeacher = ({  }) => {
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { Success, Error } from "../../config/helper";
+
+const AddTeacher = ({ selectedTeacher = {} }) => {
   const navigate = useNavigate();
-  const selectedTeacher = useSelector((state) => state.school.selectedTeacher);
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const [teacher, setTeacher] = useState(location.state?.teacher || {});
+
   const [formData, setFormData] = useState({
-    teacherId: "",
-    teacherName: "",
+    id: "",
+    name: "",
     subject: "",
     qualification: "",
     experience: "",
-    phone: "",
-    email: "",
-    userName: "",
+    mobileNo: "",
+    emailId: "",
+    gender: "",
     password: "",
   });
   const [passwordVisible,setPasswordVisible] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (selectedTeacher) {
-      setFormData(selectedTeacher);
+    if (location.state?.teacher) {
+      setTeacher(location.state.teacher);
+      setFormData(teacher);
     }
-  }, [selectedTeacher]);
+  }, [location.state]);
+
+  const validateMobileNo = (mobileNo) => {
+    const mobilePattern = /^[6-9]\d{9}$/;
+    return mobilePattern.test(mobileNo);
+  };
+
+  const validateEmail = (emailId) => {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(emailId);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    if (name === "mobileNo") {
+      if (!validateMobileNo(value)) {
+        setErrors((prev) => ({ ...prev, mobileNo: "Invalid mobile number" }));
+      } else {
+        setErrors((prev) => ({ ...prev, mobileNo: "" }));
+      }
+    }
+
+    if (name === "emailId") {
+      if (!validateEmail(value)) {
+        setErrors((prev) => ({ ...prev, emailId: "Invalid Email Id" }));
+      } else {
+        setErrors((prev) => ({ ...prev, emailId: "" }));
+      }
+    }
   };
 
   const togglePasswordVisibility = () => {
       setPasswordVisible((prev) => !prev);
-
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
-    navigate("/dashboard/teacher");
+
+    try {
+      if (formData.id) {
+        const resultResponse = await dispatch(updateTeacher({ id: formData.id, values: formData }));
+
+        if (resultResponse?.payload?.status === true) {
+          Success("Successfully Updated Teacher.");
+          setTimeout(() => navigate("/dashboard/teacher"), 1000);
+        } else {
+          Error("Failed to update teacher");
+        }
+      } else {
+        const resultResponse = await dispatch(createTeacher(formData));
+
+        if (resultResponse?.payload?.status === true) {
+          Success("Successfully Added Teacher.");
+          setTimeout(() => navigate("/dashboard/teacher"), 1000);
+        } else {
+          Error("Failed to add teacher");
+        }
+      }
+      
+    } catch (error) {
+      console.error("Error:", error);
+      Error("An error occurred. Please try again.");
+    } finally {
+    }
   };
 
   return (
-    <div className="flex font-quicksand pt-16">
+    <div className="flex font-quicksand">
       <div className="bg-white rounded-xl shadow-xl p-6 w-[80%] ml-auto transition-transform transform duration-300">
         <div className="flex items-center space-x-2 border-b-2 border-[#F5F6FA] pb-3 mb-6">
           <MdCancel
@@ -56,23 +120,11 @@ const AddTeacher = ({  }) => {
         </div>
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label className="block text-gray-600 mb-2">Teacher ID</label>
-            <input
-              type="text"
-              name="teacherId"
-              value={formData.teacherId}
-              onChange={handleChange}
-              placeholder="Teacher ID"
-              className="w-full p-2 border border-[#cacdd0] rounded-md text-sm"
-              required
-            />
-          </div>
-          <div className="col-span-1">
             <label className="block text-gray-600 mb-2">Teacher Name</label>
             <input
               type="text"
-              name="teacherName"
-              value={formData.teacherName}
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               placeholder="Teacher Name"
               className="w-full p-2 border border-[#cacdd0] rounded-md text-sm"
@@ -121,34 +173,36 @@ const AddTeacher = ({  }) => {
             <label className="block text-gray-600 mb-2">Contact No.</label>
             <input
               type="text"
-              name="phone"
-              value={formData.phone}
+              name="mobileNo"
+              value={formData.mobileNo}
               onChange={handleChange}
               placeholder="Contact Number"
               className="w-full p-2 border border-[#cacdd0] rounded-md text-sm"
               required
             />
+            {errors.mobileNo && <p className="text-red-500 text-sm">{errors.mobileNo}</p>}
           </div>
-          <div className="col-span-2">
+          <div className="col-span-1">
             <label className="block text-gray-600 mb-2">Email ID</label>
             <input
               type="email"
-              name="email"
-              value={formData.email}
+              name="emailId"
+              value={formData.emailId}
               onChange={handleChange}
               placeholder="Email ID"
               className="w-full p-2 border border-[#cacdd0] rounded-md text-sm"
               required
             />
+            {errors.emailId && <p className="text-red-500 text-sm">{errors.emailId}</p>}
           </div>
           <div className="col-span-1">
-            <label className="block text-gray-600 mb-2">Username</label>
+            <label className="block text-gray-600 mb-2">Gender</label>
             <input
               type="text"
-              name="userName"
-              value={formData.userName}
+              name="gender"
+              value={formData.gender}
               onChange={handleChange}
-              placeholder="Username"
+              placeholder="Gender"
               className="w-full p-2 border border-[#cacdd0] rounded-md text-sm"
               required
             />
@@ -190,6 +244,7 @@ const AddTeacher = ({  }) => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

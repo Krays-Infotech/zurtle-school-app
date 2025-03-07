@@ -1,29 +1,53 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/login.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { LuUserRound } from "react-icons/lu";
+import { login } from "../../Redux/Reducers/Login/LoginSlice";
+
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { Error, Success } from "../../config/helper";
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     let { name, value } = e.target;
-    setLoginDetails((prev) => ({ ...prev, [name]: value }));
+    setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible((prev) => !prev);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login Details", loginDetails);
-    navigate("/dashboard");
-  };
+  
+    setLoading(true);
+    try {
+      const resultResponse = await dispatch(login(loginDetails));
+  
+      if (resultResponse?.payload?.userId) {
+        Success("Successfully Logged In.");
+        setTimeout(() => navigate("/dashboard"), 1000);
+      } else {
+        setLoginDetails({ emailId: "", password: "" });
+        Error("Login Failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      Error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };  
 
   return (
     <div className="bg-[#735CFC]/20 w-full flex items-center justify-center min-h-screen bg-cover bg-center px-4 font-quicksand">
@@ -45,8 +69,8 @@ const Login = () => {
             <div className="space-y-4">
               <div className="relative">
                 <input
-                  type="email"
-                  name="email"
+                  type="emailId"
+                  name="emailId"
                   className="w-full border border-gray-300 p-3 rounded-md text-sm outline-none"
                   placeholder="Enter Email"
                   required
@@ -111,6 +135,7 @@ const Login = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

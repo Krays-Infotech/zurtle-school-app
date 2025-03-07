@@ -1,14 +1,27 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { FaChartLine } from "react-icons/fa";
+import { getStudentReport } from "../../Redux/Reducers/StudentReport/GetStudentReportSlice";
 
-const StudentReport = () => {
-  const reports = [
-    { id: 1, subject: "Mathematics", score: "85%", grade: "B+" },
-    { id: 2, subject: "Science", score: "92%", grade: "A" },
-    { id: 3, subject: "English", score: "78%", grade: "C+" },
-    { id: 4, subject: "History", score: "88%", grade: "B" },
-    { id: 5, subject: "Computer Science", score: "95%", grade: "A+" },
-  ];
+const StudentReport = ({ student }) => {
+  const dispatch = useDispatch();
+
+  const [reports, setReports] = useState([]);
+
+  useEffect(() => {
+      fetchReports();
+    }, []);
+
+  const fetchReports = async () => {
+      const resultResponse = await dispatch(getStudentReport({ studentId: student.id }));
+      console.log("response : ", resultResponse?.payload?.status)
+  
+      if (resultResponse?.payload?.status === true) {
+        setReports(resultResponse.payload.data);
+      } else {
+        Error("Failed to fetch reports");
+      }
+  };
 
   const handleDownload = () => {
     alert("Report Downloaded!");
@@ -34,7 +47,7 @@ const StudentReport = () => {
               key={report.id}
               className={`text-center ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
             >
-              <td className="border border-gray-300 p-3">{report.subject}</td>
+              <td className="border border-gray-300 p-3">{report.subject.subjectName}</td>
               <td className="border border-gray-300 p-3">{report.score}</td>
               <td className="border border-gray-300 p-3">{report.grade}</td>
             </tr>
