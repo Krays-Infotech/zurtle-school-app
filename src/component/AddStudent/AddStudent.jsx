@@ -38,7 +38,18 @@ const AddStudent = () => {
   useEffect(() => {
     if (location.state?.student) {
       setStudent(location.state.student);
-      setFormData(student);
+      setFormData({
+        id: student.id || "",
+        name: student.name || "",
+        standard: student.standard || "",
+        section: student.section || "",
+        rollNo: student.rollNo || "",
+        gender: student.gender || "",
+        emailId: student.emailId || "",
+        password: student.password || "",
+        mobileNo: student.mobileNo || "",
+        parentId: student.parent.id || ""
+      });
     }
   }, [location.state]);
 
@@ -142,7 +153,7 @@ const AddStudent = () => {
           <div className="col-span-1">
             <label className="block text-gray-600 mb-2">Student Name</label>
             <input
-              type="text"
+              type="text" 
               name="name"
               value={formData.name}
               onChange={handleChange}
