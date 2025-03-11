@@ -1,8 +1,11 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Options from "../Options/Options";
 import { dummyQuestions } from "../../utils/data";
-import student from "../../assets/student.png";
+import logoImg from "../../assets/logo.png";
+import questionmark from "../../assets/questionMarkLogo.png";
+import testbg from "../../assets/testbg.png";
+import progressline from "../../assets/progressline.png";
 
 const GetAssessment = () => {
   const [totalQuestion] = useState(dummyQuestions.length);
@@ -30,95 +33,86 @@ const GetAssessment = () => {
   };
 
   return (
-    <div className="min-h-screen  font-quicksand">
-   {/* Main Card */}
-   <div className=" flex justify-center">
-<div className="relative w-full max-w-lg bg-white  rounded-xl p-6 border border-gray-200 pt-10">
-  {/* Image inside the container at the top-right */}
-  <img
-    src={student}
-    alt="Student Illustration"
-    className="absolute top-2 right-2 w-16 lg:w-[30%]"
-  />
+    <div className="min-h-screen flex justify-center  font-golos py-8">
+      {/* Main Card */}
+      <div className="relative w-full max-w-4xl  rounded-xl p-10  ">
+        {/* Header */}
+        <div
+          className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px] "
+          style={{ backgroundImage: `url(${testbg})` }}
+        >
+          <div className="absolute left-50 top-30 transform -translate-y-1/2">
+            <img src={questionmark} alt="Expolarity" className="w-16" />
+          </div>
 
-  {isCompleted ? (
-    <div className="text-center py-30">
-      <p className="text-xl font-semibold text-gray-700 ">You Have Successfully Completed Your Test!</p>
-      <button
-        className="mt-5 bg-[#735CFC] hover:bg-blue-600 transition-all duration-200 rounded-md text-white px-6 py-2 text-md shadow-md"
-        onClick={() => navigate("/studentDashBoard")}
-      >
-        View Result
-      </button>
-    </div>
-  ) : (
-    <>
-      {/* Progress Circle */}
-      <div className="flex justify-center items-center mb-6">
-  <div className="relative w-24 h-24"> 
-    <svg className="w-full h-full">
-      {/* Background Circle */}
-      <circle
-        className="text-gray-300"
-        strokeWidth="8" 
-        stroke="currentColor"
-        fill="transparent"
-        r="40"  
-        cx="48"
-        cy="48"
-      />
-      {/* Progress Circle */}
-      <circle
-        className="text-[#735CFC] transition-all duration-500 ease-out"
-        strokeWidth="8" 
-        strokeLinecap="round"
-        stroke="currentColor"
-        fill="transparent"
-        r="40"
-        cx="48"
-        cy="48"
-        strokeDasharray="251" 
-        strokeDashoffset={`${251 - (currentIndex / totalQuestion) * 251}`}
-      />
-    </svg>
-    {/* Percentage Display */}
-    <span className="absolute inset-0 flex items-center justify-center text-lg font-bold text-[#735CFC]">
-      {Math.round((currentIndex / totalQuestion) * 100)}%
-    </span>
-  </div>
-</div>
+          <div className="absolute right-50 top-30 transform -translate-y-1/2">
+            <img src={questionmark} alt="Expolarity" className="w-16" />
+          </div>
 
+          <div className="flex flex-col items-center  p-12  ">
+            <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
+            <h1 className="text-3xl font-bold text-gray-700">Expolarity</h1>
+          </div>
+          {isCompleted ? (
+          <div className="text-center ">
+            <p className="text-xl font-semibold text-gray-700">
+              Your Test has done Successfully.
+            </p>
+            <p className="text-xl font-semibold text-gray-700">Thank You</p>
+            <button
+              className="mt-5 bg-[#DBF4E5] transition-all duration-200 rounded-md text-black px-6 py-2 text-md shadow-md"
+              onClick={() => navigate("/login")}
+            >
+               Please log in to view the result.
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Question */}
+            <div className="text-xl font-semibold text-center mb-4">
+              <p>{dummyQuestions[currentIndex].question}</p>
+            </div>
 
-      {/* Question */}
-      <div className="text-xl font-semibold  text-center mb-4 py-4">
-        <p>{dummyQuestions[currentIndex].question}</p>
-      </div>
+            {/* Options */}
+            <Options
+              options={dummyQuestions[currentIndex].options}
+              selectedOption={selectedOptions[currentIndex]}
+              onSelectOption={handleSelectOption}
+            />
 
-      {/* Options */}
-      <Options
-        options={dummyQuestions[currentIndex].options}
-        selectedOption={selectedOptions[currentIndex]}
-        onSelectOption={handleSelectOption}
-      />
-
-      {/* Navigation Buttons */}
-      <div className="flex items-center justify-end gap-3 py-4">
-        {currentIndex !== 0 && (
-          <button
-            className="bg-[#735CFC] hover:bg-gray-300 text-white hover:text-gray-700 rounded-md px-4 py-2 text-md shadow-md transition-all"
-            onClick={pre}
-          >
-            Previous
-          </button>
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-end gap-3 py-4">
+              {currentIndex !== 0 && (
+                <button
+                  className="bg-green-500 hover:bg-green-600 text-white rounded-md px-4 py-2 text-md shadow-md transition-all"
+                  onClick={pre}
+                >
+                  Previous
+                </button>
+              )}
+              <p className="text-sm text-gray-500">
+                {currentIndex + 1} / {totalQuestion}
+              </p>
+            </div>
+          </>
         )}
-        <p className="text-sm text-gray-500">
-          {currentIndex + 1} / {totalQuestion}
-        </p>
+        </div>
+
+        {/* Question Section */}
+       
+        <div className="relative w-full h-32 flex items-center justify-center mt-26">
+          {/* Background Line */}
+          <div
+            className="absolute w-full h-[100px] top-1/2 -translate-y-1/2 bg-cover"
+            style={{ backgroundImage: `url(${progressline})` }}
+          />
+
+          {/* Circles */}
+          <div className="absolute left-10 bottom-5 w-14 h-14 bg-[#F0FBDA] rounded-full"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-20 h-20 bottom-0 bg-[#38B76C] rounded-full shadow-lg"></div>
+          <div className="absolute right-10 bottom-20 w-14 h-14 bg-[#F0FBDA] rounded-full"></div>
+        </div>
       </div>
-    </>
-  )}
-</div>
-</div>
     </div>
   );
 };

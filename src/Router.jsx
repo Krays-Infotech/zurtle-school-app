@@ -15,6 +15,8 @@ import DashBoard from "./Pages/DashBoard/DashBoard";
 import Sidebar from "./component/Sidebar/Sidebar";
 import StudentDashboard from "./Pages/DashBoard/StudentDashBoard";
 import GetAssement from "./component/GetAssement/GetAssement";
+import TakeTestPage from "./Pages/TakeTestPage/TakeTestPage.jsx";
+import Header from "./component/Header/Header.jsx";
 
 
 const BarLayout = () => {
@@ -41,8 +43,11 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         {/* Public Routes Without BarLayout */}
-        <Route path="/" element={<Login />} />
-
+        <Route element={<Header />} >
+        <Route path="/getAssement" element={<GetAssement />} />
+        </Route>
+        <Route path="/" element={<TakeTestPage />} />
+        <Route path="/login" element={<Login />} />
         {/* Protected With BarLayout */}
         <Route element={<BarLayout />}>
           <Route path="/dashboard" element={<DashBoard />} />
@@ -79,7 +84,7 @@ const Router = () => {
             path="dashboard/parent/addParent"
             element={<AddParent/>}
           />
-          <Route path="/getAssement" element={<GetAssement />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>

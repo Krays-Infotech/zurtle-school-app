@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text&display=swap');
+
+
 @tailwind utilities;
 
 @import "tailwindcss";
+
+.font-golos {
+  font-family: 'Golos Text', sans-serif;
+}
 
 .font-quicksand {
   font-family: 'Quicksand', sans-serif;
