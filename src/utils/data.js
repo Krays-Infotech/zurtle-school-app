@@ -246,117 +246,117 @@
       ],
     },
   
-    {
-      id: "q11",
-      question: "Do volunteer work at a non-profit organization",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
+    // {
+    //   id: "q11",
+    //   question: "Do volunteer work at a non-profit organization",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
   
-    {
-      id: "q12",
-      question: "Write a song",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
+    // {
+    //   id: "q12",
+    //   question: "Write a song",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
   
-    {
-      id: "q13",
-      question: "Study animal behavior",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q14",
-      question: "Sell restaurant franchises to individuals",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q15",
-      question: "Study whales and other types of marine life",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q16",
-      question: "Assemble electronic parts",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q17",
-      question: "Operate a grinding machine in a factory",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q18",
-      question: "Manage the operations of a hotel",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q19",
-      question: "Perform stunts for a movie or television show",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q20",
-      question: "Design sets for plays",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
+    // {
+    //   id: "q13",
+    //   question: "Study animal behavior",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
+    // {
+    //   id: "q14",
+    //   question: "Sell restaurant franchises to individuals",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
+    // {
+    //   id: "q15",
+    //   question: "Study whales and other types of marine life",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
+    // {
+    //   id: "q16",
+    //   question: "Assemble electronic parts",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
+    // {
+    //   id: "q17",
+    //   question: "Operate a grinding machine in a factory",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
+    // {
+    //   id: "q18",
+    //   question: "Manage the operations of a hotel",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
+    // {
+    //   id: "q19",
+    //   question: "Perform stunts for a movie or television show",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
+    // {
+    //   id: "q20",
+    //   question: "Design sets for plays",
+    //   options: [
+    //     "Dislike",
+    //     "Slightly dislike",
+    //     "Neutral",
+    //     "Slightly enjoy",
+    //     "Enjoy",
+    //   ],
+    // },
   ]
     

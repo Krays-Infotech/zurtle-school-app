@@ -28,7 +28,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Login Details", loginDetails);
-    navigate("/dashboard");
+    navigate("/studentdashboard");
   };
 
   return (
@@ -72,7 +72,7 @@ const Login = () => {
         {/* Input Fields */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Username Field */}
-          <div className="relative">
+          {/* <div className="relative">
             <label
               htmlFor="username"
               className="block text-left text-gray-600 text-sm py-2"
@@ -93,10 +93,10 @@ const Login = () => {
                 <LuUserRound />
               </span>
             </div>
-          </div>
+          </div> */}
 
           {/* Password Field */}
-          <div className="relative">
+          {/* <div className="relative">
             <label
               htmlFor="password"
               className="block text-left text-gray-600 text-sm py-2"
@@ -123,30 +123,30 @@ const Login = () => {
                 {passwordVisible ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
-          </div>
+          </div> */}
 
           {/* Submit Button */}
-          <button
+          {/* <button
             type="submit"
             className="w-full bg-[#076555] hover:bg-green-800 text-white p-3 rounded-md transition duration-200"
           >
             Login
-          </button>
-          <div className="text-center ">
+          </button> */}
+          {/* <div className="text-center ">
             <p className="text-xs text-gray-600 flex items-center justify-center space-x-2">
               <span className="w-[40px] h-[1px] bg-gray-300"></span>
               <span>Or</span>
               <span className="w-[40px] h-[1px] bg-gray-300"></span>
             </p>
-
+          </div> */}
             {/* Google Login */}
             <div className="flex justify-center pt-4">
-              <button className="bg-white border border-gray-300 rounded-lg p-2 flex items-center gap-2 text-sm hover:bg-gray-100 transition">
-                <img src={googleImg} alt="Google" className="h-4 w-4" />
+              <button className="bg-white border border-gray-300 rounded-lg p-5 flex items-center gap-2 text-sm hover:bg-gray-100 transition">
+                <img src={googleImg} alt="Google" className="h-6 w-6" />
                 <span>Sign in with Google</span>
               </button>
             </div>
-          </div>
+          
         </form>
       </div>
     </div>

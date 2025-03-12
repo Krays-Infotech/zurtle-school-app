@@ -15,7 +15,7 @@ const menuItems = [
   {
     title: "Dashboards",
     icon: <FaHome className="w-5 h-5" />,
-    path: "/dashboard",
+    path: "/studentdashboard",
     submenu: [
       {
         name: "School",
