@@ -53,11 +53,8 @@ const GetAssessment = () => {
     }));
   };
 
-  const isPageCompleted = () => {
-    return questions
-      .slice(currentIndex, currentIndex + QUESTIONS_PER_PAGE)
-      .every((q) => selectedOptions[q.id]);
-  };
+  const isPageCompleted = () => true;
+
 
   const next = () => {
     if (isPageCompleted()) {
@@ -168,7 +165,8 @@ const GetAssessment = () => {
                   : "bg-gray-300 cursor-not-allowed"
               }`}
               onClick={next}
-              disabled={!isPageCompleted()}
+              disabled={false}
+
             >
               {currentIndex + QUESTIONS_PER_PAGE < totalQuestions ? "Next" : "Finish"}
             </button>
