@@ -17,26 +17,31 @@ const menuItems = [
     icon: <FaHome className="w-5 h-5" />,
     path: "/studentdashboard",
     submenu: [
+      // {
+      //   name: "School",
+      //   path: "/dashboard/school",
+      //   icon: <FaSchool className="w-4 h-4" />,
+      // },
       {
-        name: "School",
-        path: "/dashboard/school",
+        name: "Report",
+        path: "/dashboard/report",
         icon: <FaSchool className="w-4 h-4" />,
       },
-      {
-        name: "Teacher",
-        path: "/dashboard/teacher",
-        icon: <FaChalkboardTeacher className="w-4 h-4" />,
-      },
-      {
-        name: "Student",
-        path: "/dashboard/student",
-        icon: <FaUserGraduate className="w-4 h-4" />,
-      },
-      {
-        name: "Parent",
-        path: "/dashboard/parent",
-        icon: <FaUserTie className="w-4 h-4" />,
-      },
+      // {
+      //   name: "Teacher",
+      //   path: "/dashboard/teacher",
+      //   icon: <FaChalkboardTeacher className="w-4 h-4" />,
+      // },
+      // {
+      //   name: "Student",
+      //   path: "/dashboard/student",
+      //   icon: <FaUserGraduate className="w-4 h-4" />,
+      // },
+      // {
+      //   name: "Parent",
+      //   path: "/dashboard/parent",
+      //   icon: <FaUserTie className="w-4 h-4" />,
+      // },
     ],
   },
 ];

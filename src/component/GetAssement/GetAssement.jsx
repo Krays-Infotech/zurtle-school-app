@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Options from "../Options/Options";
-import { dummyQuestions } from "../../utils/data";
+import { storeQuestionResponse } from "../../Redux/Reducers/Assessment/StoreSlice";
+import { getQuestions } from "../../Redux/Reducers/Assessment/GetQuestionsSlice";
 import logoImg from "../../assets/logo.png";
 import questionmark from "../../assets/questionMarkLogo.png";
 import testbg from "../../assets/testbg.png";
@@ -10,34 +12,80 @@ import progressline from "../../assets/progressline.png";
 const QUESTIONS_PER_PAGE = 5; // Number of questions per page
 
 const GetAssessment = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isFetched = useRef(false);
+
+  const [questions, setQuestions] = useState([]);
+  const [totalQuestions, setTotalQuestions] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
-  const navigate = useNavigate();
+  const [totalPages, setTotalPages] = useState(0);
 
-  const totalPages = Math.ceil(dummyQuestions.length / QUESTIONS_PER_PAGE);
+  useEffect(() => {
+    if (!isFetched.current) {
+      fetchQuestions();
+      isFetched.current = true;
+    }
+  }, []);
 
-  const handleSelectOption = (questionIndex, option) => {
+  const fetchQuestions = async () => {
+    const resultResponse = await dispatch(getQuestions());
+    console.log("Response:", resultResponse?.payload?.status);
+
+    if (resultResponse?.payload?.status === true) {
+      setQuestions(resultResponse.payload.data);
+      setTotalQuestions(resultResponse.payload.data.length);
+    }
+  };
+
+  useEffect(() => {
+    if (totalQuestions > 0) {
+      setTotalPages(Math.ceil(totalQuestions / QUESTIONS_PER_PAGE));
+    }
+  }, [totalQuestions]);
+
+  const handleSelectOption = (questionId, option) => {
+    if (!option) return; // Prevent setting null values
     setSelectedOptions((prev) => ({
       ...prev,
-      [questionIndex]: option,
+      [questionId]: option,
     }));
   };
 
   const isPageCompleted = () => {
-    const start = currentIndex;
-    const end = Math.min(start + QUESTIONS_PER_PAGE, dummyQuestions.length);
-    for (let i = start; i < end; i++) {
-      if (!selectedOptions[i]) return false;
-    }
-    return true;
+    return questions
+      .slice(currentIndex, currentIndex + QUESTIONS_PER_PAGE)
+      .every((q) => selectedOptions[q.id]);
   };
 
   const next = () => {
     if (isPageCompleted()) {
-      if (currentIndex + QUESTIONS_PER_PAGE < dummyQuestions.length) {
+      if (currentIndex + QUESTIONS_PER_PAGE < totalQuestions) {
         setCurrentIndex(currentIndex + QUESTIONS_PER_PAGE);
       } else {
-        console.log("Selected options:", selectedOptions);
+        console.log("Selected options before submission:", JSON.stringify(selectedOptions, null, 2));
+
+        const formattedData = Object.entries(selectedOptions)
+          .map(([questionId, option]) => {
+            if (!option) {
+              console.error(`Option for questionId ${questionId} is null!`);
+              return null;
+            }
+            return {
+              questionId,
+              option: {
+                id: option.id,
+                option: option.option,
+                points: option.points,
+              },
+            };
+          })
+          .filter(Boolean); // Remove null values
+
+        console.log("Formatted data sent to backend:", JSON.stringify(formattedData, null, 2));
+
+        dispatch(storeQuestionResponse(formattedData));
         navigate("/login"); // Navigate after completing all questions
       }
     }
@@ -67,27 +115,36 @@ const GetAssessment = () => {
             <h1 className="text-3xl font-bold text-gray-700">Expolarity</h1>
           </div>
 
-          {/* Display Five Questions */}
-          {dummyQuestions
-            .slice(currentIndex, currentIndex + QUESTIONS_PER_PAGE)
-            .map((q, idx) => (
-              <div key={currentIndex + idx} className="mb-6">
-                <div className="flex items-center space-x-4 ml-60">
-                  <p className="text-gray-700 text-lg font-semibold">
-                    {currentIndex + idx + 1}. {q.question}
-                  </p>
-                  <p className="text-gray-500 text-sm">Select one option.</p>
+          {questions.length > 0 && questions[currentIndex] ? (
+            <>
+              {/* Display Five Questions */}
+              <div className="w-full flex items-center justify-center">
+                <div className="w-[60%]">
+                  <div className="pr-4">
+                    {questions
+                      .slice(currentIndex, currentIndex + QUESTIONS_PER_PAGE)
+                      .map((q, idx) => (
+                        <div key={currentIndex + idx} className="mb-6">
+                          <div className="flex justify-start items-center space-x-4">
+                            <p className="text-gray-700 text-lg text-justify font-semibold">
+                              {currentIndex + idx + 1}. {q.question}
+                            </p>
+                          </div>
+                          <Options
+                            options={q.options}
+                            selectedOption={selectedOptions[q.id]}
+                            onSelectOption={(option) => handleSelectOption(q.id, option)}
+                            questionIndex={q.id}
+                          />
+                        </div>
+                      ))}
+                  </div>
                 </div>
-                <Options
-                  options={q.options}
-                  selectedOption={selectedOptions[currentIndex + idx]}
-                  onSelectOption={(option) =>
-                    handleSelectOption(currentIndex + idx, option)
-                  }
-                  questionIndex={currentIndex + idx}
-                />
               </div>
-            ))}
+            </>
+          ) : (
+            <p className="text-center text-gray-500">Loading questions...</p>
+          )}
 
           {/* Navigation Buttons */}
           <div className="flex items-center justify-between py-4">
@@ -113,12 +170,12 @@ const GetAssessment = () => {
               onClick={next}
               disabled={!isPageCompleted()}
             >
-              {currentIndex + QUESTIONS_PER_PAGE < dummyQuestions.length
-                ? "Next"
-                : "Finish"}
+              {currentIndex + QUESTIONS_PER_PAGE < totalQuestions ? "Next" : "Finish"}
             </button>
           </div>
-          <div className="relative w-full h-32 flex items-center justify-center ">
+
+          {/* Progress Bar (Hidden on Small and Medium Screens) */}
+          <div className="relative w-full h-32  items-center justify-center hidden md:block">
             {/* Background Line */}
             <div
               className="absolute w-full h-[100px] top-1/2 -translate-y-1/2 bg-cover"

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveTestReport } from "../../Redux/Reducers/Assessment/SaveTestReport";
 import { LuUserRound } from "react-icons/lu";
 import { FaLock } from "react-icons/fa";
 import telescopeImg from "../../assets/telescope.png";
@@ -16,6 +18,7 @@ const Login = () => {
   const [loginDetails, setLoginDetails] = useState({});
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +32,10 @@ const Login = () => {
     e.preventDefault();
     console.log("Login Details", loginDetails);
     navigate("/studentdashboard");
+  };
+
+  const googleLogin = async (e) => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
   };
 
   return (
@@ -141,7 +148,9 @@ const Login = () => {
           </div> */}
             {/* Google Login */}
             <div className="flex justify-center pt-4">
-              <button className="bg-white border border-gray-300 rounded-lg p-5 flex items-center gap-2 text-sm hover:bg-gray-100 transition">
+              <button 
+                onClick={() => googleLogin()}
+                className="bg-white border border-gray-300 rounded-lg p-5 flex items-center gap-2 text-sm hover:bg-gray-100 transition">
                 <img src={googleImg} alt="Google" className="h-6 w-6" />
                 <span>Sign in with Google</span>
               </button>

@@ -17,6 +17,7 @@ import StudentDashboard from "./Pages/DashBoard/StudentDashBoard";
 import GetAssement from "./component/GetAssement/GetAssement";
 import TakeTestPage from "./Pages/TakeTestPage/TakeTestPage.jsx";
 import Header from "./component/Header/Header.jsx";
+import StudentReport from "./component/StudentReport/StudentReport.jsx";
 
 
 const BarLayout = () => {
@@ -52,6 +53,10 @@ const Router = () => {
         <Route element={<BarLayout />}>
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/studentDashboard" element={<StudentDashboard />} />
+          <Route
+            path="dashboard/report"
+            element={<StudentReport  />}
+          />
           <Route
             path="dashboard/school"
             element={<School  />}
