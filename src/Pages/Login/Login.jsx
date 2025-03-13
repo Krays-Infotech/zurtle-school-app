@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   const googleLogin = async (e) => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = "https://panel.expolarity.ai/oauth2/authorization/google";
   };
 
   return (
