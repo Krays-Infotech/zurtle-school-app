@@ -29,7 +29,7 @@ const StudentDashBoard = () => {
     }
   }, []);
   return (
-    <div className="flex min-h-screen pt-16">
+    <div className="flex  pt-16">
       <main className=" font-quicksand w-full">
         
         {/* Student Profile Section */}

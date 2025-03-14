@@ -108,7 +108,15 @@ const StudentReport = () => {
 
         {/* Payment Button / Download Button */}
         <div className="flex justify-center mt-5">
-          {!isPaid ? (
+        {!isPaid ? (
+            <button
+              onClick={handlePayment}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg w-48 font-semibold transition duration-300"
+            >
+              Pay to Unlock
+            </button>
+          ) : null} 
+          {/* {!isPaid ? (
             <button
               onClick={handlePayment}
               className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg w-48 font-semibold transition duration-300"
@@ -123,7 +131,7 @@ const StudentReport = () => {
             >
               Download Report
             </PDFDownloadLink>
-          )}
+          )} */}
         </div>
       </div>
     </div>
