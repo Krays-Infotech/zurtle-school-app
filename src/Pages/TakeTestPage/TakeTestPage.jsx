@@ -56,7 +56,7 @@ const TakeTestPage = () => {
         {/* Logo and Title */}
         <div className="flex flex-col items-center">
           <img src={logoImg} alt="Expolarity" className="w-20 mb-3" />
-          <h1 className="text-3xl font-bold text-gray-700">Expolarity</h1>
+          <h1 className="text-3xl font-bold text-gray-700">Expolarity.AI</h1>
           <p className="text-sm text-gray-500 py-5">
             Take Your Test Now and Explore!
           </p>

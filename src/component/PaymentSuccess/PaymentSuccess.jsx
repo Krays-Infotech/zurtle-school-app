@@ -50,14 +50,14 @@ const PaymentSuccess = () => {
           successfully.
         </p>
 
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <button
-            onClick={() => navigate("/report")}
-            className="inline-block rounded-lg bg-navBarBgColor px-6 py-2 text-white transition duration-300 hover:bg-blue-600"
+            onClick={() => navigate("/dashboard/report")}
+            className="inline-block rounded-lg bg-blue-600 px-6 py-2 text-white transition duration-300 "
           >
             View Report
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

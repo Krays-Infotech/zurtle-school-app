@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"; 
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Options from "../Options/Options";
@@ -32,14 +32,14 @@ const GetAssessment = () => {
   }, []);
 
   const fetchQuestions = async () => {
-    setLoading(true); 
+    setLoading(true);
     const resultResponse = await dispatch(getQuestions());
 
     if (resultResponse?.payload?.status === true) {
       setQuestions(resultResponse.payload.data);
       setTotalQuestions(resultResponse.payload.data.length);
     }
-    setLoading(false); 
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -91,9 +91,10 @@ const GetAssessment = () => {
             <p className="text-lg font-semibold">Loading Questions...</p>
           </div>
         ) : (
-          <div className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px]"
-            style={{ backgroundImage: `url(${testbg})` }}>
-            
+          <div
+            className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px]"
+            style={{ backgroundImage: `url(${testbg})` }}
+          >
             <div className="absolute left-50 top-30 transform -translate-y-1/2">
               <img src={questionmark} alt="Expolarity" className="w-16" />
             </div>
@@ -104,12 +105,16 @@ const GetAssessment = () => {
 
             <div className="flex flex-col items-center p-12">
               <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
-              <h1 className="text-3xl font-bold text-gray-700">Expolarity.AI</h1>
+              <h1 className="text-3xl font-bold text-gray-700">
+                Expolarity.AI
+              </h1>
             </div>
 
             {isCompleted ? (
               <div className="text-center text-gray-700">
-                <h2 className="text-2xl font-semibold">Your Test has been completed successfully.</h2>
+                <h2 className="text-2xl font-semibold">
+                  Your Test has been completed successfully.
+                </h2>
                 <p className="mt-2 text-lg text-gray-500">Thank You</p>
                 {/* Login Button to View Results */}
                 <button
@@ -136,7 +141,9 @@ const GetAssessment = () => {
                             <Options
                               options={q.options}
                               selectedOption={selectedOptions[q.id]}
-                              onSelectOption={(option) => handleSelectOption(q.id, option)}
+                              onSelectOption={(option) =>
+                                handleSelectOption(q.id, option)
+                              }
                               questionIndex={q.id}
                             />
                           </div>
@@ -171,20 +178,87 @@ const GetAssessment = () => {
                   }`}
                   onClick={next}
                 >
-                  {currentIndex + QUESTIONS_PER_PAGE < totalQuestions ? "Next" : "Finish"}
+                  {currentIndex + QUESTIONS_PER_PAGE < totalQuestions
+                    ? "Next"
+                    : "Finish"}
                 </button>
               </div>
             )}
 
-            {/* Progress Bar */}
-            <div className="relative w-full h-32 items-center justify-center hidden md:block">
-              <div
-                className="absolute w-full h-[100px] top-1/2 -translate-y-1/2 bg-cover"
-                style={{ backgroundImage: `url(${progressline})` }}
-              />
-              <div className="absolute left-10 bottom-5 w-14 h-14 bg-[#F0FBDA] rounded-full"></div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-20 h-20 bottom-0 bg-[#38B76C] rounded-full shadow-lg"></div>
-              <div className="absolute right-10 bottom-20 w-14 h-14 bg-[#F0FBDA] rounded-full"></div>
+            {/* Progress Bar with Moving Circles */}
+            <div className="relative w-full h-32 flex items-center justify-center hidden md:block">
+              {/* SVG Curved Path */}
+              <svg
+                className="absolute w-[95%] h-[120px] top-1/2 -translate-y-1/2"
+                viewBox="0 0 1000 150"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Define the curved path */}
+                <path
+                  id="progress-path"
+                  d="M 50 90 C 300 180, 700 -30, 950 90"
+                  stroke="url(#gradient)"
+                  strokeWidth="2"
+                  fill="none"
+                />
+
+                {/* Gradient for Stroke */}
+                <defs>
+                  <linearGradient
+                    id="gradient"
+                    x1="0"
+                    y1="0"
+                    x2="1000"
+                    y2="0"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0%" stopColor="#EAF4D3" />
+                    <stop offset="100%" stopColor="#A4E19D" />
+                  </linearGradient>
+                </defs>
+
+                {/* Calculate the circle positions along the path */}
+                {(() => {
+                  const progress = currentIndex / totalQuestions;
+
+                  // Function to get a point on the path based on progress
+                  const getPointOnPath = (progress) => {
+                    const path = document.getElementById("progress-path");
+                    if (!path) return { x: 0, y: 0 };
+
+                    const length = path.getTotalLength();
+                    const point = path.getPointAtLength(length * progress);
+                    return { x: point.x, y: point.y };
+                  };
+
+                  const leftPoint = getPointOnPath(progress * 0.44);
+                  const rightPoint = getPointOnPath(1 - progress * 0.44);
+
+                  return (
+                    <>
+                      {/* Left Circle (Moves along Path) */}
+                      <circle
+                        cx={leftPoint.x}
+                        cy={leftPoint.y}
+                        r="30"
+                        fill="#EAF4D3"
+                      />
+
+                      {/* Center Circle (Static) */}
+                      <circle cx="500" cy="80" r="50" fill="#00B050" />
+
+                      {/* Right Circle (Moves along Path) */}
+                      <circle
+                        cx={rightPoint.x}
+                        cy={rightPoint.y}
+                        r="30"
+                        fill="#EAF4D3"
+                      />
+                    </>
+                  );
+                })()}
+              </svg>
             </div>
           </div>
         )}

@@ -14,7 +14,7 @@ const Header = () => {
           {/* Logo and Expolar Text */}
           <div className="flex items-center gap-2">
             <img src={logoImg} alt="Logo" className="w-8 h-8" />
-            <span className="text-white text-lg ">Expolarity</span>
+            <span className="text-white text-lg ">Expolarity.AI</span>
           </div>
 
           {/* Profile Image */}
