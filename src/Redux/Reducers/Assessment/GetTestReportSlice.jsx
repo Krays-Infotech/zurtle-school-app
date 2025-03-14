@@ -4,10 +4,10 @@ import configuration from "../../../config/configuration";
 
 export const getTestReport = createAsyncThunk(
   "getTestReport",
-  async (_, { rejectWithValue }) => {
+  async (userId, { rejectWithValue }) => {
     try {
       console.log("Fetching Reports");
-      const response = await NetworkRequest.get(configuration.apis.getTestReport);
+      const response = await NetworkRequest.get(`${configuration.apis.getTestReport}/${userId}`);
 
       console.log("API Response:", response);
 

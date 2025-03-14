@@ -31,7 +31,6 @@ const GetAssessment = () => {
 
   const fetchQuestions = async () => {
     const resultResponse = await dispatch(getQuestions());
-    console.log("Response:", resultResponse?.payload?.status);
 
     if (resultResponse?.payload?.status === true) {
       setQuestions(resultResponse.payload.data);
@@ -61,8 +60,6 @@ const GetAssessment = () => {
       if (currentIndex + QUESTIONS_PER_PAGE < totalQuestions) {
         setCurrentIndex(currentIndex + QUESTIONS_PER_PAGE);
       } else {
-        console.log("Selected options before submission:", JSON.stringify(selectedOptions, null, 2));
-
         const formattedData = Object.entries(selectedOptions)
           .map(([questionId, option]) => {
             if (!option) {
@@ -78,12 +75,10 @@ const GetAssessment = () => {
               },
             };
           })
-          .filter(Boolean); // Remove null values
-
-        console.log("Formatted data sent to backend:", JSON.stringify(formattedData, null, 2));
+          .filter(Boolean);
 
         dispatch(storeQuestionResponse(formattedData));
-        navigate("/login"); // Navigate after completing all questions
+        navigate("/login");
       }
     }
   };
@@ -109,7 +104,7 @@ const GetAssessment = () => {
 
           <div className="flex flex-col items-center p-12">
             <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
-            <h1 className="text-3xl font-bold text-gray-700">Expolarity</h1>
+            <h1 className="text-3xl font-bold text-gray-700">Expolarity.AI</h1>
           </div>
 
           {questions.length > 0 && questions[currentIndex] ? (

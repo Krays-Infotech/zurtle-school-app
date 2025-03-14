@@ -10,6 +10,8 @@ import {
 } from "react-icons/fa";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import { BiSolidReport } from "react-icons/bi";
+
 
 const menuItems = [
   {
@@ -25,7 +27,7 @@ const menuItems = [
       {
         name: "Report",
         path: "/dashboard/report",
-        icon: <FaSchool className="w-4 h-4" />,
+        icon: <BiSolidReport  className="w-4 h-4" />,
       },
       // {
       //   name: "Teacher",
@@ -70,17 +72,17 @@ const Sidebar = () => {
     <>
       {/* Hamburger Menu for Small Screens */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 bg-[#735CFC] text-white p-2 rounded-full"
+        className="lg:hidden fixed top-4 left-4 z-50 bg-[#735CFC] text-white p-2 rounded-full"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
         {isSidebarOpen ? <FaTimes className="w-4 h-4" /> : <FaBars className="w-4 h-4" />}
       </button>
-
+  
       {/* Sidebar */}
       <div
         className={`bg-white fixed h-full p-4 border-r border-[#F5F6FA] flex flex-col transition-all duration-300 z-40
-        ${isSidebarOpen ? "w-64 left-0" : "w-64 -left-64"}
-        md:w-64 md:left-0`}
+          ${isSidebarOpen ? "w-64 left-0" : "w-64 -left-64"}
+          lg:w-64 lg:left-0`}
       >
         <div className="flex items-center justify-start border-b border-[#F5F6FA] pb-3 mb-4">
           <h2 className="ml-2 text-xl font-bold font-quicksand text-black">

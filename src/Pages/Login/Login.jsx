@@ -13,6 +13,7 @@ import logoImg from "../../assets/logo.png";
 import flower from "../../assets/flower.png";
 import googleImg from "../../assets/google.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import configuration from "../../config/configuration";
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState({});
@@ -35,7 +36,7 @@ const Login = () => {
   };
 
   const googleLogin = async (e) => {
-    window.location.href = "https://java.expolarity.ai/oauth2/authorization/google";
+    window.location.href = `${configuration.baseUrl}${configuration.apis.getGoogleLogin}`;
   };
 
   return (
@@ -72,12 +73,12 @@ const Login = () => {
         {/* Logo and Title */}
         <div className="flex flex-col items-center">
           <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
-          <h1 className="text-3xl font-bold text-gray-700">Expolarity</h1>
+          <h1 className="text-3xl font-bold text-gray-700">Expolarity.AI</h1>
           <p className="text-sm text-gray-400 py-6">Login</p>
         </div>
 
         {/* Input Fields */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form className="space-y-6">
           {/* Username Field */}
           {/* <div className="relative">
             <label
@@ -149,6 +150,7 @@ const Login = () => {
             {/* Google Login */}
             <div className="flex justify-center pt-4">
               <button 
+                type = "button"
                 onClick={() => googleLogin()}
                 className="bg-white border border-gray-300 rounded-lg p-5 flex items-center gap-2 text-sm hover:bg-gray-100 transition">
                 <img src={googleImg} alt="Google" className="h-6 w-6" />

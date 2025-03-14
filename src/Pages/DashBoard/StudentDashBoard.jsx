@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 import StudentProfile from "../../component/StudentProfile/StudentProfile";
 import StudentTest from "../../component/StudentTest/StudentTest";
 import StudentReport from "../../component/StudentReport/StudentReport";
@@ -8,20 +10,27 @@ import StudentActivity from "../../component/StudentActivity/StudentActivity";
 const StudentDashBoard = () => {
 
   const navigate = useNavigate();
+  const isFetched = useRef(false);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    const token = queryParams.get("token");
-    console.log("token : ", token);
+    if (!isFetched.current) {
+      const token = queryParams.get("token");
+      const id = queryParams.get("userId");
 
-    if (token) {
-      localStorage.setItem("authToken", token);
-      navigate("/studentdashboard");
+      if (token) {
+        localStorage.setItem("id", id);
+        localStorage.setItem("role", "student");
+        localStorage.setItem("token", token);
+ 
+        navigate("/studentdashboard");
+        isFetched.current = true;
+      }
     }
   }, []);
   return (
     <div className="flex min-h-screen pt-16">
-      <main className="md:ml-56 font-quicksand w-full">
+      <main className=" font-quicksand w-full">
         
         {/* Student Profile Section */}
         <div className="rounded-xl px-6 mb-6">

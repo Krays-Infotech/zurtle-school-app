@@ -9,7 +9,10 @@ const configuration = {
         getQuestions: "zurtle/api/school/questionBank/all",
         storeQuestion: "zurtle/api/school/questionBank/store",
         saveTestReport: "zurtle/api/school/questionBank/testReport",
-        getTestReport: "zurtle/api/school/questionBank/getReport"
+        getTestReport: "zurtle/api/school/questionBank/getReport",
+        getGoogleLogin: "oauth2/authorization/google",
+        payment: "zurtle/api/payments/createCheckoutSession",
+        paymentStatus: "zurtle/api/payments/savePaymentDetails",
     }
 }
 
