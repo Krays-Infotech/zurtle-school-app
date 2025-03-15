@@ -19,6 +19,7 @@ const StudentReport = () => {
 
   const [reports, setReports] = useState([]);
   const [isPaid, setIsPaid] = useState(false);
+  const userId = localStorage.getItem("id");
 
   useEffect(() => {
     if (!isFetched.current) {
@@ -30,13 +31,12 @@ const StudentReport = () => {
   }, []);
 
   const fetchReports = async () => {
-    const userId = localStorage.getItem("id");
     console.log(userId);
 
-    const resultResponse = await dispatch(getTestReport(userId));
+    const result = await dispatch(getTestReport(userId)).unwrap();
 
-    if (resultResponse?.payload?.status === true) {
-      setReports(resultResponse.payload.data);
+    if (result?.status === true) {
+      setReports(result.data);
     }
   };
 
@@ -61,9 +61,9 @@ const StudentReport = () => {
       currencyType: "cad",
     };
 
-    const paymentResponse = await dispatch(createPayment({ values }));
-    if (paymentResponse?.payload?.status === true) {
-      window.location.href = paymentResponse?.payload?.data?.paymentUrl;
+    const res = await dispatch(createPayment({ values })).unwrap();
+    if (res?.status === true) {
+      window.location.href = res?.data?.paymentUrl;
     }
   };
 
@@ -124,11 +124,11 @@ const StudentReport = () => {
         </div>
 
         {/* Payment Button / Download Button */}
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center mt-5 ">
           {!isPaid ? (
             <button
               onClick={handlePayment}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg w-48 font-semibold transition duration-300"
+              className="bg-blue-500 cursor-pointer  hover:bg-blue-600 text-white px-5 py-2 rounded-lg w-48 font-semibold transition duration-300"
             >
               Pay to Unlock
             </button>
