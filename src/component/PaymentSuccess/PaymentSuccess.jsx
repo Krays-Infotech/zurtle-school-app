@@ -9,32 +9,37 @@ const PaymentSuccess = () => {
   const { session_id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isFetched = useRef(false);
   const [paymentSuccess, setPaymentSuccess] = useState(true);
 
   useEffect(() => {
-    if (!isFetched.current) {
-        handleSuccessPayment();
-        isFetched.current = true;
-      }
+    handleSuccessPayment();
   }, []);
 
   const handleSuccessPayment = async () => {
-    if (session_id) {
-      setPaymentSuccess(false);
+    try {
+      if (session_id) {
+        setPaymentSuccess(false);
+        const userId = localStorage.getItem("id");
+        const result = await dispatch(
+          paymentStatus({ userId, sessionId: session_id, paymentStatus: true })
+        ).unwrap();
 
-      const userId = localStorage.getItem("id");
-      
-      await dispatch(paymentStatus({ userId, sessionId: session_id, paymentStatus: true }));
-
-      localStorage.setItem("isPaid", "true"); 
-    } else {
-      navigate("/");
+        if (result.status) {
+          localStorage.setItem("isPaid", "true");
+          setTimeout(() => {
+            navigate("/dashboard/report");
+          }, 1000);
+        }
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return paymentSuccess ? (
-    <div className="flex min-h-[80vh] items-center justify-center">Loading...</div>
+    <div className="flex min-h-[80vh] items-center justify-center">
+      Loading...
+    </div>
   ) : (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-md">
@@ -49,15 +54,6 @@ const PaymentSuccess = () => {
           Thank you for your purchase. Your payment has been processed
           successfully.
         </p>
-
-        {/* <div className="mt-6">
-          <button
-            onClick={() => navigate("/dashboard/report")}
-            className="inline-block rounded-lg bg-blue-600 px-6 py-2 text-white transition duration-300 "
-          >
-            View Report
-          </button>
-        </div> */}
       </div>
     </div>
   );

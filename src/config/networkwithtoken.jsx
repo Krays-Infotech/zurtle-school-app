@@ -37,12 +37,10 @@ instance.interceptors.response.use(
       if (error.response) {
         console.log("Error", error.response);
         const { status, data } = error.response;
-        if (error.response.status === 401 || error.response.status === 403) {
+        if (error.status === 401 || error.status === 403) {
           localStorage.removeItem("userData");
-          console.log("dfgsdfg", data);
         }
-        console.log("dfgsdfg", data);
-        return Promise.reject(status);
+        return Promise.reject(data);
       } else {
         return Promise.reject(error);
       }

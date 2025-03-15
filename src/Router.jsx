@@ -18,22 +18,28 @@ import GetAssement from "./component/GetAssement/GetAssement";
 import TakeTestPage from "./Pages/TakeTestPage/TakeTestPage.jsx";
 import Header from "./component/Header/Header.jsx";
 import StudentReport from "./component/StudentReport/StudentReport.jsx";
-import PaymentSuccess from "./component/PaymentSuccess/PaymentSuccess.jsx"
-import PaymentFailure from "./component/PaymentFailure/PaymentFailure.jsx"
+import PaymentSuccess from "./component/PaymentSuccess/PaymentSuccess.jsx";
+import PaymentFailure from "./component/PaymentFailure/PaymentFailure.jsx";
 
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   return (
     <div className="flex h-screen">
       {/* Sidebar with fixed width */}
-      <div className={`transition-all duration-300 ${isSidebarCollapsed ? "w-0" : "w-0 lg:w-64"}`}>
+      <div
+        className={`transition-all duration-300 ${
+          isSidebarCollapsed ? "w-0" : "w-0 lg:w-64"
+        }`}
+      >
         <Sidebar isCollapsed={isSidebarCollapsed} />
       </div>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        <Navbar toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)} />
-        
+        <Navbar
+          toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        />
+
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto p-6 bg-[#F5F6FA] min-h-screen">
           <Outlet />
@@ -44,65 +50,37 @@ const BarLayout = () => {
 };
 
 const Router = () => {
-
   return (
     <BrowserRouter>
       <Routes>
         {/* Public Routes Without BarLayout */}
-        <Route element={<Header />} >
-        <Route path="/getAssement" element={<GetAssement />} />
+        <Route element={<Header />}>
+          <Route path="/getAssement" element={<GetAssement />} />
         </Route>
         <Route path="/" element={<TakeTestPage />} />
         <Route path="/login" element={<Login />} />
+        <Route
+          path="/paymentSuccess/:session_id"
+          element={<PaymentSuccess />}
+        />
+        <Route
+          path="/paymentFailure/:session_id"
+          element={<PaymentFailure />}
+        />
         {/* Protected With BarLayout */}
         <Route element={<BarLayout />}>
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/studentDashboard" element={<StudentDashboard />} />
-          <Route
-            path="dashboard/report"
-            element={<StudentReport  />}
-          />
-          <Route
-            path="/paymentSuccess/:session_id"
-            element={<PaymentSuccess />}
-          />
-          <Route
-            path="/paymentFailure/:session_id"
-            element={<PaymentFailure />}
-          />
-          <Route
-            path="dashboard/school"
-            element={<School  />}
-          />
-          <Route
-            path="dashboard/teacher"
-            element={<Teacher  />}
-          />
-          <Route
-            path="dashboard/student"
-            element={<Student  />}
-          />
-          <Route
-            path="dashboard/parent"
-            element={<Parent />}
-          />
-          <Route
-            path="dashboard/school/addSchool"
-            element={<AddSchool />}
-          />
-          <Route
-            path="dashboard/teacher/addTeacher"
-            element={<AddTeacher  />}
-          />
-          <Route
-            path="dashboard/student/addStudent"
-            element={<AddStudent  />}
-          />
-          <Route
-            path="dashboard/parent/addParent"
-            element={<AddParent/>}
-          />
-          
+          <Route path="dashboard/report" element={<StudentReport />} />
+
+          <Route path="dashboard/school" element={<School />} />
+          <Route path="dashboard/teacher" element={<Teacher />} />
+          <Route path="dashboard/student" element={<Student />} />
+          <Route path="dashboard/parent" element={<Parent />} />
+          <Route path="dashboard/school/addSchool" element={<AddSchool />} />
+          <Route path="dashboard/teacher/addTeacher" element={<AddTeacher />} />
+          <Route path="dashboard/student/addStudent" element={<AddStudent />} />
+          <Route path="dashboard/parent/addParent" element={<AddParent />} />
         </Route>
       </Routes>
     </BrowserRouter>
