@@ -15,6 +15,7 @@ import DashBoard from "./Pages/DashBoard/DashBoard";
 import Sidebar from "./component/Sidebar/Sidebar";
 import StudentDashboard from "./Pages/DashBoard/StudentDashBoard";
 import GetAssement from "./component/GetAssement/GetAssement";
+import GetInterest from "./component/GetInterest/GetInterest.jsx";
 import TakeTestPage from "./Pages/TakeTestPage/TakeTestPage.jsx";
 import Header from "./component/Header/Header.jsx";
 import StudentReport from "./component/StudentReport/StudentReport.jsx";
@@ -56,6 +57,7 @@ const Router = () => {
         {/* Public Routes Without BarLayout */}
         <Route element={<Header />}>
           <Route path="/getAssement" element={<GetAssement />} />
+          <Route path="/getInterest" element={<GetInterest />} />
         </Route>
         <Route path="/" element={<TakeTestPage />} />
         <Route path="/login" element={<Login />} />

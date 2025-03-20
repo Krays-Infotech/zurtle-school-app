@@ -1,3 +1,87 @@
+import practical from "../assets/images/practical.png";
+import analytical from "../assets/images/analytical.png";
+import creative from "../assets/images/creative.png";
+import friendly from "../assets/images/friendly.png";
+import assertive from "../assets/images/assertive.png";
+import wellGroomed from "../assets/images/well-groomed.png";
+
+import athletic from "../assets/images/athletic.png";
+import inquisitive from "../assets/images/inquisitive.png";
+import intuitive from "../assets/images/intuitive.png";
+import helpful from "../assets/images/helpful.png";
+import sociable from "../assets/images/sociable.png";
+import accurate from "../assets/images/accurate.png";
+
+import straight from "../assets/images/straight.png";
+import scientific from "../assets/images/scientific.png";
+import imaginative from "../assets/images/imaginative.png";
+import idealistic from "../assets/images/idealistic.png";
+import persuasive from "../assets/images/persuasive.png";
+import numerical from "../assets/images/numerical.png";
+
+import mechanical from "../assets/images/mechanical.png";
+import observant from "../assets/images/observant.png";
+import innovative from "../assets/images/innovative.png";
+import insightful from "../assets/images/insightful.png";
+import enthusiastic from "../assets/images/enthusiastic.png";
+import methodical from "../assets/images/methodical.png";
+
+import electrical from "../assets/images/electrical.png";
+import think from "../assets/images/think.png";
+import sketch from "../assets/images/sketch.png";
+import teach from "../assets/images/teach.png";
+import projects from "../assets/images/projects.png";
+import workWell from "../assets/images/workWell.png";
+
+import mechProblems from "../assets/images/mechProblems.png";
+import mathProblems from "../assets/images/mathProblems.png";
+import playMusic from "../assets/images/playMusic.png";
+import express from "../assets/images/express.png";
+import convince from "../assets/images/convince.png";
+import paperWork from "../assets/images/paperWork.png";
+
+import tent from "../assets/images/tent.png";
+import physical from "../assets/images/physical.png";
+import writing from "../assets/images/writing.png";
+import leadGroup from "../assets/images/leadGroup.png";
+import promoteIdeas from "../assets/images/promoteIdeas.png";
+import keepRecords from "../assets/images/keepRecords.png";
+
+import sport from "../assets/images/sport.png";
+import calculation from "../assets/images/calculation.png";
+import design from "../assets/images/design.png";
+import mediate from "../assets/images/mediate.png";
+import speach from "../assets/images/speach.png";
+import computer from "../assets/images/computer.png";
+
+import tinker from "../assets/images/tinker.png";
+import explore from "../assets/images/explore.png";
+import concert from "../assets/images/concert.png";
+import work from "../assets/images/work.png";
+import makeDecision from "../assets/images/makeDecision.png";
+import followProcedure from "../assets/images/followProcedure.png";
+
+import outdoors from "../assets/images/outdoors.png";
+import useComputer from "../assets/images/useComputer.png";
+import reading from "../assets/images/reading.png";
+import help from "../assets/images/help.png";
+import elected from "../assets/images/elected.png";
+import dataProcessing from "../assets/images/dataProcessing.png";
+
+import bePhysically from "../assets/images/bePhysically.png";
+import workIndependent from "../assets/images/workIndependent.png";
+import crafts from "../assets/images/crafts.png";
+import meetings from "../assets/images/meetings.png";
+import salesAward from "../assets/images/salesAward.png";
+import typing from "../assets/images/typing.png";
+
+import useHands from "../assets/images/useHands.png";
+import lab from "../assets/images/lab.png";
+import photo from "../assets/images/photo.png";
+import volunteer from "../assets/images/volunteer.png";
+import political from "../assets/images/political.png";
+import details from "../assets/images/details.png";
+  
   //schoolsDummylist
   export const schoolList = [
     { schoolId: 1, registerNo: "SCH-1000", schoolName: "School 1", studentsCount: "1200", principalName: "Name 1", address: "ADDR 1", contactNo: "9876543210" },
@@ -133,230 +217,168 @@
     { id: 19, studentId: "STU1019", motherName: "Anjali Sharma", fatherName: "Mahesh Sharma", address: "777, Sapphire Road, Mysore", phone: "9876543228", email: "parent19@example.com" },
     { id: 20, studentId: "STU1020", motherName: "Ritu Jain", fatherName: "Sanjeev Jain", address: "888, Maroon Street, Dehradun", phone: "9876543229", email: "parent20@example.com", }
   ];
-
-  export const dummyQuestions = [
-    {
-      id: "q1",
-      question: "Teach children how to read",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q2",
-      question: "Fix a broken faucet",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q3",
-      question: "Conduct biological research",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q4",
-      question: "Supervise the activities of children at a camp",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q5",
-      question: "Run a toy store",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q6",
-      question: "Handle customers' bank transactions",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q7",
-      question: "Operate a calculator",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q8",
-      question: "Do research on plants or animals",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q9",
-      question: "Manage a clothing store",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
-    {
-      id: "q10",
-      question: "Write books or plays",
-      options: [
-        "Dislike",
-        "Slightly dislike",
-        "Neutral",
-        "Slightly enjoy",
-        "Enjoy",
-      ],
-    },
   
-    // {
-    //   id: "q11",
-    //   question: "Do volunteer work at a non-profit organization",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-  
-    // {
-    //   id: "q12",
-    //   question: "Write a song",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-  
-    // {
-    //   id: "q13",
-    //   question: "Study animal behavior",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-    // {
-    //   id: "q14",
-    //   question: "Sell restaurant franchises to individuals",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-    // {
-    //   id: "q15",
-    //   question: "Study whales and other types of marine life",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-    // {
-    //   id: "q16",
-    //   question: "Assemble electronic parts",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-    // {
-    //   id: "q17",
-    //   question: "Operate a grinding machine in a factory",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-    // {
-    //   id: "q18",
-    //   question: "Manage the operations of a hotel",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-    // {
-    //   id: "q19",
-    //   question: "Perform stunts for a movie or television show",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-    // {
-    //   id: "q20",
-    //   question: "Design sets for plays",
-    //   options: [
-    //     "Dislike",
-    //     "Slightly dislike",
-    //     "Neutral",
-    //     "Slightly enjoy",
-    //     "Enjoy",
-    //   ],
-    // },
-  ]
-    
+  export const dummyTopics = [
+    {
+      id: "topic1",
+      topic: "Are you?",
+      questions: [
+        {
+          id: "q1",
+          question: "",
+          options: [
+            { label: "Practical", image: practical, category: "Realistic" },
+            { label: "Analytical", image: analytical, category: "Investigative" },
+            { label: "Creative", image: creative, category: "Artistic" },
+            { label: "Friendly", image: friendly, category: "Social" },
+            { label: "Assertive", image: assertive, category: "Enterprising" },
+            { label: "Well groomed", image: wellGroomed, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q2",
+          question: "",
+          options: [
+            { label: "Athletic", image: athletic, category: "Realistic" },
+            { label: "Inquisitive", image: inquisitive, category: "Investigative" },
+            { label: "Intuitive", image: intuitive, category: "Artistic" },
+            { label: "Helpful", image: helpful, category: "Social" },
+            { label: "Sociable", image: sociable, category: "Enterprising" },
+            { label: "Accurate", image: accurate, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q3",
+          question: "",
+          options: [
+            { label: "Straight forward", image: straight, category: "Realistic" },
+            { label: "Scientific", image: scientific, category: "Investigative" },
+            { label: "Imaginative", image: imaginative, category: "Artistic" },
+            { label: "Idealistic", image: idealistic, category: "Social" },
+            { label: "Persuasive", image: persuasive, category: "Enterprising" },
+            { label: "Numerically inclined", image: numerical, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q4",
+          question: "",
+          options: [
+            { label: "Mechanically inclined", image: mechanical, category: "Realistic" },
+            { label: "Observant", image: observant, category: "Investigative" },
+            { label: "Innovative", image: innovative, category: "Artistic" },
+            { label: "Insightful", image: insightful, category: "Social" },
+            { label: "Enthusiastic", image: enthusiastic, category: "Enterprising" },
+            { label: "Methodical", image: methodical, category: "Conventional" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "topic2",
+      topic: "Can you?",
+      questions: [
+        {
+          id: "q5",
+          question: "",
+          options: [
+            { label: "Fix electrical things", image: electrical, category: "Realistic" },
+            { label: "Think abstractly", image: think, category: "Investigative" },
+            { label: "Sketch, draw, paint", image: sketch, category: "Artistic" },
+            { label: "Teach/train others", image: teach, category: "Social" },
+            { label: "Initiate projects", image: projects, category: "Enterprising" },
+            { label: "Work well within a system", image: workWell, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q6",
+          question: "",
+          options: [
+            { label: "Solve mechanical problems", image: mechProblems, category: "Realistic" },
+            { label: "Solve math problems", image: mathProblems, category: "Investigative" },
+            { label: "Play a musical instrument", image: playMusic, category: "Artistic" },
+            { label: "Express yourself clearly", image: express, category: "Social" },
+            { label: "Convince people to do things your way", image: convince, category: "Enterprising" },
+            { label: "Do a lot of paper work in a short time", image: paperWork, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q7",
+          question: "",
+          options: [
+            { label: "Pitch a tent", image: tent, category: "Realistic" },
+            { label: "Understand physical theories", image: physical, category: "Investigative" },
+            { label: "Write stories, poetry, music, sing, act, dance", image: writing, category: "Artistic" },
+            { label: "Lead a group discussion", image: leadGroup, category: "Social" },
+            { label: "Sell things or promote ideas", image: promoteIdeas, category: "Enterprising" },
+            { label: "Keep accurate records", image: keepRecords, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q8",
+          question: "",
+          options: [
+            { label: "Play a sport", image: sport, category: "Realistic" },
+            { label: "Do complex calculations", image: calculation, category: "Investigative" },
+            { label: "Design fashions or interiors", image: design, category: "Artistic" },
+            { label: "Mediate disputes", image: mediate, category: "Social" },
+            { label: "Give talks or speeches", image: speach, category: "Enterprising" },
+            { label: "Use a computer terminal", image: computer, category: "Conventional" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "topic3",
+      topic: "Like to?",
+      questions: [
+        {
+          id: "q9",
+          question: "",
+          options: [
+            { label: "Tinker with mechanics", image: tinker, category: "Realistic" },
+            { label: "Explore ideas", image: explore, category: "Investigative" },
+            { label: "Attend concerts, theaters, art exhibits", image: concert, category: "Artistic" },
+            { label: "Work in groups", image: work, category: "Social" },
+            { label: "Make decisions affecting others", image: makeDecision, category: "Enterprising" },
+            { label: "Follow clearly defined procedures", image: followProcedure, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q10",
+          question: "",
+          options: [
+            { label: "Work outdoors", image: outdoors, category: "Realistic" },
+            { label: "Use computers", image: useComputer, category: "Investigative" },
+            { label: "Read fiction, plays, poetry", image: reading, category: "Artistic" },
+            { label: "Help people with problems", image: help, category: "Social" },
+            { label: "Be elected to office", image: elected, category: "Enterprising" },
+            { label: "Use data processing equipment", image: dataProcessing, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q11",
+          question: "",
+          options: [
+            { label: "Be physically active", image: bePhysically, category: "Realistic" },
+            { label: "Work independently", image: workIndependent, category: "Investigative" },
+            { label: "Work on crafts", image: crafts, category: "Artistic" },
+            { label: "Participate in meetings", image: meetings, category: "Social" },
+            { label: "Win a leadership or sales award", image: salesAward, category: "Enterprising" },
+            { label: "Type or take shorthand", image: typing, category: "Conventional" },
+          ],
+        },
+        {
+          id: "q12",
+          question: "",
+          options: [
+            { label: "Use your hands", image: useHands, category: "Realistic" },
+            { label: "Perform lab experiments", image: lab, category: "Investigative" },
+            { label: "Take photographs", image: photo, category: "Artistic" },
+            { label: "Do volunteer service", image: volunteer, category: "Social" },
+            { label: "Start your own political campaign", image: political, category: "Enterprising" },
+            { label: "Be responsible for details", image: details, category: "Conventional" },
+          ],
+        },
+      ],
+    },
+  ];  

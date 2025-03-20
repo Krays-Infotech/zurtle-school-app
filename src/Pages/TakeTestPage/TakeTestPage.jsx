@@ -19,7 +19,8 @@ const TakeTestPage = () => {
 
   const handleTest = () => {
     localStorage.setItem("testTaken", "true"); 
-    navigate("/getAssement"); 
+    //navigate("/getAssement"); 
+    navigate("/getInterest");
   };
 
   return (

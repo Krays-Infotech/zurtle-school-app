@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Options from "../Options/Options";
+import { storeInterestResponse } from "../../Redux/Reducers/Assessment/StoreInterestSlice";
 import { storeQuestionResponse } from "../../Redux/Reducers/Assessment/StoreSlice";
 import { getQuestions } from "../../Redux/Reducers/Assessment/GetQuestionsSlice";
 import logoImg from "../../assets/logo.png";
 import questionmark from "../../assets/questionMarkLogo.png";
 import testbg from "../../assets/testbg.png";
-import progressline from "../../assets/progressline.png";
 
 const QUESTIONS_PER_PAGE = 5;
 
 const GetAssessment = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const isFetched = useRef(false);
 
   const [questions, setQuestions] = useState([]);
@@ -23,6 +25,9 @@ const GetAssessment = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // Retrieve selected interest options
+  const selectedInterestOptions = location.state?.selectedInterestOptions || {};
 
   useEffect(() => {
     if (!isFetched.current) {
@@ -73,6 +78,7 @@ const GetAssessment = () => {
           }))
           .filter(Boolean);
 
+        dispatch(storeInterestResponse(selectedInterestOptions));
         dispatch(storeQuestionResponse(formattedData));
         setIsCompleted(true);
       }
