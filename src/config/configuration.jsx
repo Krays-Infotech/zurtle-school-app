@@ -8,7 +8,7 @@ const configuration = {
         login: "zurtle/api/school/auth/login",
         getQuestions: "zurtle/api/school/questionBank/all",
         storeQuestion: "zurtle/api/school/questionBank/store",
-        storeInterest: "zurtle/api/school/interest/store",
+        storeInterest: "zurtle/api/interest/store",
         saveTestReport: "zurtle/api/school/questionBank/testReport",
         getTestReport: "zurtle/api/school/questionBank/getReport",
         getGoogleLogin: "oauth2/authorization/google",

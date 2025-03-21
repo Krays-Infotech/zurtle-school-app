@@ -72,7 +72,7 @@ const Sidebar = () => {
     <>
       {/* Hamburger Menu for Small Screens */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 bg-[#735CFC] text-white p-2 rounded-full"
+        className="lg:hidden fixed top-4 left-4 z-50 bg-[#2A6656] text-white p-2 rounded-full"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
         {isSidebarOpen ? <FaTimes className="w-4 h-4" /> : <FaBars className="w-4 h-4" />}
@@ -100,7 +100,7 @@ const Sidebar = () => {
                   onClick={() => handleMenuClick(item)}
                   className={`px-3 h-10 flex items-center w-full text-left font-quicksand rounded transition ${
                     isMainActive
-                      ? "bg-[#735CFC] text-white"
+                      ? "bg-[#2A6656] text-white"
                       : "hover:bg-[#f6f6f6] hover:text-black"
                   }`}
                 >

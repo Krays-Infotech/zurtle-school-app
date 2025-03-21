@@ -42,7 +42,7 @@ const BarLayout = () => {
         />
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-6 bg-[#F5F6FA] min-h-screen">
+        <div className="flex-1 overflow-y-auto p-6 bg-[#F0FDF4] min-h-screen">
           <Outlet />
         </div>
       </div>

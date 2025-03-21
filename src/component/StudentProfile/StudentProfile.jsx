@@ -27,29 +27,29 @@ const StudentProfile = () => {
       {/* Student Details */}
       <div className="w-full text-center sm:text-left">
         <h3 className="text-xl sm:text-2xl font-bold text-[#3A3A3A] flex items-center gap-2 justify-center sm:justify-start">
-          <FaUser className="text-[#735CFC]" /> {student.studentName}
+          <FaUser className="text-[#2A6656]" /> {student.studentName}
         </h3>
 
         {/* Details in One Line */}
         <div className="flex flex-col sm:flex-wrap sm:flex-row items-center sm:items-start gap-4 sm:gap-6 mt-3 text-lg text-gray-700">
           <div className="flex items-center gap-2">
-            <FaChalkboardTeacher className="text-[#735CFC] text-xl"/>
+            <FaChalkboardTeacher className="text-[#2A6656] text-xl"/>
             <span className="font-medium">Class: {student.class} ({student.section})</span>
           </div>
           <div className="flex items-center gap-2">
-            <FaIdBadge className="text-[#735CFC] text-xl" />
+            <FaIdBadge className="text-[#2A6656] text-xl" />
             <span className="font-medium">Roll No: {student.rollNo}</span>
           </div>
           <div className="flex items-center gap-2">
-            <FaIdBadge className="text-[#735CFC] text-xl" />
+            <FaIdBadge className="text-[#2A6656] text-xl" />
             <span className="font-medium">ID: #{student.studentId}</span>
           </div>
           <div className="flex items-center gap-2">
-            <FaPhone className="text-[#735CFC] text-xl" />
+            <FaPhone className="text-[#2A6656] text-xl" />
             <span className="font-medium">{student.phone}</span>
           </div>
           <div className="flex items-center gap-2">
-            <FaEnvelope className="text-[#735CFC] text-2xl" />
+            <FaEnvelope className="text-[#2A6656] text-2xl" />
             <span className="font-medium">{student.email}</span>
           </div>
         </div>
