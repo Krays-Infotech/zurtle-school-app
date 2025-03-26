@@ -21,6 +21,8 @@ import Header from "./component/Header/Header.jsx";
 import StudentReport from "./component/StudentReport/StudentReport.jsx";
 import PaymentSuccess from "./component/PaymentSuccess/PaymentSuccess.jsx";
 import PaymentFailure from "./component/PaymentFailure/PaymentFailure.jsx";
+import ResultPage from "./component/ResultPage/ResultPage.jsx";
+import CareerMatchCard from "./component/CareerMatchCard/CareerMatchCard.jsx";
 
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -58,6 +60,8 @@ const Router = () => {
         <Route element={<Header />}>
           <Route path="/getAssement" element={<GetAssement />} />
           <Route path="/getInterest" element={<GetInterest />} />
+          <Route path="/result" element={<ResultPage />} />
+          <Route path="/careerMatch" element={<CareerMatchCard />} />
         </Route>
         <Route path="/" element={<TakeTestPage />} />
         <Route path="/login" element={<Login />} />
