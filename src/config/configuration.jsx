@@ -14,6 +14,7 @@ const configuration = {
         getGoogleLogin: "oauth2/authorization/google",
         payment: "zurtle/api/payments/createCheckoutSession",
         paymentStatus: "zurtle/api/payments/savePaymentDetails",
+        getStudent: "zurtle/api/getStudentById",
     }
 }
 
