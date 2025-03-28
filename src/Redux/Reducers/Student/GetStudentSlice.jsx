@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import NetworkRequest from "../../../config/network";
 import configuration from "../../../config/configuration";
 
-export const getTestReport = createAsyncThunk(
-  "getTestReport",
+export const getStudent = createAsyncThunk(
+  "getStudent",
   async (userId, { rejectWithValue }) => {
     try {
 
@@ -15,18 +15,14 @@ export const getTestReport = createAsyncThunk(
       };
 
       const response = await NetworkRequest.get(
-        `${configuration.apis.getTestReport}/${userId}`,
+        `${configuration.apis.getStudent}/${userId}`,
         { headers }
       );
-
-      //const response = await NetworkRequest.get(${configuration.apis.getTestReport}/${userId});
-
-      console.log("API Response:", response);
 
       if (response?.status) {
         return response.data;
       } else {
-        return rejectWithValue("Failed to fetch reports");
+        return rejectWithValue("Failed to fetch details");
       }
     } catch (err) {
       console.error("Error:", err);
@@ -35,36 +31,36 @@ export const getTestReport = createAsyncThunk(
   }
 );
 
-const getTestReportInitalState = {
-  getReports: {},
+const getStudentInitalState = {
+  studentDetails: {},
   loading: false,
   error: null,
 };
 
-const getTestReportSlice = createSlice({
-  name: "getTestReport",
-  initialState: getTestReportInitalState,
+const getStudentSlice = createSlice({
+  name: "getStudent",
+  initialState: getStudentInitalState,
 
   reducers: {},
 
   extraReducers: (builder) => {
     builder
-      .addCase(getTestReport.pending, (state) => {
+      .addCase(getStudent.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.getReports = {};
+        state.studentDetails = {};
       })
-      .addCase(getTestReport.fulfilled, (state, action) => {
+      .addCase(getStudent.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.getReports = action.payload;
+        state.studentDetails = action.payload;
       })
-      .addCase(getTestReport.rejected, (state, action) => {
+      .addCase(getStudent.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.getReports = {};
+        state.studentDetails = {};
       });
   },
 });
 
-export default getTestReportSlice.reducer;
+export default getStudentSlice.reducer;

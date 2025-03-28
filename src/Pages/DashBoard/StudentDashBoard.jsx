@@ -19,15 +19,26 @@ const StudentDashBoard = () => {
       const id = queryParams.get("userId");
 
       if (token) {
-        localStorage.setItem("id", id);
-        localStorage.setItem("role", "student");
-        localStorage.setItem("token", token);
- 
+        // Check if the token is a valid JWT
+        if (token.split(".").length === 3) {
+          try {
+            const decodedToken = jwtDecode(token);
+
+            localStorage.setItem("id", id);
+            localStorage.setItem("role", decodedToken.role);
+            localStorage.setItem("token", token);
+          } catch (error) {
+            console.error("Error decoding JWT:", error);
+          }
+        } else {
+          console.error("Invalid token format:", token);
+        }
         navigate("/studentdashboard");
         isFetched.current = true;
       }
     }
   }, []);
+
   return (
     <div className="flex  pt-16">
       <main className=" font-quicksand w-full">
