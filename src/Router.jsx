@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Navbar from "./component/Nav/Navbar";
 import { Outlet } from "react-router-dom";
 import School from "./Pages/School/School";
@@ -26,9 +27,9 @@ import CareerMatchCard from "./component/CareerMatchCard/CareerMatchCard.jsx";
 
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
   return (
-    <div className="flex h-screen">
-      {/* Sidebar with fixed width */}
+    <div className=" min-h-screen">
       <div
         className={`transition-all duration-300 ${
           isSidebarCollapsed ? "w-0" : "w-0 lg:w-64"
@@ -37,14 +38,12 @@ const BarLayout = () => {
         <Sidebar isCollapsed={isSidebarCollapsed} />
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="lg:ml-[256px] flex flex-col">
         <Navbar
           toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         />
 
-        {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-6 bg-[#F0FDF4] min-h-screen">
+        <div className=" sm:p-6 bg-[#F0FDF4] min-h-screen p-2">
           <Outlet />
         </div>
       </div>
@@ -53,10 +52,27 @@ const BarLayout = () => {
 };
 
 const Router = () => {
+  const token =
+    useSelector((state) => state.loginDetails.token) ||
+    localStorage.getItem("token");
+  // const token = true;
+  const ProtectedRoute = ({ children }) => {
+    if (!token) {
+      return <Navigate to="/" replace />;
+    }
+    return children;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes Without BarLayout */}
+        <Route
+          path="/login"
+          element={
+            token ? <Navigate to="/studentDashboard" replace /> : <Login />
+          }
+        />
+
         <Route element={<Header />}>
           <Route path="/getAssement" element={<GetAssement />} />
           <Route path="/getInterest" element={<GetInterest />} />
@@ -64,21 +80,37 @@ const Router = () => {
           <Route path="/careerMatch" element={<CareerMatchCard />} />
         </Route>
         <Route path="/" element={<TakeTestPage />} />
-        <Route path="/login" element={<Login />} />
+
         <Route
           path="/paymentSuccess/:session_id"
-          element={<PaymentSuccess />}
+          element={
+            <ProtectedRoute>
+              <PaymentSuccess />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/paymentFailure/:session_id"
-          element={<PaymentFailure />}
+          element={
+            <ProtectedRoute>
+              <PaymentFailure />
+            </ProtectedRoute>
+          }
         />
-        {/* Protected With BarLayout */}
-        <Route element={<BarLayout />}>
-          <Route path="/dashboard" element={<DashBoard />} />
-          <Route path="/studentDashboard" element={<StudentDashboard />} />
-          <Route path="dashboard/report" element={<StudentReport />} />
 
+        <Route element={<BarLayout />}>
+          <Route path="/studentDashboard" element={<StudentDashboard />} />
+          <Route
+            path="dashboard/report"
+            element={
+              <ProtectedRoute>
+                <StudentReport />
+              </ProtectedRoute>
+            }
+          />
+
+          {/*
+          <Route path="/dashboard" element={<DashBoard />} />
           <Route path="dashboard/school" element={<School />} />
           <Route path="dashboard/teacher" element={<Teacher />} />
           <Route path="dashboard/student" element={<Student />} />
@@ -86,7 +118,7 @@ const Router = () => {
           <Route path="dashboard/school/addSchool" element={<AddSchool />} />
           <Route path="dashboard/teacher/addTeacher" element={<AddTeacher />} />
           <Route path="dashboard/student/addStudent" element={<AddStudent />} />
-          <Route path="dashboard/parent/addParent" element={<AddParent />} />
+          <Route path="dashboard/parent/addParent" element={<AddParent />} />*/}
         </Route>
       </Routes>
     </BrowserRouter>

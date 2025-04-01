@@ -19,7 +19,6 @@ const StudentReport = () => {
 
   const [reports, setReports] = useState([]);
   const [isPaid, setIsPaid] = useState(false);
-  const userId = localStorage.getItem("id");
 
   useEffect(() => {
     if (!isFetched.current) {
@@ -31,7 +30,11 @@ const StudentReport = () => {
   }, []);
 
   const fetchReports = async () => {
-    console.log(userId);
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    var userId = "";
+    if (userDetails) {
+      userId = userDetails.id;
+    }
 
     const result = await dispatch(getTestReport(userId)).unwrap();
 
