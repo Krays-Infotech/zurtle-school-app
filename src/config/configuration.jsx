@@ -8,6 +8,8 @@ const configuration = {
     googleLogin: "/google-login",
     checkout: "/checkout",
     saveAssessment: "/evaluate",
+    saveBasics: "/students",
+    saveIds: "/results",
 
     // login: "zurtle/api/auth/login",
     // getQuestions: "zurtle/api/getAllQuestions",

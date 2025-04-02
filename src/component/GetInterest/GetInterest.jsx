@@ -135,15 +135,15 @@ const GetInterest = () => {
     <div className="min-h-screen patternBg flex justify-center font-golos py-8">
       <div className="relative w-full max-w-4xl rounded-xl p-10">
         <div
-          className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px]"
-          style={{ backgroundImage: `url(${testbg})` }}
+        // className="text-center  relative bg-cover bg-no-repeat "
+        // style={{ backgroundImage: `url(${testbg})` }}
         >
-          <div className="absolute left-50 top-30 transform -translate-y-1/2">
+          {/* <div className="absolute left-50 top-30 transform -translate-y-1/2">
             <img src={questionmark} alt="Expolarity" className="w-16" />
           </div>
           <div className="absolute right-50 top-30 transform -translate-y-1/2">
             <img src={questionmark} alt="Expolarity" className="w-16" />
-          </div>
+          </div> */}
           <div className="flex flex-col items-center p-12">
             <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
             <h1 className="text-3xl font-bold text-gray-700">Expolarity.AI</h1>

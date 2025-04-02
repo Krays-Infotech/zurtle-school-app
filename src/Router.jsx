@@ -69,7 +69,7 @@ const Router = () => {
         <Route
           path="/login"
           element={
-            token ? <Navigate to="/studentDashboard" replace /> : <Login />
+            token ? <Navigate to="/studentdashboard" replace /> : <Login />
           }
         />
 
@@ -99,13 +99,13 @@ const Router = () => {
         />
 
         <Route element={<BarLayout />}>
-          <Route path="/studentDashboard" element={<StudentDashboard />} />
+          <Route path="/studentdashboard" element={<StudentDashboard />} />
           <Route
             path="dashboard/report"
             element={
-              <ProtectedRoute>
-                <StudentReport />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <StudentReport />
+              // </ProtectedRoute>
             }
           />
 

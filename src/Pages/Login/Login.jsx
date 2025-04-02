@@ -114,7 +114,7 @@ const Login = () => {
               <div className="flex-grow border-t border-[#DFDFDF]"></div>
             </div>
 
-            <div className="flex gap-5 items-center justify-center">
+            {/* <div className="flex gap-5 items-center justify-center">
               <div
                 onClick={() => googleLogin()}
                 className="bg-white cursor-pointer w-[90px] flex items-center justify-center p-2 py-3 rounded-[8px]"
@@ -133,6 +133,14 @@ const Login = () => {
               <div className="bg-white cursor-pointer w-[90px] flex items-center justify-center p-2 py-3 rounded-[8px]">
                 <img src={fb} alt="fb" className="w-5 drop-shadow-2xl" />
               </div>
+            </div> */}
+
+            <div
+              onClick={() => googleLogin()}
+              className="bg-white cursor-pointer gap-3 gilory-medium flex items-center justify-center p-2 py-3 rounded-[8px]"
+            >
+              <img src={google} alt="google" className="w-5 drop-shadow-2xl" />
+              <p className="text-gray-500">SIgn in with Google</p>
             </div>
           </div>
         </div>

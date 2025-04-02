@@ -19,7 +19,7 @@ const InterestOptions = ({
     <div className="options mt-5">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {options.map((opt, i) => (
-          <label key={i} className="cursor-pointer">
+          <label key={i} className="cursor-pointer bg-white">
             <input
               type="checkbox"
               className="hidden"
