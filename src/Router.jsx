@@ -24,6 +24,7 @@ import PaymentSuccess from "./component/PaymentSuccess/PaymentSuccess.jsx";
 import PaymentFailure from "./component/PaymentFailure/PaymentFailure.jsx";
 import ResultPage from "./component/ResultPage/ResultPage.jsx";
 import CareerMatchCard from "./component/CareerMatchCard/CareerMatchCard.jsx";
+import CareerPath from "./Pages/CareerPath/CareerPath.jsx";
 
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -78,23 +79,24 @@ const Router = () => {
           <Route path="/getInterest" element={<GetInterest />} />
           <Route path="/result" element={<ResultPage />} />
           <Route path="/careerMatch" element={<CareerMatchCard />} />
+          <Route path="/careerPath" element={<CareerPath />} />
         </Route>
         <Route path="/" element={<TakeTestPage />} />
 
         <Route
           path="/paymentSuccess/:session_id"
           element={
-            <ProtectedRoute>
-              <PaymentSuccess />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <PaymentSuccess />
+            // </ProtectedRoute>
           }
         />
         <Route
           path="/paymentFailure/:session_id"
           element={
-            <ProtectedRoute>
-              <PaymentFailure />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <PaymentFailure />
+            // </ProtectedRoute>
           }
         />
 

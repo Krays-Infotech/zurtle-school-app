@@ -56,8 +56,8 @@ const BasicDetails = ({ setIsProfileCompleted }) => {
             </label>
 
             <select
-              id="gender"
-              name="gender"
+              id="grade"
+              name="grade"
               className="w-full border bg-[#EAF0F7] border-gray-300 p-3 rounded-md text-sm outline-none"
               onChange={handleChange}
               required

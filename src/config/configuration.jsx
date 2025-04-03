@@ -10,6 +10,8 @@ const configuration = {
     saveAssessment: "/evaluate",
     saveBasics: "/students",
     saveIds: "/results",
+    getResult: "/report",
+    getCarrerPath: "",
 
     // login: "zurtle/api/auth/login",
     // getQuestions: "zurtle/api/getAllQuestions",

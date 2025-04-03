@@ -10,19 +10,28 @@ const Options = ({
   return (
     <div className="options mt-5 ">
       <div className="flex gap-5 mb-2 text-sm text-gray-600">
-        <div className="flex gap-4">
-          {type === "RATING" &&
-            options.map((op, i) => (
-              <input
-                key={i}
-                type="radio"
-                name={`question-${questionIndex}`}
-                className="cursor-pointer w-4 h-4 accent-green-500"
-                checked={selectedOption === op}
-                onChange={() => onSelectOption(op)}
-                required
-              />
-            ))}
+        <div className="flex gap-4 items-center">
+          {type === "RATING" && (
+            <>
+              {/* <p className="text-gray-700 font-medium">Strongly Agree</p> */}
+              {options.map((op, i) => (
+                <button
+                  key={i}
+                  className={`w-8 cursor-pointer h-8 flex items-center justify-center rounded-full border 
+                        ${
+                          selectedOption === op
+                            ? "bg-green-500 text-white border-green-500"
+                            : "border-gray-400 text-gray-700"
+                        }
+                        transition-all duration-200 hover:bg-green-200`}
+                  onClick={() => onSelectOption(op)}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              {/* <p className="text-gray-700 font-medium">Strongly Disagree</p> */}
+            </>
+          )}
         </div>
       </div>
 

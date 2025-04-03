@@ -7,8 +7,8 @@ export const createPayment = createAsyncThunk(
   async ({ values }: { values: {} }) => {
     try {
       const response = await NetworkToken.post(
-        configuration.apis.payment,
-        values,
+        configuration.apis.checkout,
+        values
       );
       if (response.status) {
         const resultData = response.data;
@@ -17,7 +17,7 @@ export const createPayment = createAsyncThunk(
     } catch (err) {
       console.log(err);
     }
-  },
+  }
 );
 
 const createPaymentInitialState = {

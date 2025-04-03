@@ -8,6 +8,7 @@ import questionmark from "../../assets/questionMarkLogo.png";
 import testbg from "../../assets/testbg.png";
 import { saveTestReport } from "../../Redux/Reducers/Assessment/SaveTestReport";
 import saveAssessment from "../../assets/gif/save.gif";
+import Loader from "../Loader/Loader";
 
 const QUESTIONS_PER_PAGE = 5;
 
@@ -42,6 +43,7 @@ const GetAssessment = () => {
   }, []);
 
   const saveLoading = useSelector((state) => state.saveAssessment.loading);
+  const getLoading = useSelector((state) => state.getQuestions.loading);
 
   useEffect(() => {
     if (!isFetched.current) {
@@ -156,13 +158,8 @@ const GetAssessment = () => {
 
   return (
     <>
-      {saveLoading ? (
-        <div className="gilory-medium flex flex-col items-center justify-center w-full min-h-screen">
-          <img src={saveAssessment} alt="Animated GIF" className="w-[150px]" />
-          <p className="mt-2 text-center">
-            We are analyzing your answers for best results...
-          </p>
-        </div>
+      {saveLoading || getLoading ? (
+        <Loader />
       ) : (
         <div className="min-h-screen patternBg flex justify-center font-golos py-8">
           <div className="relative w-full max-w-4xl rounded-xl p-10">
