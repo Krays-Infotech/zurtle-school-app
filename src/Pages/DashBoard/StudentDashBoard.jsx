@@ -6,10 +6,13 @@ import StudentProfile from "../../component/StudentProfile/StudentProfile";
 import StudentTest from "../../component/StudentTest/StudentTest";
 import StudentReport from "../../component/StudentReport/StudentReport";
 import StudentActivity from "../../component/StudentActivity/StudentActivity";
+import School from "../School/School";
+import { useDispatch } from "react-redux";
+import { loginFn } from "../../Redux/Reducers/Login/LoginSlice";
 
 const StudentDashBoard = () => {
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const isFetched = useRef(false);
 
   useEffect(() => {
@@ -24,8 +27,19 @@ const StudentDashBoard = () => {
           try {
             const decodedToken = jwtDecode(token);
 
-            localStorage.setItem("id", id);
-            localStorage.setItem("role", decodedToken.role);
+            const userDetails = {
+              id: id,
+              role: decodedToken.role,
+            };
+
+            const data = {
+              userDetails,
+              token,
+            };
+
+            dispatch(loginFn(data));
+
+            localStorage.setItem("userDetails", JSON.stringify(userDetails));
             localStorage.setItem("token", token);
           } catch (error) {
             console.error("Error decoding JWT:", error);
@@ -42,7 +56,6 @@ const StudentDashBoard = () => {
   return (
     <div className="flex  pt-16">
       <main className=" font-quicksand w-full">
-        
         {/* Student Profile Section */}
         <div className="rounded-xl px-6 mb-6">
           <StudentProfile />
@@ -61,7 +74,6 @@ const StudentDashBoard = () => {
         <div className="rounded-xl p-6">
           <StudentActivity />
         </div>
-
       </main>
     </div>
   );

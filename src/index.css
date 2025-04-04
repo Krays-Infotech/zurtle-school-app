@@ -1,19 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Golos+Text&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.cdnfonts.com/css/gilroy-bold");
 
 @tailwind utilities;
 
 @import "tailwindcss";
 
 .font-golos {
-  font-family: 'Golos Text', sans-serif;
+  font-family: "Golos Text", sans-serif;
 }
 
-.font-roboto{
-  font-family: 'Roboto', sans-serif;
+.font-roboto {
+  font-family: "Roboto", sans-serif;
 }
 
+.font-inter {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.font-gilory {
+  /* font-family: "Gilroy-Bold", sans-serif; */
+  /* font-family: "Gilroy-Heavy", sans-serif; */
+  font-family: "Gilroy-Light", sans-serif;
+  /* font-family: "Gilroy-Regular", sans-serif; */
+}
+
+.gilory-medium {
+  font-family: "Gilroy-Medium", sans-serif;
+}
 
 ::-webkit-scrollbar {
   display: none;

@@ -1,33 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FaUser, FaPhone, FaEnvelope, FaIdBadge, FaChalkboardTeacher } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import {
+  FaUser,
+  FaPhone,
+  FaEnvelope,
+  FaIdBadge,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 import { useDispatch } from "react-redux";
 
 import { getStudent } from "../../Redux/Reducers/Student/GetStudentSlice";
 
 const StudentProfile = () => {
-
   const dispatch = useDispatch();
-  const isFetched = useRef(false);
 
   const [student, setStudent] = useState([]);
-  const userId = localStorage.getItem("id");
 
   useEffect(() => {
-    if (!isFetched.current) {
-      fetchStudent();
-      isFetched.current = true;
-    }
+    fetchStudent();
   }, []);
 
   const fetchStudent = async () => {
-
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    var userId = "";
+    if (userDetails) {
+      userId = userDetails.id;
+    }
     const result = await dispatch(getStudent(userId)).unwrap();
 
     if (result?.status === true) {
       setStudent(result.data);
     }
   };
-  
 
   return (
     <div className="bg-white rounded-xl p-4 max-w-6xl border border-gray-200 w-full mx-auto flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
@@ -50,8 +53,10 @@ const StudentProfile = () => {
         <div className="flex flex-col sm:flex-wrap sm:flex-row items-center sm:items-start gap-4 sm:gap-6 mt-3 text-lg text-gray-700">
           {student.standard && (
             <div className="flex items-center gap-2">
-              <FaChalkboardTeacher className="text-[#2A6656] text-xl"/>
-              <span className="font-medium">Class: {student.standard} ({student.section})</span>
+              <FaChalkboardTeacher className="text-[#2A6656] text-xl" />
+              <span className="font-medium">
+                Class: {student.standard} ({student.section})
+              </span>
             </div>
           )}
           {student.rollNo && (

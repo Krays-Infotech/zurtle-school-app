@@ -6,7 +6,10 @@ export const saveTestReport = createAsyncThunk(
   "saveTestReport",
   async (values, { rejectWithValue }) => {
     try {
-      const response = await NetworkRequest.post(configuration.apis.saveTestReport, values);
+      const response = await NetworkRequest.post(
+        configuration.apis.saveAssessment,
+        values
+      );
 
       if (response?.status === 200) {
         return response.data;

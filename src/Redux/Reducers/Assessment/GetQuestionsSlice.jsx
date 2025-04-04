@@ -7,9 +7,7 @@ export const getQuestions = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       console.log("Fetching questions...");
-      const response = await NetworkRequest.get(configuration.apis.getQuestions);
-
-      console.log("API Response:", response);
+      const response = await NetworkRequest.get(configuration.apis.assessment);
 
       if (response?.status) {
         return response.data;

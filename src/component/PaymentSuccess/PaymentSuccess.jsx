@@ -19,16 +19,22 @@ const PaymentSuccess = () => {
     try {
       if (session_id) {
         setPaymentSuccess(false);
-        const userId = localStorage.getItem("id");
-        const result = await dispatch(
-          paymentStatus({ userId, sessionId: session_id, paymentStatus: true })
-        ).unwrap();
+        const userId = localStorage.getItem("userId");
+        if (userId) {
+          const result = await dispatch(
+            paymentStatus({
+              userId,
+              sessionId: session_id,
+              paymentStatus: true,
+            })
+          ).unwrap();
 
-        if (result.status) {
-          localStorage.setItem("isPaid", "true");
-          setTimeout(() => {
-            navigate("/dashboard/report");
-          }, 1000);
+          if (result.status) {
+            localStorage.setItem("isPaid", "true");
+            setTimeout(() => {
+              navigate("/dashboard/report");
+            }, 1000);
+          }
         }
       }
     } catch (err) {

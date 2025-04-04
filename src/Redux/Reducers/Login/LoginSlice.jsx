@@ -6,7 +6,10 @@ export const login = createAsyncThunk(
   "loginDetails",
   async (values, { rejectWithValue }) => {
     try {
-      const response = await NetworkRequest.post(configuration.apis.login, values);
+      const response = await NetworkRequest.post(
+        configuration.apis.login,
+        values
+      );
 
       if (response?.status === 200) {
         const resultData = response.data;
@@ -28,7 +31,8 @@ export const login = createAsyncThunk(
 );
 
 const loginDetailsInitalState = {
-  loginDetails: {},
+  loginDetails: JSON.parse(localStorage.getItem("userDetails")) || {},
+  token: localStorage.getItem("token") || null,
   loading: false,
   error: null,
 };
@@ -37,7 +41,17 @@ const loginDetailsSlice = createSlice({
   name: "loginDetails",
   initialState: loginDetailsInitalState,
 
-  reducers: {},
+  reducers: {
+    loginFn: (state, action) => {
+      state.loginDetails = action.payload.userDetails;
+      state.token = action.payload.token;
+    },
+    logout: (state) => {
+      state.loginDetails = {};
+      state.token = null;
+      localStorage.clear();
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -59,4 +73,5 @@ const loginDetailsSlice = createSlice({
   },
 });
 
+export const { logout, loginFn } = loginDetailsSlice.actions;
 export default loginDetailsSlice.reducer;

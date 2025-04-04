@@ -7,13 +7,13 @@ import { FaUserGraduate } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setSelectedStudent } from "../../Redux/Reducers/School/schoolSlice";
 
-const Student = ({  }) => {
+const Student = ({}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [students, setStudents] = useState(studentList); 
+  const [students, setStudents] = useState(studentList);
   const pageSize = 10;
 
   // Filter data based on search value
@@ -30,7 +30,9 @@ const Student = ({  }) => {
   // Select/Deselect a single row
   const onSelectRow = (studentId) => {
     setSelectedRows((prev) =>
-      prev.includes(studentId) ? prev.filter((rowId) => rowId !== studentId) : [...prev, studentId]
+      prev.includes(studentId)
+        ? prev.filter((rowId) => rowId !== studentId)
+        : [...prev, studentId]
     );
   };
 
@@ -56,12 +58,14 @@ const Student = ({  }) => {
 
   // Handle delete functionality
   const handleDelete = (studentId) => {
-    setStudents((prevStudents) => prevStudents.filter((student) => student.studentId !== studentId));
+    setStudents((prevStudents) =>
+      prevStudents.filter((student) => student.studentId !== studentId)
+    );
   };
 
   return (
     <div className="flex font-quicksand p-16">
-    <div className="bg-white rounded-xl shadow-lg p-6 w-full sm:w-[95%] md:w-[80%] ml-auto">
+      <div className="bg-white rounded-xl shadow-lg p-6 w-full sm:w-[95%] md:w-[80%] ml-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-extrabold text-gray-700 flex items-center">
@@ -72,8 +76,8 @@ const Student = ({  }) => {
 
         {/* Search Bar and Button */}
         <div className="flex justify-between items-center mb-6">
-        <div className="w-72 h-10 flex items-center border border-[#F3F4F6] rounded-lg px-3">
-        <Search className="text-gray-400 w-5 h-5" />
+          <div className="w-72 h-10 flex items-center border border-[#F3F4F6] rounded-lg px-3">
+            <Search className="text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search students..."
@@ -116,7 +120,7 @@ const Student = ({  }) => {
                 <tr
                   key={student.studentId}
                   className="hover:bg-gray-50 border-b border-[#F3F4F6]"
-                  onClick={() => navigate("/studentDashboard")}
+                  onClick={() => navigate("/studentdashboard")}
                 >
                   <td className="p-3 text-left">
                     <input
@@ -159,7 +163,8 @@ const Student = ({  }) => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDelete(student.studentId)}}
+                        handleDelete(student.studentId);
+                      }}
                       className="bg-red-100 text-red-500 p-2 rounded-lg hover:bg-red-200 transition"
                     >
                       <Trash size={16} />

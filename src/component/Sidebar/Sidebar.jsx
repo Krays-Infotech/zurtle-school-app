@@ -12,7 +12,6 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { BiSolidReport } from "react-icons/bi";
 
-
 const menuItems = [
   {
     title: "Dashboards",
@@ -27,7 +26,7 @@ const menuItems = [
       {
         name: "Report",
         path: "/dashboard/report",
-        icon: <BiSolidReport  className="w-4 h-4" />,
+        icon: <BiSolidReport className="w-4 h-4" />,
       },
       // {
       //   name: "Teacher",
@@ -72,22 +71,33 @@ const Sidebar = () => {
     <>
       {/* Hamburger Menu for Small Screens */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 bg-[#2A6656] text-white p-2 rounded-full"
+        className="lg:hidden fixed top-4 left-4 z-30 bg-[#2A6656] cursor-pointer text-white p-2 rounded-full"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? <FaTimes className="w-4 h-4" /> : <FaBars className="w-4 h-4" />}
+        {isSidebarOpen ? (
+          <FaTimes className="w-4 h-4" />
+        ) : (
+          <FaBars className="w-4 h-4" />
+        )}
       </button>
-  
+
       {/* Sidebar */}
       <div
         className={`bg-white fixed h-full p-4 border-r border-[#F5F6FA] flex flex-col transition-all duration-300 z-40
           ${isSidebarOpen ? "w-64 left-0" : "w-64 -left-64"}
           lg:w-64 lg:left-0`}
       >
-        <div className="flex items-center justify-start border-b border-[#F5F6FA] pb-3 mb-4">
+        <div className="flex items-center justify-between border-b border-[#F5F6FA] pb-3 mb-4">
           <h2 className="ml-2 text-xl font-bold font-quicksand text-black">
-            RMS School 
+            RMS School
           </h2>
+
+          <button
+            className=" lg:hidden bg-[#2A6656] text-white p-2 rounded-full cursor-pointer"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            <FaTimes className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Menu */}
@@ -118,13 +128,17 @@ const Sidebar = () => {
                 {openMenus[item.title] && item.submenu && (
                   <ul className="ml-6 mt-1 space-y-1 text-sm font-normal font-quicksand">
                     {item.submenu.map((subItem) => {
-                      const isSubActive = location.pathname.startsWith(subItem.path);
+                      const isSubActive = location.pathname.startsWith(
+                        subItem.path
+                      );
                       return (
                         <li key={subItem.name} className="py-1">
                           <Link
                             to={subItem.path}
                             className={`py-1 px-2 flex items-center space-x-2 rounded ${
-                              isSubActive ? "bg-[#ebe9f1] text-black" : "text-black"
+                              isSubActive
+                                ? "bg-[#ebe9f1] text-black"
+                                : "text-black"
                             }`}
                           >
                             {subItem.icon}

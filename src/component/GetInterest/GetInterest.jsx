@@ -22,6 +22,8 @@ const GetInterest = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [heading, setHeading] = useState("");
 
+  const [interestOptionsData, setInterestOptionsData] = useState([]);
+
   useEffect(() => {
     if (!isFetched.current) {
       const formattedQuestions = dummyTopics.flatMap((topic) =>
@@ -35,7 +37,7 @@ const GetInterest = () => {
       setQuestions(formattedQuestions);
       setTotalQuestions(formattedQuestions.length);
       setTotalPages(Math.ceil(formattedQuestions.length / QUESTIONS_PER_PAGE));
-      
+
       if (formattedQuestions.length > 0) {
         setHeading(formattedQuestions[0].topic);
       }
@@ -51,59 +53,74 @@ const GetInterest = () => {
     }));
   };
 
+  const isPageCompleted = () => {
+    const currentPageQuestions = questions.slice(
+      currentIndex,
+      currentIndex + QUESTIONS_PER_PAGE
+    );
+
+    return currentPageQuestions.every(
+      (q) =>
+        selectedInterestOptions[q.id] !== undefined &&
+        selectedInterestOptions[q.id] !== null
+    );
+  };
+
   const next = () => {
+    const currentQuestions = questions.slice(
+      currentIndex,
+      currentIndex + QUESTIONS_PER_PAGE
+    );
+
+    const selectedOptionsForCurrent = currentQuestions
+      .map((q) => ({
+        questionId: q.id,
+        topic: q.topic,
+        selectedOption: selectedInterestOptions[q.id] || null,
+      }))
+      .filter((item) => item.selectedOption);
+
+    setInterestOptionsData((prevData) => [
+      ...prevData,
+      ...selectedOptionsForCurrent,
+    ]);
+
     if (currentIndex + QUESTIONS_PER_PAGE < totalQuestions) {
       setCurrentIndex(currentIndex + QUESTIONS_PER_PAGE);
       if (questions[currentIndex + QUESTIONS_PER_PAGE]) {
         setHeading(questions[currentIndex + QUESTIONS_PER_PAGE].topic);
       }
     } else {
-      console.log("Final Selections before processing:", selectedInterestOptions);
-  
-      // Initialize formatted selection structure
-      const formattedSelection = [
-        { category: "Realistic", options: [], count: 0 },
-        { category: "Investigative", options: [], count: 0 },
-        { category: "Artistic", options: [], count: 0 },
-        { category: "Social", options: [], count: 0 },
-        { category: "Enterprising", options: [], count: 0 },
-        { category: "Conventional", options: [], count: 0 },
-      ];
-  
-      Object.entries(selectedInterestOptions).forEach(([questionId, selectedLabels]) => {
-        const question = questions.find(q => q.id.toString() === questionId.toString());
-  
-        if (question) {
-          selectedLabels.forEach(label => {
-            const selectedOption = question.options.find(opt => opt.label === label);
-  
-            if (selectedOption) {
-              const categoryName = selectedOption.category;
-  
-              // Ensure the selected category exists in formattedSelection
-              const categoryIndex = formattedSelection.findIndex(item => item.category === categoryName);
-              if (categoryIndex !== -1) {
-                formattedSelection[categoryIndex].options.push(label);
-                formattedSelection[categoryIndex].count += 1;
-              }
-            }
+      const groupedData = [
+        ...interestOptionsData,
+        ...selectedOptionsForCurrent,
+      ].reduce((acc, item) => {
+        let topicEntry = acc.find((entry) => entry.topic === item.topic);
+
+        if (topicEntry) {
+          topicEntry.selectedOptions.push(item.selectedOption);
+        } else {
+          acc.push({
+            topic: item.topic,
+            selectedOptions: [item.selectedOption],
           });
         }
-      });
-  
-      // Remove empty categories (categories with count = 0)
-      const filteredFormattedSelection = formattedSelection.filter(item => item.count > 0);
-  
-      console.log("Final formatted selection:", filteredFormattedSelection);
-  
-      if (filteredFormattedSelection.length > 0) {
-        navigate("/getAssement", { state: { selectedInterestOptions: filteredFormattedSelection } });
+
+        return acc;
+      }, []);
+
+      console.log("Intrest Selected Options:", groupedData);
+
+      if (Object.keys(groupedData).length > 0) {
+        navigate("/getAssement", {
+          state: { selectedInterestOptions: groupedData },
+        });
         setIsCompleted(true);
       } else {
         console.error("Error: No valid selections were processed!");
       }
     }
-  };  
+  };
 
   const prev = () => {
     if (currentIndex > 0) {
@@ -115,27 +132,25 @@ const GetInterest = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center font-golos py-8">
+    <div className="min-h-screen patternBg flex justify-center font-golos py-8">
       <div className="relative w-full max-w-4xl rounded-xl p-10">
         <div
-          className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px]"
-          style={{ backgroundImage: `url(${testbg})` }}
+        // className="text-center  relative bg-cover bg-no-repeat "
+        // style={{ backgroundImage: `url(${testbg})` }}
         >
-          <div className="absolute left-50 top-30 transform -translate-y-1/2">
+          {/* <div className="absolute left-50 top-30 transform -translate-y-1/2">
             <img src={questionmark} alt="Expolarity" className="w-16" />
           </div>
           <div className="absolute right-50 top-30 transform -translate-y-1/2">
             <img src={questionmark} alt="Expolarity" className="w-16" />
-          </div>
+          </div> */}
           <div className="flex flex-col items-center p-12">
             <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
             <h1 className="text-3xl font-bold text-gray-700">Expolarity.AI</h1>
           </div>
         </div>
 
-        <h2 className="text-2xl font-bold text-gray-700 mb-4">
-          {heading}
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-700 mb-4">{heading}</h2>
 
         {!isCompleted ? (
           <div className="w-full flex items-center justify-center">
@@ -152,7 +167,9 @@ const GetInterest = () => {
                     <InterestOptions
                       options={q.options}
                       selectedOptions={selectedInterestOptions[q.id] || []}
-                      onSelectOption={(updatedSelection) => handleSelectOption(q.id, updatedSelection)}
+                      onSelectOption={(updatedSelection) =>
+                        handleSelectOption(q.id, updatedSelection)
+                      }
                       questionIndex={q.id}
                     />
                   </div>
@@ -175,18 +192,26 @@ const GetInterest = () => {
           <div className="flex items-center justify-between py-4">
             {currentIndex > 0 && (
               <button
-                className="bg-green-500 hover:bg-green-600 text-white rounded-md px-4 py-2"
+                type="submit"
+                className="bg-green-500 hover:bg-green-600 text-white rounded-md px-4 py-2 cursor-pointer"
                 onClick={prev}
               >
                 Previous
               </button>
             )}
             <p className="text-sm text-gray-500">
-              Page {Math.ceil(currentIndex / QUESTIONS_PER_PAGE) + 1} of {totalPages}
+              Page {Math.ceil(currentIndex / QUESTIONS_PER_PAGE) + 1} of{" "}
+              {totalPages}
             </p>
             <button
-              className="px-4 py-2 rounded-md shadow-md text-white bg-green-500 hover:bg-green-600"
+              type="submit"
+              className={`px-4 py-2 rounded-md shadow-md text-white cursor-pointer  ${
+                isPageCompleted()
+                  ? "bg-green-500 hover:bg-green-600"
+                  : "bg-gray-300 cursor-not-allowed"
+              }`}
               onClick={next}
+              disabled={!isPageCompleted()}
             >
               Next
             </button>
