@@ -25,7 +25,8 @@ const BasicDetails = ({ setIsProfileCompleted }) => {
     try {
       e.preventDefault();
 
-      const userId = localStorage.getItem("userId");
+      const userId = JSON.parse(sessionStorage.getItem("userId"));
+      // const userId = localStorage.getItem("userId");
       if (userId) {
         const data = {
           userId,
