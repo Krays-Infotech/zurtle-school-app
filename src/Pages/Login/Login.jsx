@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { LuUserRound } from "react-icons/lu";
-import logo from "../../assets/Login/loginLogo.svg";
+import logo from "../../assets/Login/LoginLogo.svg";
 import flyingHuman from "../../assets/Login/flyingHuman.svg";
 import google from "../../assets/Login/google.svg";
 import apple from "../../assets/Login/apple.png";
