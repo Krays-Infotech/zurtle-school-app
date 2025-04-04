@@ -4,10 +4,10 @@ import configuration from "../../../config/configuration";
 
 export const getResult = createAsyncThunk(
   "getResult",
-  async (repId, { rejectWithValue }) => {
+  async (userId, { rejectWithValue }) => {
     try {
       const response = await NetworkRequest.get(
-        `${configuration.apis.getResult}/${repId}`
+        `${configuration.apis.getResult}/${userId}`
       );
 
       if (response?.status) {

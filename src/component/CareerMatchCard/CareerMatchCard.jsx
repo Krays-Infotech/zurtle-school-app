@@ -20,12 +20,15 @@ const CareerMatchCard = () => {
   const [studentDetails, setStudentDetails] = useState(null);
   const [selectedCareer, setSelectedCareer] = useState("");
   const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
+  const [isPaymentPending, setIsPaymentPending] = useState(false);
 
   const loading = useSelector((state) => state.getResult.loading);
 
   useEffect(() => {
     sendIds();
   }, []);
+
+  console.log(isProfileCompleted);
 
   const sendIds = async () => {
     try {
@@ -64,13 +67,16 @@ const CareerMatchCard = () => {
 
   const fetchRecommendation = async () => {
     try {
-      const repId = JSON.parse(sessionStorage.getItem("assessmentId"));
+      const userId = JSON.parse(sessionStorage.getItem("userId"));
       // const repId = localStorage.getItem("assessmentId");
-      const res = await dispatch(getResult(repId)).unwrap();
+      const res = await dispatch(getResult(userId)).unwrap();
       if (res) {
         setRecommendation(res?.career_recommendations);
+        setIsPaymentPending(res?.payment_status);
+        sessionStorage.setItem("isPaid", JSON.stringify(res?.payment_status));
 
-        console.log("res?.career_recommendations", res?.career_recommendations);
+        console.log(res.payment_status);
+
         setStudentDetails(res.student);
         sessionStorage.setItem("studentDetails", JSON.stringify(res.student));
       }
@@ -84,14 +90,18 @@ const CareerMatchCard = () => {
   const seeCarrerPath = async (career) => {
     console.log(career);
 
-    const payment = localStorage.getItem("isPaid") || null;
-    console.log(payment);
+    const paid = JSON.parse(sessionStorage.getItem("isPaid")) || null;
+    console.log(paid);
 
-    if (!payment) {
-      setIsPaymentCompleted(true);
-    } else {
+    // if (isPaymentPending) {
+    if (paid) {
       navigate(`/careerPath/${career}`);
+    } else {
+      setIsPaymentCompleted(true);
     }
+    // } else {
+    //   navigate(`/careerPath/${career}`);
+    // }
   };
 
   const handlePayment = async () => {
@@ -212,74 +222,11 @@ const CareerMatchCard = () => {
                         <h3 className="text-[14px]  font-semibold text-gray-800">
                           {shortPrefix}
                         </h3>
-                        {/* {traits && (
-                          <p className="text-gray-600 text-[12px] mt-2">
-                            {traits}
-                          </p>
-                        )} */}
                       </div>
                     );
                   })}
               </div>
             </div>
-
-            {/* 
-            <div className="bg-[#750AD5]  shadow-md rounded-2xl p-6 mt-4 flex flex-col items-center w-full max-w-sm">
-              <img
-                src={Scientist}
-                alt="Scientist"
-                className="w-24 h-24 md:w-28 md:h-28"
-              />
-              <h3 className="text-[24px] md:text-[28px] text-white mt-4">
-                {recommendation && recommendation[0].split(" ")[0]}
-              </h3>
-
-              <button
-                onClick={() => seeCarrerPath()}
-                className="mt-4 cursor-pointer bg-white text-[#750AD5] px-4 py-2 rounded-lg text-[16px] md:text-[20px] font-semibold"
-              >
-                See your Career Path
-              </button>
-            </div>
-
-            <p className="text-[13px] md:text-[14px] mt-2 text-center max-w-md">
-              Kids who love exploring, experimenting, and discovering new
-              things!
-            </p>
-
-            <div className="mt-6 max-w-lg">
-              <h4 className="text-[14px] md:text-[16px] font-semibold">
-                Why it fits you
-              </h4>
-              <ul className="py-4 space-y-4">
-                <li className="flex items-center text-[14px] md:text-[16px]">
-                  <img src={GoldStar} alt="star" className="w-5 h-5 mr-2" />
-                  You are very organized and focused (High Conscientiousness).
-                </li>
-                <li className="flex items-center text-[14px] md:text-[16px]">
-                  <img src={GoldStar} alt="star" className="w-5 h-5 mr-2" />
-                  Learning new things and thinking creatively (High Openness).
-                </li>
-                <li className="flex items-center text-[14px] md:text-[16px]">
-                  <img src={GoldStar} alt="star" className="w-5 h-5 mr-2" />
-                  You enjoy solving problems and figuring out how things work.
-                </li>
-              </ul>
-            </div> */}
-
-            {/* <motion.div
-              className="fixed bottom-6 right-6 "
-              initial={{ y: 0 }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 0.8, repeat: Infinity, repeatDelay: 2 }}
-            >
-              <button
-                onClick={() => handlePayment()}
-                className="flex items-center cursor-pointer gap-2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg font-semibold hover:bg-green-600 transition"
-              >
-                Pay $5 to Explore More <FaUnlockAlt />
-              </button>
-            </motion.div> */}
           </div>
 
           {!isProfileCompleted && (

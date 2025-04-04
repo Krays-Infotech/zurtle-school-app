@@ -11,7 +11,7 @@ const configuration = {
     saveAssessment: "/evaluate",
     saveBasics: "/students",
     saveIds: "/results",
-    getResult: "/report",
+    getResult: "/report/user",
     careerPath: "/generate",
     paymentStatus: "/payments",
 
