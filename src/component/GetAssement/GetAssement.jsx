@@ -144,7 +144,9 @@ const GetAssessment = () => {
 
         console.log("Answers", answers);
         const res = await dispatch(saveTestReport(answers)).unwrap();
-        localStorage.setItem("assessmentId", res.result_id);
+        // localStorage.setItem("assessmentId", res.result_id);
+        sessionStorage.setItem("assessmentId", JSON.stringify(res.result_id));
+
         console.log("response", res);
 
         setIsCompleted(true);

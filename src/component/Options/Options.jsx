@@ -10,10 +10,12 @@ const Options = ({
   return (
     <div className="options mt-5 ">
       <div className="flex gap-5 mb-2 text-sm text-gray-600">
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center ">
           {type === "RATING" && (
             <>
-              {/* <p className="text-gray-700 font-medium">Strongly Agree</p> */}
+              <p className="text-gray-700 text-xs font-medium">
+                Strongly Agree
+              </p>
               {options.map((op, i) => (
                 <button
                   key={i}
@@ -29,7 +31,9 @@ const Options = ({
                   {i + 1}
                 </button>
               ))}
-              {/* <p className="text-gray-700 font-medium">Strongly Disagree</p> */}
+              <p className="text-gray-700 font-medium text-xs">
+                Strongly Disagree
+              </p>
             </>
           )}
         </div>

@@ -17,23 +17,26 @@ const CareerPath = () => {
   const studentDetails = useSelector((state) => state.getResult.resultDetails);
   const loading = useSelector((state) => state.genarateCarrer.loading);
 
-  console.log(studentDetails);
-
   useEffect(() => {
     fetchCarrerPath();
   }, []);
 
   const fetchCarrerPath = async () => {
     try {
-      const student = studentDetails.student;
+      const details = JSON.parse(sessionStorage.getItem("studentDetails"));
+      console.log("details", details);
+
+      const student = studentDetails.student || details;
 
       const data = {
         student_id: student.student_id,
+        grade: student.class,
         country: student.country,
         assessment_result: career,
       };
-      const res = await dispatch(generateCarrer(data.student)).unwrap();
-      setCareerDetails(res);
+      console.log(data);
+      const res = await dispatch(generateCarrer(data)).unwrap();
+      setCareerDetails(res.data);
 
       console.log(res);
       // const result = await dispatch(getCareerPathById(data.student)).unwrap();

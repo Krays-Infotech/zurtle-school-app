@@ -32,11 +32,14 @@ const CareerMatchCard = () => {
       const token = params.get("token");
       const isLogin = params.get("isLogin");
       const userId = params.get("userId");
+      console.log("userId", userId);
 
-      const reqId = localStorage.getItem("assessmentId");
+      // const reqId = localStorage.getItem("assessmentId");
+      const reqId = JSON.parse(sessionStorage.getItem("assessmentId"));
 
       if (userId) {
-        localStorage.setItem("userId", userId);
+        // localStorage.setItem("userId", userId);
+        sessionStorage.setItem("userId", userId);
 
         const data = {
           reqId,
@@ -60,13 +63,15 @@ const CareerMatchCard = () => {
 
   const fetchRecommendation = async () => {
     try {
-      const repId = localStorage.getItem("assessmentId");
+      const repId = JSON.parse(sessionStorage.getItem("assessmentId"));
+      // const repId = localStorage.getItem("assessmentId");
       const res = await dispatch(getResult(repId)).unwrap();
       if (res) {
         setRecommendation(res?.career_recommendations);
 
         console.log("res?.career_recommendations", res?.career_recommendations);
         setStudentDetails(res.student);
+        sessionStorage.setItem("studentDetails", JSON.stringify(res.student));
       }
     } catch (err) {
       console.log(err);
@@ -147,20 +152,26 @@ const CareerMatchCard = () => {
                           .trim()
                       : "";
 
+                    const maxLength = 55;
+                    const shortPrefix =
+                      prefix.length > maxLength
+                        ? prefix.slice(0, maxLength) + "..."
+                        : prefix;
+
                     return (
                       <div
                         onClick={() => seeCarrerPath(prefix)}
                         key={i}
                         className="bg-white cursor-pointer shadow-lg rounded-xl p-6 text-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
                       >
-                        <h3 className="text-[14px] md:text-xl font-semibold text-gray-800">
-                          {prefix}
+                        <h3 className="text-[14px]  font-semibold text-gray-800">
+                          {shortPrefix}
                         </h3>
-                        {traits && (
+                        {/* {traits && (
                           <p className="text-gray-600 text-[12px] mt-2">
                             {traits}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     );
                   })}
