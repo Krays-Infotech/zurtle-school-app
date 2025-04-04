@@ -5,8 +5,9 @@ import saveAssessmentReducer from "../Redux/Reducers/Assessment/SaveTestReport";
 import saveBasicDetailsReducer from "../Redux/Reducers/Login/saveBasic";
 import saveUserIdsReducer from "../Redux/Reducers/Login/saveUser";
 import getResultReducer from "../Redux/Reducers/Result/ResultSlice";
-import getCarrerPathReducer from "../Redux/Reducers/Result/getCarrerPath";
+import genarateCarrerPathReducer from "../Redux/Reducers/Result/generateCareer";
 import GetQuestionsReducer from "../Redux/Reducers/Assessment/GetQuestionsSlice";
+import getCareerPathByIdReducer from "../Redux/Reducers/Result/getCareerPathById";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     saveBasics: saveBasicDetailsReducer,
     saveUserIds: saveUserIdsReducer,
     getResult: getResultReducer,
-    getCarrerPath: getCarrerPathReducer,
+    genarateCarrer: genarateCarrerPathReducer,
+    getCareerPath: getCareerPathByIdReducer,
   },
 });
 

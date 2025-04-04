@@ -18,6 +18,7 @@ const CareerMatchCard = () => {
   const [isProfileCompleted, setIsProfileCompleted] = useState(null);
   const [recommendation, setRecommendation] = useState("");
   const [studentDetails, setStudentDetails] = useState(null);
+  const [selectedCareer, setSelectedCareer] = useState("");
 
   const loading = useSelector((state) => state.getResult.loading);
 
@@ -74,8 +75,9 @@ const CareerMatchCard = () => {
 
   console.log(recommendation);
 
-  const seeCarrerPath = async () => {
-    navigate("/careerPath");
+  const seeCarrerPath = async (career) => {
+    console.log(career);
+    navigate(`/careerPath/${career}`);
   };
 
   const handlePayment = async () => {
@@ -129,28 +131,42 @@ const CareerMatchCard = () => {
               </div>
             </div>
 
-            <div className="flex mt-9 mb-6 rounded-md flex-col w-[80%] items-center bg-gradient-to-b from-purple-600 to-indigo-900  py-12 px-5">
+            <div className="flex mt-9 mb-6 rounded-md flex-col w-[80%] items-center bg-gradient-to-b from-purple-600 to-indigo-900 py-12 px-5">
               <h2 className="text-3xl md:text-4xl text-white font-bold mb-6">
                 Recommended Careers
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
                 {recommendation &&
-                  recommendation.map((rec, i) => (
-                    <div
-                      onClick={() => seeCarrerPath()}
-                      key={i}
-                      className="bg-white cursor-pointer  shadow-lg rounded-xl p-6 text-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-                    >
-                      <h3 className="text-xl md:text-xl font-semibold text-gray-800">
-                        {rec.split(" ")[0]}
-                      </h3>
-                      <p className="text-gray-600 text-[12px] mt-2">
-                        {rec.split("[").pop().replace("]", "")}
-                      </p>
-                    </div>
-                  ))}
+                  recommendation.map((rec, i) => {
+                    const prefix = rec.includes("[")
+                      ? rec.substring(0, rec.indexOf("[")).trim()
+                      : rec;
+                    const traits = rec.includes("[")
+                      ? rec
+                          .substring(rec.indexOf("[") + 1, rec.indexOf("]"))
+                          .trim()
+                      : "";
+
+                    return (
+                      <div
+                        onClick={() => seeCarrerPath(prefix)}
+                        key={i}
+                        className="bg-white cursor-pointer shadow-lg rounded-xl p-6 text-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+                      >
+                        <h3 className="text-[14px] md:text-xl font-semibold text-gray-800">
+                          {prefix}
+                        </h3>
+                        {traits && (
+                          <p className="text-gray-600 text-[12px] mt-2">
+                            {traits}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
               </div>
             </div>
+
             {/* 
             <div className="bg-[#750AD5]  shadow-md rounded-2xl p-6 mt-4 flex flex-col items-center w-full max-w-sm">
               <img

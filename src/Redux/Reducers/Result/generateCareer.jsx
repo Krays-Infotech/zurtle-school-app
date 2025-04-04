@@ -1,15 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import NetworkRequest from "../../../config/network";
 import configuration from "../../../config/configuration";
+import axios from "axios";
 
-export const getCarrerPath = createAsyncThunk(
-  "getCarrerPath",
+export const generateCarrer = createAsyncThunk(
+  "generateCarrer",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await NetworkRequest.get(
-        configuration.apis.getCarrerPath,
+      const response = await axios.post(
+        "https://engine.expolarity.ai/api/careers/generate",
         data
       );
+      // NetworkRequest.get(
+      //   configuration.apis.careerPath,
+      //   data
+      // );
 
       if (response?.status) {
         return response.data;
@@ -24,33 +29,33 @@ export const getCarrerPath = createAsyncThunk(
 );
 
 const getCarrerPathInitalState = {
-  resultDetails: {},
+  carrerDetails: {},
   loading: false,
   error: null,
 };
 
-const getCarrerPathSlice = createSlice({
-  name: "getCarrerPathSlice",
+const generateCarrerPathSlice = createSlice({
+  name: "generateCarrerPathSlice",
   initialState: getCarrerPathInitalState,
 
   reducers: {},
 
   extraReducers: (builder) => {
     builder
-      .addCase(getCarrerPath.pending, (state) => {
+      .addCase(generateCarrer.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getCarrerPath.fulfilled, (state, action) => {
+      .addCase(generateCarrer.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.resultDetails = action.payload;
+        state.carrerDetails = action.payload;
       })
-      .addCase(getCarrerPath.rejected, (state, action) => {
+      .addCase(generateCarrer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-export default getCarrerPathSlice.reducer;
+export default generateCarrerPathSlice.reducer;

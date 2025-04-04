@@ -79,7 +79,7 @@ const Router = () => {
           <Route path="/getInterest" element={<GetInterest />} />
           <Route path="/result" element={<ResultPage />} />
           <Route path="/careerMatch" element={<CareerMatchCard />} />
-          <Route path="/careerPath" element={<CareerPath />} />
+          <Route path="/careerPath/:career" element={<CareerPath />} />
         </Route>
         <Route path="/" element={<TakeTestPage />} />
 

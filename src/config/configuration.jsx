@@ -1,5 +1,6 @@
 const configuration = {
   baseUrl: "https://zurtle-rms-python.onrender.com",
+  CareerBaseUrl: "https://engine.expolarity.ai/api/careers",
   // baseUrl: "https://java.expolarity.ai/",
   // baseUrl: "http://localhost:8080/",
 
@@ -11,7 +12,7 @@ const configuration = {
     saveBasics: "/students",
     saveIds: "/results",
     getResult: "/report",
-    getCarrerPath: "",
+    careerPath: "/generate",
 
     // login: "zurtle/api/auth/login",
     // getQuestions: "zurtle/api/getAllQuestions",
