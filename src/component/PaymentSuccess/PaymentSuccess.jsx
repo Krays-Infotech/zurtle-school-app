@@ -34,7 +34,8 @@ const PaymentSuccess = () => {
           ).unwrap();
 
           if (result) {
-            localStorage.setItem("isPaid", "true");
+            sessionStorage.setItem("isPaid", true);
+            // localStorage.setItem("isPaid", "true");
             setTimeout(() => {
               navigate("/careerMatch?isLogin=True");
             }, 1000);

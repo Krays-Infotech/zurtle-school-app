@@ -89,7 +89,7 @@ const GetAssessment = () => {
   }, [totalQuestions]);
 
   const handleSelectOption = (questionId, option) => {
-    console.log(questionId, option);
+    // console.log(questionId, option);
     setSelectedOptions((prev) => ({
       ...prev,
       [questionId]: option,

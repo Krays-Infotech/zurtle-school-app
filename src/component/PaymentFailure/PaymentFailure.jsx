@@ -22,7 +22,8 @@ const PaymentFailure = () => {
         paymentStatus({ userId, sessionId: session_id, paymentStatus: false })
       );
 
-      localStorage.setItem("isPaid", "false");
+      // localStorage.setItem("isPaid", "false");
+      sessionStorage.setItem("isPaid", true);
     } else {
       navigate("/careerMatch?isLogin=True");
     }

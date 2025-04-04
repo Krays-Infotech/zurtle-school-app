@@ -7,6 +7,75 @@ import { getCareerPathById } from "../../Redux/Reducers/Result/getCareerPathById
 import { Link, useParams } from "react-router-dom";
 import Loader from "../../component/Loader/Loader";
 
+const DetailsView = ({ content }) => {
+  const lines = content.split("\n");
+
+  let elements = [];
+  let listBuffer = [];
+
+  const flushList = () => {
+    if (listBuffer.length > 0) {
+      elements.push(
+        <ul
+          key={elements.length}
+          className="ml-6 list-disc space-y-1 text-gray-800"
+        >
+          {listBuffer.map((item, idx) => (
+            <li key={idx} dangerouslySetInnerHTML={{ __html: item }}></li>
+          ))}
+        </ul>
+      );
+      listBuffer = [];
+    }
+  };
+
+  lines.forEach((line, index) => {
+    if (line.startsWith("## ")) {
+      flushList();
+      elements.push(
+        <h2 key={index} className="text-3xl font-extrabold text-blue-700 mt-6">
+          {line.replace("## ", "")}
+        </h2>
+      );
+    } else if (line.startsWith("### ")) {
+      flushList();
+      elements.push(
+        <h3 key={index} className="text-2xl font-bold text-blue-600 mt-4">
+          {line.replace("### ", "")}
+        </h3>
+      );
+    } else if (line.startsWith("- ")) {
+      // Remove ** from subheading inside list items
+      listBuffer.push(line.replace("- ", "").replace(/\*\*(.*?)\*\*/g, "$1"));
+    } else if (/\*\*(.*?)\*\*/.test(line)) {
+      flushList();
+      const formattedText = line.replace(/\*\*(.*?)\*\*/g, "$1"); // Remove ** but keep text
+      elements.push(
+        <p key={index} className="text-lg text-gray-700 leading-relaxed">
+          {formattedText}
+        </p>
+      );
+    } else if (line.trim() === "") {
+      flushList();
+    } else {
+      flushList();
+      elements.push(
+        <p key={index} className="text-gray-700 leading-relaxed">
+          {line}
+        </p>
+      );
+    }
+  });
+
+  flushList();
+
+  return (
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-xl border border-gray-200">
+      {elements}
+    </div>
+  );
+};
+
 const CareerPath = () => {
   const dispatch = useDispatch();
   const { career } = useParams();
@@ -50,8 +119,8 @@ const CareerPath = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="flex flex-col mt-11 items-center justify-center min-h-screen">
-          <div className="bg-[#750AD5]  shadow-md rounded-2xl p-6 mt-4 flex flex-col items-center w-full max-w-sm">
+        <div className="flex flex-col mt-14 items-center justify-center min-h-screen">
+          {/* <div className="bg-[#750AD5]  shadow-md rounded-2xl p-6 mt-4 flex flex-col items-center w-full max-w-sm">
             <img
               src={Scientist}
               alt="Scientist"
@@ -60,39 +129,16 @@ const CareerPath = () => {
             <h3 className="text-[24px] md:text-[28px] text-white mt-4">
               {career}
             </h3>
-
-            {/* <button className="mt-4 cursor-pointer bg-white text-[#750AD5] px-4 py-2 rounded-lg text-[16px] md:text-[20px] font-semibold">
-              See your Career Path
-            </button> */}
-          </div>
-
-          {/* <p className="text-[13px] md:text-[14px] mt-2 text-center max-w-md">
-            Kids who love exploring, experimenting, and discovering new things!
-          </p>
-
-          <div className="mt-6 max-w-lg">
-            <h4 className="text-[14px] md:text-[16px] font-semibold">
-              Why it fits you
-            </h4>
-            <ul className="py-4 space-y-4">
-              <li className="flex items-center text-[14px] md:text-[16px]">
-                <img src={GoldStar} alt="star" className="w-5 h-5 mr-2" />
-                You are very organized and focused (High Conscientiousness).
-              </li>
-              <li className="flex items-center text-[14px] md:text-[16px]">
-                <img src={GoldStar} alt="star" className="w-5 h-5 mr-2" />
-                Learning new things and thinking creatively (High Openness).
-              </li>
-              <li className="flex items-center text-[14px] md:text-[16px]">
-                <img src={GoldStar} alt="star" className="w-5 h-5 mr-2" />
-                You enjoy solving problems and figuring out how things work.
-              </li>
-            </ul>
           </div> */}
+          {/* <p>{careerDetails}</p> */}
 
-          <Link to={"/careerMatch?isLogin=True"}>Back</Link>
-
-          <p>{careerDetails}</p>
+          <DetailsView content={careerDetails} />
+          <Link
+            to={"/careerMatch?isLogin=True"}
+            className="bg-blue-500 p-2 w-[120px] mb-3 flex items-center justify-center text-white rounded-md"
+          >
+            Back
+          </Link>
         </div>
       )}
     </>
