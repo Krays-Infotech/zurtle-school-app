@@ -4,18 +4,18 @@ import configuration from "../../../config/configuration";
 
 export const paymentStatus = createAsyncThunk(
   "paymentStatus",
-  async ({ userId, sessionId, paymentStatus }, { rejectWithValue }) => {
+  async ({ user_id, session_id, payment_status }, { rejectWithValue }) => {
     try {
       const response = await NetworkRequest.post(
         configuration.apis.paymentStatus,
         {
-          userId,
-          sessionId,
-          paymentStatus,
+          user_id,
+          session_id,
+          payment_status,
         }
       );
 
-      if (response?.status === 200) {
+      if (response?.status) {
         return response.data;
       } else {
         return rejectWithValue(response.data);

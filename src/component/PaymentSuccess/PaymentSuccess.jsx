@@ -11,6 +11,8 @@ const PaymentSuccess = () => {
   const dispatch = useDispatch();
   const [paymentSuccess, setPaymentSuccess] = useState(true);
 
+  console.log(session_id);
+
   useEffect(() => {
     handleSuccessPayment();
   }, []);
@@ -19,20 +21,22 @@ const PaymentSuccess = () => {
     try {
       if (session_id) {
         setPaymentSuccess(false);
-        const userId = localStorage.getItem("userId");
+        const userId = JSON.parse(sessionStorage.getItem("userId"));
+        console.log(userId);
+        // const userId = localStorage.getItem("userId");
         if (userId) {
           const result = await dispatch(
             paymentStatus({
-              userId,
-              sessionId: session_id,
-              paymentStatus: true,
+              user_id: userId,
+              session_id: session_id,
+              payment_status: true,
             })
           ).unwrap();
 
-          if (result.status) {
+          if (result) {
             localStorage.setItem("isPaid", "true");
             setTimeout(() => {
-              navigate("/dashboard/report");
+              navigate("/careerMatch?isLogin=True");
             }, 1000);
           }
         }

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const PaymentFailure = () => {
-
   const { session_id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -11,20 +10,21 @@ const PaymentFailure = () => {
 
   useEffect(() => {
     if (!isFetched.current) {
-        handleFailurePayment();
-        isFetched.current = true;
-      }
+      handleFailurePayment();
+      isFetched.current = true;
+    }
   }, []);
 
   const handleFailurePayment = async () => {
     if (session_id) {
-
       const userId = localStorage.getItem("id");
-      await dispatch(paymentStatus({ userId, sessionId: session_id, paymentStatus: false }));
+      await dispatch(
+        paymentStatus({ userId, sessionId: session_id, paymentStatus: false })
+      );
 
-      localStorage.setItem("isPaid", "false"); 
+      localStorage.setItem("isPaid", "false");
     } else {
-      navigate("/");
+      navigate("/careerMatch?isLogin=True");
     }
   };
 
@@ -49,7 +49,9 @@ const PaymentFailure = () => {
           </svg>
         </div>
 
-        <h1 className="mt-4 text-2xl font-bold text-red-700">Payment Failed!</h1>
+        <h1 className="mt-4 text-2xl font-bold text-red-700">
+          Payment Failed!
+        </h1>
         <p className="mt-2 text-gray-600">
           Something went wrong with your payment. Please try again.
         </p>

@@ -4,7 +4,7 @@ import { generateCarrer } from "../../Redux/Reducers/Result/generateCareer";
 import Scientist from "../../assets/scientist.png";
 import GoldStar from "../../assets/goldStar.png";
 import { getCareerPathById } from "../../Redux/Reducers/Result/getCareerPathById";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loader from "../../component/Loader/Loader";
 
 const CareerPath = () => {
@@ -50,7 +50,7 @@ const CareerPath = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="flex flex-col mt-6 items-center justify-center min-h-screen">
+        <div className="flex flex-col mt-11 items-center justify-center min-h-screen">
           <div className="bg-[#750AD5]  shadow-md rounded-2xl p-6 mt-4 flex flex-col items-center w-full max-w-sm">
             <img
               src={Scientist}
@@ -89,6 +89,8 @@ const CareerPath = () => {
               </li>
             </ul>
           </div> */}
+
+          <Link to={"/careerMatch?isLogin=True"}>Back</Link>
 
           <p>{careerDetails}</p>
         </div>
