@@ -35,7 +35,7 @@ const GetAssessment = () => {
     const selectedInterestOptions =
       location.state?.selectedInterestOptions || {};
 
-    console.log(selectedInterestOptions);
+    // console.log(selectedInterestOptions);
 
     if (!selectedInterestOptions) {
       navigate("getIntrest");

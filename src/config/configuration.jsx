@@ -13,6 +13,7 @@ const configuration = {
     saveIds: "/results",
     getResult: "/report",
     careerPath: "/generate",
+    paymentStatus: "/payments",
 
     // login: "zurtle/api/auth/login",
     // getQuestions: "zurtle/api/getAllQuestions",
@@ -22,7 +23,6 @@ const configuration = {
     // getTestReport: "zurtle/api/getTestReport",
     // getGoogleLogin: "oauth2/authorization/google",
     // payment: "zurtle/api/payments/createCheckoutSession",
-    // paymentStatus: "zurtle/api/payments/savePaymentDetails",
     // getStudent: "zurtle/api/getStudentById",
   },
 };

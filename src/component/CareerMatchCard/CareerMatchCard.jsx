@@ -19,6 +19,7 @@ const CareerMatchCard = () => {
   const [recommendation, setRecommendation] = useState("");
   const [studentDetails, setStudentDetails] = useState(null);
   const [selectedCareer, setSelectedCareer] = useState("");
+  const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
 
   const loading = useSelector((state) => state.getResult.loading);
 
@@ -78,11 +79,19 @@ const CareerMatchCard = () => {
     }
   };
 
-  console.log(recommendation);
+  // console.log(recommendation);
 
   const seeCarrerPath = async (career) => {
     console.log(career);
-    navigate(`/careerPath/${career}`);
+
+    const payment = localStorage.getItem("isPaid") || null;
+    console.log(payment);
+
+    if (!payment) {
+      setIsPaymentCompleted(true);
+    } else {
+      navigate(`/careerPath/${career}`);
+    }
   };
 
   const handlePayment = async () => {
@@ -97,6 +106,42 @@ const CareerMatchCard = () => {
     if (res) {
       window.location.href = res?.data?.paymentUrl;
     }
+  };
+
+  const PaymentModel = ({ setIsPaymentCompleted, handlePayment }) => {
+    return (
+      // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center relative">
+        <button
+          onClick={() => setIsPaymentCompleted(false)}
+          className="absolute cursor-pointer top-3 right-3 text-gray-400 hover:text-gray-600 text-xl"
+        >
+          &times;
+        </button>
+
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          Unlock Advanced Career Path Insights
+        </h2>
+
+        <p className="text-gray-600 mb-6">
+          Dive deeper into your personalized career trajectory with exclusive
+          insights curated by experts. Understand your strengths, ideal
+          industries, skill gaps, and next steps — tailored just for you!
+        </p>
+
+        <button
+          onClick={handlePayment}
+          className="flex cursor-pointer items-center justify-center gap-2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg font-semibold hover:bg-green-600 transition w-full"
+        >
+          Pay $5 to See My Advanced Career Path <FaUnlockAlt />
+        </button>
+
+        <p className="text-sm text-gray-500 mt-4">
+          One-time payment. Instant access. No hidden charges.
+        </p>
+      </div>
+      // </div>
+    );
   };
 
   return (
@@ -222,7 +267,7 @@ const CareerMatchCard = () => {
               </ul>
             </div> */}
 
-            <motion.div
+            {/* <motion.div
               className="fixed bottom-6 right-6 "
               initial={{ y: 0 }}
               animate={{ y: [0, -10, 0] }}
@@ -234,12 +279,21 @@ const CareerMatchCard = () => {
               >
                 Pay $5 to Explore More <FaUnlockAlt />
               </button>
-            </motion.div>
+            </motion.div> */}
           </div>
 
           {!isProfileCompleted && (
             <div className="fixed inset-0 z-50 flex items-center backdrop-blur-sm justify-center bg-gray-400/30 ">
               <BasicDetails setIsProfileCompleted={setIsProfileCompleted} />
+            </div>
+          )}
+
+          {isPaymentCompleted && (
+            <div className="fixed inset-0 z-50 flex items-center backdrop-blur-sm justify-center bg-gray-400/30 ">
+              <PaymentModel
+                setIsPaymentCompleted={setIsPaymentCompleted}
+                handlePayment={handlePayment}
+              />
             </div>
           )}
         </div>
