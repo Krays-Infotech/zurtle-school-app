@@ -6,6 +6,7 @@ import GoldStar from "../../assets/goldStar.png";
 import { getCareerPathById } from "../../Redux/Reducers/Result/getCareerPathById";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../../component/Loader/Loader";
+import Result from "../../component/Result";
 
 const DetailsView = ({ content }) => {
   const lines = content.split("\n");
@@ -119,26 +120,18 @@ const CareerPath = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="flex flex-col mt-14 items-center justify-center min-h-screen">
-          {/* <div className="bg-[#750AD5]  shadow-md rounded-2xl p-6 mt-4 flex flex-col items-center w-full max-w-sm">
-            <img
-              src={Scientist}
-              alt="Scientist"
-              className="w-24 h-24 md:w-28 md:h-28"
-            />
-            <h3 className="text-[24px] md:text-[28px] text-white mt-4">
-              {career}
-            </h3>
-          </div> */}
-          {/* <p>{careerDetails}</p> */}
-
-          <DetailsView content={careerDetails} />
-          <Link
-            to={"/careerMatch?isLogin=True"}
-            className="bg-blue-500 p-2 w-[120px] mb-3 flex items-center justify-center text-white rounded-md"
-          >
-            Back
-          </Link>
+        // <div className="flex flex-col mt-14 items-center justify-center min-h-screen">
+        <div className="result_bg">
+          {/* <DetailsView content={careerDetails} /> */}
+          <Result data={careerDetails} />
+          <div className="flex justify-end pr-5">
+            <Link
+              to={"/careerMatch?isLogin=True"}
+              className="bg-blue-500 p-2 w-[120px] mb-3 flex items-center justify-center text-white rounded-md"
+            >
+              Back
+            </Link>
+          </div>
         </div>
       )}
     </>
