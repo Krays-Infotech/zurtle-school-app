@@ -79,7 +79,7 @@ const DetailsView = ({ content }) => {
 const CareerPath = () => {
   const dispatch = useDispatch();
   const { career } = useParams();
-  console.log("career", career);
+  // console.log("career", career);
 
   const [careerDetails, setCareerDetails] = useState("");
 
@@ -92,9 +92,13 @@ const CareerPath = () => {
 
   const fetchCarrerPath = async () => {
     try {
-      const details = JSON.parse(sessionStorage.getItem("studentDetails"));
-      console.log("details", details);
+      // const result = await dispatch(
+      //   getCareerPathById(student.student_id)
+      // ).unwrap();
 
+      // if (result) {
+      // }
+      const details = JSON.parse(sessionStorage.getItem("studentDetails"));
       const student = studentDetails.student || details;
 
       const data = {
@@ -103,12 +107,8 @@ const CareerPath = () => {
         country: student.country,
         assessment_result: career,
       };
-      console.log(data);
       const res = await dispatch(generateCarrer(data)).unwrap();
       setCareerDetails(res.data);
-
-      console.log(res);
-      // const result = await dispatch(getCareerPathById(data.student)).unwrap();
     } catch (err) {
       console.log(err);
     }

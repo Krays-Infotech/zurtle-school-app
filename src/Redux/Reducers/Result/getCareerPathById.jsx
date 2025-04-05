@@ -6,9 +6,12 @@ export const getCareerPathById = createAsyncThunk(
   "getCareerPathById",
   async (student_id, { rejectWithValue }) => {
     try {
-      const response = await NetworkRequest.get(
-        `${configuration.apis.careerPath}${student_id}`,
-        data
+      // const response = await NetworkRequest.get(
+      //   `${configuration.apis.careerPath}${student_id}`
+      // );
+
+      const response = await axios.get(
+        `https://engine.expolarity.ai/api/careers/${student_id}`
       );
 
       if (response?.status) {

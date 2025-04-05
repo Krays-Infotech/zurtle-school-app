@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Scientist from "../../assets/scientist.png";
-import GoldStar from "../../assets/goldStar.png";
 import BasicDetails from "../BasicDetails/BasicDetails";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaUnlockAlt } from "react-icons/fa";
-import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUserIds } from "../../Redux/Reducers/Login/saveUser";
 import { createPayment } from "../../Redux/Reducers/Payment/createPaymentSlice";
@@ -17,10 +14,8 @@ const CareerMatchCard = () => {
   const location = useLocation();
   const [isProfileCompleted, setIsProfileCompleted] = useState(null);
   const [recommendation, setRecommendation] = useState("");
-  const [studentDetails, setStudentDetails] = useState(null);
-  const [selectedCareer, setSelectedCareer] = useState("");
   const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
-  const [isPaymentPending, setIsPaymentPending] = useState(false);
+  const [user, setUserId] = useState(null);
 
   const loading = useSelector((state) => state.getResult.loading);
 
@@ -28,23 +23,21 @@ const CareerMatchCard = () => {
     sendIds();
   }, []);
 
-  console.log(isProfileCompleted);
-
   const sendIds = async () => {
     try {
       const params = new URLSearchParams(window.location.search);
-      const token = params.get("token");
       const isLogin = params.get("isLogin");
       const userId = params.get("userId");
-      console.log("userId", userId);
 
-      // const reqId = localStorage.getItem("assessmentId");
       const reqId = JSON.parse(sessionStorage.getItem("assessmentId"));
 
       if (userId) {
-        // localStorage.setItem("userId", userId);
+        setUserId(userId);
         sessionStorage.setItem("userId", userId);
+        console.log("userId", userId);
+      }
 
+      if (userId && reqId) {
         const data = {
           reqId,
           userId,
@@ -54,7 +47,7 @@ const CareerMatchCard = () => {
       if (isLogin === "True") {
         setIsProfileCompleted(true);
       }
-      navigate("/careerMatch");
+      // navigate("/careerMatch");
     } catch (err) {
       console.log(err);
     }
@@ -67,17 +60,12 @@ const CareerMatchCard = () => {
 
   const fetchRecommendation = async () => {
     try {
-      const userId = JSON.parse(sessionStorage.getItem("userId"));
-      // const repId = localStorage.getItem("assessmentId");
+      console.log("working");
+      const userId = user || JSON.parse(sessionStorage.getItem("userId"));
       const res = await dispatch(getResult(userId)).unwrap();
       if (res) {
         setRecommendation(res?.career_recommendations);
-        setIsPaymentPending(res?.payment_status);
         sessionStorage.setItem("isPaid", JSON.stringify(res?.payment_status));
-
-        console.log(res.payment_status);
-
-        setStudentDetails(res.student);
         sessionStorage.setItem("studentDetails", JSON.stringify(res.student));
       }
     } catch (err) {
@@ -85,29 +73,20 @@ const CareerMatchCard = () => {
     }
   };
 
-  // console.log(recommendation);
-
   const seeCarrerPath = async (career) => {
-    console.log(career);
-
     const paid = JSON.parse(sessionStorage.getItem("isPaid")) || null;
-    console.log(paid);
 
-    // if (isPaymentPending) {
     if (paid) {
       navigate(`/careerPath/${career}`);
     } else {
       setIsPaymentCompleted(true);
     }
-    // } else {
-    //   navigate(`/careerPath/${career}`);
-    // }
   };
 
   const handlePayment = async () => {
     const values = {
       amount: 5,
-      userId: 5,
+      userId: user,
       paymentFor: "Assessment",
       currencyType: "cad",
     };
@@ -120,7 +99,6 @@ const CareerMatchCard = () => {
 
   const PaymentModel = ({ setIsPaymentCompleted, handlePayment }) => {
     return (
-      // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center relative">
         <button
           onClick={() => setIsPaymentCompleted(false)}
@@ -150,7 +128,6 @@ const CareerMatchCard = () => {
           One-time payment. Instant access. No hidden charges.
         </p>
       </div>
-      // </div>
     );
   };
 
