@@ -17,6 +17,8 @@ const CareerMatchCard = () => {
   const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
   const [user, setUserId] = useState(null);
 
+  const [detailsCompleted, setDetailsCompleted] = useState(false);
+
   const loading = useSelector((state) => state.getResult.loading);
 
   useEffect(() => {
@@ -43,11 +45,12 @@ const CareerMatchCard = () => {
           userId,
         };
         const res = await dispatch(saveUserIds(data)).unwrap();
+        console.log(res);
       }
       if (isLogin === "True") {
         setIsProfileCompleted(true);
       }
-      // navigate("/careerMatch");
+      navigate("/careerMatch");
     } catch (err) {
       console.log(err);
     }

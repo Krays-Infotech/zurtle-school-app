@@ -33,7 +33,7 @@ const BasicDetails = ({ setIsProfileCompleted }) => {
           basicDetails,
         };
         const res = await dispatch(saveBasicDetails(data)).unwrap();
-        console.log("res", res);
+        // console.log("res", res);
         setIsProfileCompleted(true);
       }
     } catch (err) {
