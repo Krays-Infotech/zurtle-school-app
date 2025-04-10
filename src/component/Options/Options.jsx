@@ -8,9 +8,9 @@ const Options = ({
   type,
 }) => {
   return (
-    <div className="options mt-5 ">
+    <div className="options mt-5">
       <div className="flex gap-5 mb-2 text-sm text-gray-600">
-        <div className="flex gap-4 items-center ">
+        <div className="flex gap-4 flex-col sm:flex-row  justify-center items-center ">
           {type === "RATING" && (
             <>
               <p className="text-gray-700 text-xs font-medium">

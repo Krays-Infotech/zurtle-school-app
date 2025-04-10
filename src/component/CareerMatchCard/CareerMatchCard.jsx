@@ -21,8 +21,11 @@ const CareerMatchCard = () => {
 
   const loading = useSelector((state) => state.getResult.loading);
 
+  const [basicData, setBasicData] = useState(null);
+
   useEffect(() => {
     sendIds();
+    setBasicData(JSON.parse(sessionStorage.getItem("studentDetails")) || null);
   }, []);
 
   const sendIds = async () => {
@@ -55,10 +58,11 @@ const CareerMatchCard = () => {
       console.log(err);
     }
   };
+
   useEffect(() => {
-    if (isProfileCompleted && location.pathname === "/careerMatch") {
-      fetchRecommendation();
-    }
+    // if (isProfileCompleted && location.pathname === "/careerMatch") {
+    fetchRecommendation();
+    // }
   }, [isProfileCompleted, location.pathname]);
 
   const fetchRecommendation = async () => {
@@ -86,13 +90,17 @@ const CareerMatchCard = () => {
     }
   };
 
+  const payloading = useSelector((state) => state.createPayment.loading);
+
   const handlePayment = async () => {
     const values = {
       amount: 5,
-      userId: user,
+      userId: user || JSON.parse(sessionStorage.getItem("userId")),
       paymentFor: "Assessment",
       currencyType: "cad",
     };
+
+    console.log(values);
 
     const res = await dispatch(createPayment({ values })).unwrap();
     if (res) {
@@ -124,7 +132,13 @@ const CareerMatchCard = () => {
           onClick={handlePayment}
           className="flex cursor-pointer items-center justify-center gap-2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg font-semibold hover:bg-green-600 transition w-full"
         >
-          Pay $5 to See My Advanced Career Path <FaUnlockAlt />
+          {payloading ? (
+            "Loading..."
+          ) : (
+            <>
+              Pay $5 to See My Advanced Career Path" <FaUnlockAlt />
+            </>
+          )}
         </button>
 
         <p className="text-sm text-gray-500 mt-4">
@@ -209,7 +223,7 @@ const CareerMatchCard = () => {
             </div>
           </div>
 
-          {!isProfileCompleted && (
+          {!isProfileCompleted && !basicData && (
             <div className="fixed inset-0 z-50 flex items-center backdrop-blur-sm justify-center bg-gray-400/30 ">
               <BasicDetails setIsProfileCompleted={setIsProfileCompleted} />
             </div>

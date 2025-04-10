@@ -14,6 +14,7 @@ const configuration = {
     getResult: "/report/user",
     careerPath: "/generate",
     paymentStatus: "/payments",
+    register: "/students",
 
     // login: "zurtle/api/auth/login",
     // getQuestions: "zurtle/api/getAllQuestions",

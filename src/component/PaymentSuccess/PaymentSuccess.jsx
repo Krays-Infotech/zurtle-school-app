@@ -1,17 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Tick from "../../assets/tick.jpeg";
-
 import { paymentStatus } from "../../Redux/Reducers/Payment/paymentStatusSlice";
+import Tick from "../../assets/tick.jpeg";
 
 const PaymentSuccess = () => {
   const { session_id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [paymentSuccess, setPaymentSuccess] = useState(true);
-
-  console.log(session_id);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     handleSuccessPayment();
@@ -20,10 +17,7 @@ const PaymentSuccess = () => {
   const handleSuccessPayment = async () => {
     try {
       if (session_id) {
-        setPaymentSuccess(false);
         const userId = JSON.parse(sessionStorage.getItem("userId"));
-        console.log(userId);
-        // const userId = localStorage.getItem("userId");
         if (userId) {
           const result = await dispatch(
             paymentStatus({
@@ -35,37 +29,58 @@ const PaymentSuccess = () => {
 
           if (result) {
             sessionStorage.setItem("isPaid", true);
-            // localStorage.setItem("isPaid", "true");
             setTimeout(() => {
               navigate("/careerMatch?isLogin=True");
-            }, 1000);
+            }, 1500);
           }
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return paymentSuccess ? (
-    <div className="flex min-h-[80vh] items-center justify-center">
-      Loading...
-    </div>
-  ) : (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-md">
-        <div className="flex justify-center">
-          <img src={Tick} alt="tick" className="w-[100px]" />
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+      {loading ? (
+        <div className="text-center">
+          <div className="mb-4">
+            <svg
+              className="mx-auto h-12 w-12 animate-spin text-blue-500"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              />
+            </svg>
+          </div>
+          <p className="text-gray-600 text-sm">Verifying your payment...</p>
         </div>
-
-        <h1 className="mt-4 text-2xl font-bold text-gray-800">
-          Payment Successful!
-        </h1>
-        <p className="mt-2 text-gray-600">
-          Thank you for your purchase. Your payment has been processed
-          successfully.
-        </p>
-      </div>
+      ) : (
+        <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-xl transition-all duration-300">
+          <img src={Tick} alt="tick" className="mx-auto w-20 mb-4" />
+          <h1 className="text-2xl font-semibold text-green-600">
+            Payment Successful!
+          </h1>
+          <p className="mt-2 text-gray-700">
+            Thank you for your payment. You’re being redirected...
+          </p>
+        </div>
+      )}
     </div>
   );
 };

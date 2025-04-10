@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { paymentStatus } from "../../Redux/Reducers/Payment/paymentStatusSlice";
 
 const PaymentFailure = () => {
   const { session_id } = useParams();
@@ -17,12 +18,15 @@ const PaymentFailure = () => {
 
   const handleFailurePayment = async () => {
     if (session_id) {
-      const userId = localStorage.getItem("id");
+      const userId = JSON.parse(sessionStorage.getItem("userId"));
       await dispatch(
-        paymentStatus({ userId, sessionId: session_id, paymentStatus: false })
-      );
+        paymentStatus({
+          user_id: userId,
+          session_id: session_id,
+          payment_status: false,
+        })
+      ).unwrap();
 
-      // localStorage.setItem("isPaid", "false");
       sessionStorage.setItem("isPaid", true);
     } else {
       navigate("/careerMatch?isLogin=True");
@@ -59,8 +63,8 @@ const PaymentFailure = () => {
 
         <div className="mt-6">
           <button
-            onClick={() => navigate("/studentdashboard")}
-            className="inline-block rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600"
+            onClick={() => navigate("/careerMatch?isLogin=True")}
+            className="inline-block rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600 cursor-pointer"
           >
             Try Again
           </button>

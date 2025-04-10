@@ -26,6 +26,7 @@ import ResultPage from "./component/ResultPage/ResultPage.jsx";
 import CareerMatchCard from "./component/CareerMatchCard/CareerMatchCard.jsx";
 import CareerPath from "./Pages/CareerPath/CareerPath.jsx";
 import Result from "./component/Result.jsx";
+import Register from "./Pages/Register/Register.jsx";
 
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -72,6 +73,13 @@ const Router = () => {
           path="/login"
           element={
             token ? <Navigate to="/studentdashboard" replace /> : <Login />
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            token ? <Navigate to="/studentdashboard" replace /> : <Register />
           }
         />
 
