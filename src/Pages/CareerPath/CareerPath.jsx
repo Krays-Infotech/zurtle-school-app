@@ -22,14 +22,16 @@ const CareerPath = () => {
 
   const fetchCarrerPath = async () => {
     try {
+      const details = JSON.parse(sessionStorage.getItem("studentDetails"));
+      const student = studentDetails.student || details;
+
       // const result = await dispatch(
       //   getCareerPathById(student.student_id)
       // ).unwrap();
 
       // if (result) {
+      //   console.log("result", result);
       // }
-      const details = JSON.parse(sessionStorage.getItem("studentDetails"));
-      const student = studentDetails.student || details;
 
       const data = {
         student_id: student.student_id,

@@ -87,7 +87,7 @@ const Router = () => {
           <Route path="/result" element={<Result />} />
           <Route path="/getAssement" element={<GetAssement />} />
           <Route path="/getInterest" element={<GetInterest />} />
-          <Route path="/result" element={<ResultPage />} />
+          {/* <Route path="/result" element={<ResultPage />} /> */}
           <Route path="/careerMatch" element={<CareerMatchCard />} />
           <Route path="/careerPath/:career" element={<CareerPath />} />
         </Route>
