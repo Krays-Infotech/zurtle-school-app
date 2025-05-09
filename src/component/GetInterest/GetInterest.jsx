@@ -154,7 +154,7 @@ const GetInterest = () => {
 
         {!isCompleted ? (
           <div className="w-full flex items-center justify-center">
-            <div className="w-full">
+            <div className="w-full flex flex-col items-center justify-center">
               {questions
                 .slice(currentIndex, currentIndex + QUESTIONS_PER_PAGE)
                 .map((q, idx) => (
@@ -188,6 +188,13 @@ const GetInterest = () => {
           </div>
         )}
 
+        <div>
+          <p className="text-sm text-gray-500 text-center">
+            Page {Math.ceil(currentIndex / QUESTIONS_PER_PAGE) + 1} of{" "}
+            {totalPages}
+          </p>
+        </div>
+
         {!isCompleted && (
           <div className="flex items-center justify-between py-4">
             {currentIndex > 0 && (
@@ -199,10 +206,7 @@ const GetInterest = () => {
                 Previous
               </button>
             )}
-            <p className="text-sm text-gray-500">
-              Page {Math.ceil(currentIndex / QUESTIONS_PER_PAGE) + 1} of{" "}
-              {totalPages}
-            </p>
+
             <button
               type="submit"
               className={`px-4 py-2 rounded-md shadow-md text-white cursor-pointer  ${

@@ -164,23 +164,23 @@ const GetAssessment = () => {
         <Loader />
       ) : (
         <div className="min-h-screen patternBg flex justify-center font-golos py-8">
-          <div className="relative w-full max-w-4xl rounded-xl p-10">
+          <div className="relative w-full max-w-4xl rounded-xl p-3 md:p-10">
             {loading ? (
               <div className="text-center text-gray-700">
                 <p className="text-lg font-semibold">Loading Questions...</p>
               </div>
             ) : (
               <div
-                className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px]"
-                style={{ backgroundImage: `url(${testbg})` }}
+              // className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px]"
+              // style={{ backgroundImage: `url(${testbg})` }}
               >
-                <div className="absolute left-50 top-30 transform -translate-y-1/2">
+                {/* <div className="absolute left-50 top-30 transform -translate-y-1/2">
                   <img src={questionmark} alt="Expolarity" className="w-16" />
                 </div>
 
                 <div className="absolute right-50 top-30 transform -translate-y-1/2">
                   <img src={questionmark} alt="Expolarity" className="w-16" />
-                </div>
+                </div> */}
 
                 <div className="flex flex-col items-center p-12">
                   <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
@@ -192,7 +192,7 @@ const GetAssessment = () => {
                 {isCompleted ? (
                   <div className="text-center text-gray-700">
                     <h2 className="text-2xl font-semibold">
-                      Your Test has been completed successfully.
+                      🎉 Your Test has been completed successfully.
                     </h2>
                     <p className="mt-2 text-lg text-gray-500">Thank You</p>
                     {/* Login Button to View Results */}
@@ -206,8 +206,8 @@ const GetAssessment = () => {
                 ) : (
                   <>
                     <div className="w-full flex items-center justify-center">
-                      <div className="w-[60%]">
-                        <div className="pr-4">
+                      <div className="w-full md:w-[60%]">
+                        <div className="">
                           {questions &&
                             questions
                               .slice(
@@ -222,17 +222,19 @@ const GetAssessment = () => {
                                     </p>
                                   </div>
 
-                                  {q.type === "RATING" && (
-                                    <Options
-                                      options={[1, 2, 3, 4, 5]}
-                                      selectedOption={selectedOptions[q.id]}
-                                      onSelectOption={(option) =>
-                                        handleSelectOption(q.id, option)
-                                      }
-                                      questionIndex={q.id}
-                                      type={"RATING"}
-                                    />
-                                  )}
+                                  <div className="flex items-center justify-center">
+                                    {q.type === "RATING" && (
+                                      <Options
+                                        options={[1, 2, 3, 4, 5]}
+                                        selectedOption={selectedOptions[q.id]}
+                                        onSelectOption={(option) =>
+                                          handleSelectOption(q.id, option)
+                                        }
+                                        questionIndex={q.id}
+                                        type={"RATING"}
+                                      />
+                                    )}
+                                  </div>
 
                                   {q.type === "SINGLE" && (
                                     <Options
@@ -266,7 +268,7 @@ const GetAssessment = () => {
                       </button>
                     )}
 
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 ">
                       Page {currentIndex / QUESTIONS_PER_PAGE + 1} of{" "}
                       {totalPages}
                     </p>

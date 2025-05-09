@@ -8,6 +8,8 @@ import getResultReducer from "../Redux/Reducers/Result/ResultSlice";
 import genarateCarrerPathReducer from "../Redux/Reducers/Result/generateCareer";
 import GetQuestionsReducer from "../Redux/Reducers/Assessment/GetQuestionsSlice";
 import getCareerPathByIdReducer from "../Redux/Reducers/Result/getCareerPathById";
+import registerReducer from "../Redux/Reducers/Register/RegisterSLice";
+import paymentReducer from "../Redux/Reducers/Payment/createPaymentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ export const store = configureStore({
     getResult: getResultReducer,
     genarateCarrer: genarateCarrerPathReducer,
     getCareerPath: getCareerPathByIdReducer,
+    registerUser: registerReducer,
+    createPayment: paymentReducer,
   },
 });
 

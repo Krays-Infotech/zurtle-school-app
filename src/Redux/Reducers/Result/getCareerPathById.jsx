@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import NetworkRequest from "../../../config/network";
 import configuration from "../../../config/configuration";
+import axios from "axios";
 
 export const getCareerPathById = createAsyncThunk(
   "getCareerPathById",
