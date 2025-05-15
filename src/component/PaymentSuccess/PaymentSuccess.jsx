@@ -27,12 +27,14 @@ const PaymentSuccess = () => {
             })
           ).unwrap();
 
-          if (result) {
-            sessionStorage.setItem("isPaid", true);
-            setTimeout(() => {
-              navigate("/careerMatch?isLogin=True");
-            }, 1500);
-          }
+          console.log("result", result);
+          sessionStorage.setItem("isPaid", true);
+
+          // if (result) {
+          setTimeout(() => {
+            navigate("/careerMatch?isLogin=True");
+          }, 1500);
+          // }
         }
       }
     } catch (err) {
