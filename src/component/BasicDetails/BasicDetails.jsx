@@ -24,7 +24,7 @@ const BasicDetails = ({ setIsProfileCompleted }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-
+      console.log("working");
       const userId = JSON.parse(sessionStorage.getItem("userId"));
       // const userId = localStorage.getItem("userId");
       if (userId) {

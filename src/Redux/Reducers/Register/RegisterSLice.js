@@ -13,7 +13,7 @@ export const registerUser = createAsyncThunk(
         data
       );
 
-      if (response?.status === 200) {
+      if (response?.status) {
         return response.data;
       } else {
         return rejectWithValue(response.data);

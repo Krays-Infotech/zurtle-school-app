@@ -8,7 +8,7 @@ export const generateCarrer = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://engine.expolarity.ai/api/careers/generate",
+        "https://expolarity-ai.onrender.com/api/careers/generate",
         data
       );
       // NetworkRequest.get(

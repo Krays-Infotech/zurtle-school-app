@@ -5,8 +5,6 @@ import configuration from "../../../config/configuration";
 export const saveUserIds = createAsyncThunk(
   "saveUserIds",
   async (data, { rejectWithValue }) => {
-    console.log(data);
-
     try {
       const response = await NetworkRequest.put(
         `${configuration.apis.saveIds}/${data.reqId}`,

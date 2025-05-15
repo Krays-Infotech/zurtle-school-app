@@ -57,8 +57,9 @@ const Register = () => {
     console.log("Submitted data:", formData);
 
     const res = await dispatch(registerUser(formData)).unwrap();
-    console.log("result", res);
-    navigate("/login");
+    console.log("result", res.data[0]);
+    sessionStorage.setItem("userId", res.data[0]);
+    navigate("/careerMatch");
   };
 
   return (
