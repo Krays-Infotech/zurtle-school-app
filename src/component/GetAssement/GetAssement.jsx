@@ -4,10 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Options from "../Options/Options";
 import { getQuestions } from "../../Redux/Reducers/Assessment/GetQuestionsSlice";
 import logoImg from "../../assets/logo.png";
-import questionmark from "../../assets/questionMarkLogo.png";
-import testbg from "../../assets/testbg.png";
 import { saveTestReport } from "../../Redux/Reducers/Assessment/SaveTestReport";
-import saveAssessment from "../../assets/gif/save.gif";
 import Loader from "../Loader/Loader";
 
 const QUESTIONS_PER_PAGE = 5;
@@ -27,7 +24,6 @@ const GetAssessment = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Retrieve selected interest options
   const selectedInterestOptions =
     location.state?.selectedInterestOptions || null;
 
@@ -96,7 +92,6 @@ const GetAssessment = () => {
     }));
   };
 
-  // const isPageCompleted = () => true;
   const isPageCompleted = () => {
     const currentPageQuestions = questions.slice(
       currentIndex,
@@ -158,6 +153,19 @@ const GetAssessment = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - QUESTIONS_PER_PAGE);
   };
 
+  useEffect(() => {
+    if (
+      isPageCompleted() &&
+      currentIndex + QUESTIONS_PER_PAGE < totalQuestions
+    ) {
+      const timeout = setTimeout(() => {
+        next();
+      }, 600);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [selectedOptions]);
+
   return (
     <>
       {saveLoading || getLoading ? (
@@ -170,18 +178,7 @@ const GetAssessment = () => {
                 <p className="text-lg font-semibold">Loading Questions...</p>
               </div>
             ) : (
-              <div
-              // className="text-center mb-8 relative bg-cover bg-no-repeat bg-black/10 h-[280px]"
-              // style={{ backgroundImage: `url(${testbg})` }}
-              >
-                {/* <div className="absolute left-50 top-30 transform -translate-y-1/2">
-                  <img src={questionmark} alt="Expolarity" className="w-16" />
-                </div>
-
-                <div className="absolute right-50 top-30 transform -translate-y-1/2">
-                  <img src={questionmark} alt="Expolarity" className="w-16" />
-                </div> */}
-
+              <div>
                 <div className="flex flex-col items-center p-12">
                   <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
                   <h1 className="text-3xl font-bold text-gray-700">
@@ -272,20 +269,6 @@ const GetAssessment = () => {
                       Page {currentIndex / QUESTIONS_PER_PAGE + 1} of{" "}
                       {totalPages}
                     </p>
-
-                    {/* <button
-                  type="submit"
-                  className={`px-4 py-2 rounded-md shadow-md text-white cursor-pointer ${
-                    isPageCompleted()
-                      ? "bg-green-500 hover:bg-green-600"
-                      : "bg-gray-300 cursor-not-allowed"
-                  }`}
-                  onClick={next}
-                >
-                  {currentIndex + QUESTIONS_PER_PAGE < totalQuestions
-                    ? "Next"
-                    : "Finish"}
-                </button> */}
 
                     <button
                       type="submit"

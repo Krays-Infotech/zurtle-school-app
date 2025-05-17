@@ -15,8 +15,8 @@ export const saveBasicDetails = createAsyncThunk(
         data.basicDetails
       );
 
-      if (response?.status === 200) {
-        return response.data;
+      if (response?.status) {
+        return response.data.data;
       } else {
         return rejectWithValue(response.data);
       }

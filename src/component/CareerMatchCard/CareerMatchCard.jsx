@@ -223,11 +223,11 @@ const CareerMatchCard = () => {
             </div>
           </div>
 
-          {!isProfileCompleted && !basicData && (
+          {/* {!isProfileCompleted && !basicData && (
             <div className="fixed inset-0 z-50 flex items-center backdrop-blur-sm justify-center bg-gray-400/30 ">
               <BasicDetails setIsProfileCompleted={setIsProfileCompleted} />
             </div>
-          )}
+          )} */}
 
           {isPaymentCompleted && (
             <div className="fixed inset-0 z-50 flex items-center backdrop-blur-sm justify-center bg-gray-400/30 ">

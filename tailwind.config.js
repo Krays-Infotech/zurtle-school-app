@@ -5,7 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#2A6656",
+        primary: "#D5E1FD",
+        lightBlue: "#F4F7FE",
+        lightBlack: "#0C1517",
+        lightGray: "#545969",
+      },
+      fontFamily: {
+        kite: ['"Kite One"', "sans-serif"],
+        mallanna: ['"Mallanna"', "sans-serif"],
+        golos: ['"Golos Text"', "sans-serif"],
       },
     },
   },

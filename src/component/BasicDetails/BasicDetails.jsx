@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveBasicDetails } from "../../Redux/Reducers/Login/saveBasic";
 import Select from "react-select";
 import countryList from "react-select-country-list";
-import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
-const BasicDetails = ({ setIsProfileCompleted }) => {
+const BasicDetails = ({ setOnBoarding }) => {
   const dispatch = useDispatch();
   const [basicDetails, setBasicDetails] = useState({});
   const [countries] = useState(countryList().getData());
@@ -24,17 +24,22 @@ const BasicDetails = ({ setIsProfileCompleted }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log("working");
-      const userId = JSON.parse(sessionStorage.getItem("userId"));
-      // const userId = localStorage.getItem("userId");
+      const userId = Cookies.get("userId");
       if (userId) {
         const data = {
           userId,
-          basicDetails,
+          basicDetails: {
+            ...basicDetails,
+            onboarded: true,
+          },
         };
         const res = await dispatch(saveBasicDetails(data)).unwrap();
-        // console.log("res", res);
-        setIsProfileCompleted(true);
+        const onBoardedValue = res.onboarded.toString();
+        Cookies.set("onboarded", onBoardedValue);
+        setOnBoarding(onBoardedValue.toLowerCase());
+
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
       }
     } catch (err) {
       console.log(err);

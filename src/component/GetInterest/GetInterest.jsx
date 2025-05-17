@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import InterestOptions from "../InterestOptions/InterestOptions";
 import logoImg from "../../assets/logo.png";
-import questionmark from "../../assets/questionMarkLogo.png";
-import testbg from "../../assets/testbg.png";
 import { dummyTopics } from "../../utils/data";
 
 const QUESTIONS_PER_PAGE = 4;
 
 const GetInterest = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isFetched = useRef(false);
 
@@ -46,6 +42,25 @@ const GetInterest = () => {
     }
   }, []);
 
+  const [autoAdvanceIndex, setAutoAdvanceIndex] = useState(null);
+  const [userNavigatedBack, setUserNavigatedBack] = useState(false);
+
+  useEffect(() => {
+    if (
+      isPageCompleted() &&
+      autoAdvanceIndex !== currentIndex &&
+      currentIndex + QUESTIONS_PER_PAGE < totalQuestions &&
+      !userNavigatedBack
+    ) {
+      const timer = setTimeout(() => {
+        next();
+        setAutoAdvanceIndex(currentIndex);
+      }, 600);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedInterestOptions, currentIndex, userNavigatedBack]);
+
   const handleSelectOption = (questionId, updatedSelection) => {
     setSelectedInterestOptions((prev) => ({
       ...prev,
@@ -67,6 +82,8 @@ const GetInterest = () => {
   };
 
   const next = () => {
+    setUserNavigatedBack(false);
+
     const currentQuestions = questions.slice(
       currentIndex,
       currentIndex + QUESTIONS_PER_PAGE
@@ -124,6 +141,7 @@ const GetInterest = () => {
 
   const prev = () => {
     if (currentIndex > 0) {
+      setUserNavigatedBack(true);
       setCurrentIndex(currentIndex - QUESTIONS_PER_PAGE);
       if (questions[currentIndex - QUESTIONS_PER_PAGE]) {
         setHeading(questions[currentIndex - QUESTIONS_PER_PAGE].topic);
@@ -134,16 +152,7 @@ const GetInterest = () => {
   return (
     <div className="min-h-screen patternBg flex justify-center font-golos py-8">
       <div className="relative w-full max-w-4xl rounded-xl p-10">
-        <div
-        // className="text-center  relative bg-cover bg-no-repeat "
-        // style={{ backgroundImage: `url(${testbg})` }}
-        >
-          {/* <div className="absolute left-50 top-30 transform -translate-y-1/2">
-            <img src={questionmark} alt="Expolarity" className="w-16" />
-          </div>
-          <div className="absolute right-50 top-30 transform -translate-y-1/2">
-            <img src={questionmark} alt="Expolarity" className="w-16" />
-          </div> */}
+        <div>
           <div className="flex flex-col items-center p-12">
             <img src={logoImg} alt="Expolarity" className="w-16 mb-2" />
             <h1 className="text-3xl font-bold text-gray-700">Expolarity.AI</h1>
@@ -197,15 +206,15 @@ const GetInterest = () => {
 
         {!isCompleted && (
           <div className="flex items-center justify-between py-4">
-            {currentIndex > 0 && (
-              <button
-                type="submit"
-                className="bg-green-500 hover:bg-green-600 text-white rounded-md px-4 py-2 cursor-pointer"
-                onClick={prev}
-              >
-                Previous
-              </button>
-            )}
+            <button
+              type="submit"
+              className={`bg-green-500 hover:bg-green-600 text-white rounded-md px-4 py-2  ${
+                currentIndex === 0 ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
+              onClick={prev}
+            >
+              Previous
+            </button>
 
             <button
               type="submit"

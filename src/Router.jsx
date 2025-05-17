@@ -27,6 +27,7 @@ import CareerMatchCard from "./component/CareerMatchCard/CareerMatchCard.jsx";
 import CareerPath from "./Pages/CareerPath/CareerPath.jsx";
 import Result from "./component/Result.jsx";
 import Register from "./Pages/Register/Register.jsx";
+import Assessment from "./Pages/Assessment/Assessment.jsx";
 
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -82,55 +83,29 @@ const Router = () => {
             token ? <Navigate to="/studentdashboard" replace /> : <Register />
           }
         />
+        {/* <Route path="/" element={<TakeTestPage />} /> */}
+        <Route path="/" element={<Assessment />} />
 
         <Route element={<Header />}>
           <Route path="/result" element={<Result />} />
           <Route path="/getAssement" element={<GetAssement />} />
           <Route path="/getInterest" element={<GetInterest />} />
-          {/* <Route path="/result" element={<ResultPage />} /> */}
           <Route path="/careerMatch" element={<CareerMatchCard />} />
           <Route path="/careerPath/:career" element={<CareerPath />} />
         </Route>
-        <Route path="/" element={<TakeTestPage />} />
 
         <Route
           path="/paymentSuccess/:session_id"
-          element={
-            // <ProtectedRoute>
-            <PaymentSuccess />
-            // </ProtectedRoute>
-          }
+          element={<PaymentSuccess />}
         />
         <Route
           path="/paymentFailure/:session_id"
-          element={
-            // <ProtectedRoute>
-            <PaymentFailure />
-            // </ProtectedRoute>
-          }
+          element={<PaymentFailure />}
         />
 
         <Route element={<BarLayout />}>
           <Route path="/studentdashboard" element={<StudentDashboard />} />
-          <Route
-            path="dashboard/report"
-            element={
-              // <ProtectedRoute>
-              <StudentReport />
-              // </ProtectedRoute>
-            }
-          />
-
-          {/*
-          <Route path="/dashboard" element={<DashBoard />} />
-          <Route path="dashboard/school" element={<School />} />
-          <Route path="dashboard/teacher" element={<Teacher />} />
-          <Route path="dashboard/student" element={<Student />} />
-          <Route path="dashboard/parent" element={<Parent />} />
-          <Route path="dashboard/school/addSchool" element={<AddSchool />} />
-          <Route path="dashboard/teacher/addTeacher" element={<AddTeacher />} />
-          <Route path="dashboard/student/addStudent" element={<AddStudent />} />
-          <Route path="dashboard/parent/addParent" element={<AddParent />} />*/}
+          <Route path="dashboard/report" element={<StudentReport />} />
         </Route>
       </Routes>
     </BrowserRouter>

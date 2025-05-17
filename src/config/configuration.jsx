@@ -1,8 +1,7 @@
 const configuration = {
-  baseUrl: "https://zurtle-rms-python.onrender.com",
+  baseUrl: "https://zurtle-rms-python-gtb9.onrender.com",
+  // baseUrl: "https://zurtle-rms-python.onrender.com",
   CareerBaseUrl: "https://engine.expolarity.ai/api/careers",
-  // baseUrl: "https://java.expolarity.ai/",
-  // baseUrl: "http://localhost:8080/",
 
   apis: {
     assessment: "/assessment",
@@ -15,16 +14,6 @@ const configuration = {
     careerPath: "/generate",
     paymentStatus: "/payments",
     register: "/students",
-
-    // login: "zurtle/api/auth/login",
-    // getQuestions: "zurtle/api/getAllQuestions",
-    // storeQuestion: "zurtle/api/store",
-    // storeInterest: "zurtle/api/interest/store",
-    // saveTestReport: "zurtle/api/testReport",
-    // getTestReport: "zurtle/api/getTestReport",
-    // getGoogleLogin: "oauth2/authorization/google",
-    // payment: "zurtle/api/payments/createCheckoutSession",
-    // getStudent: "zurtle/api/getStudentById",
   },
 };
 
