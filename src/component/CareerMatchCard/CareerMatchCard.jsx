@@ -1,74 +1,29 @@
 import React, { useEffect, useState } from "react";
-import BasicDetails from "../BasicDetails/BasicDetails";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaUnlockAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { saveUserIds } from "../../Redux/Reducers/Login/saveUser";
 import { createPayment } from "../../Redux/Reducers/Payment/createPaymentSlice";
 import { getResult } from "../../Redux/Reducers/Result/ResultSlice";
 import loader from "../../assets/gif/save.gif";
+import Cookies from "js-cookie";
 
 const CareerMatchCard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
-  const [isProfileCompleted, setIsProfileCompleted] = useState(null);
   const [recommendation, setRecommendation] = useState("");
   const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
   const [user, setUserId] = useState(null);
 
-  const [detailsCompleted, setDetailsCompleted] = useState(false);
-
   const loading = useSelector((state) => state.getResult.loading);
 
-  const [basicData, setBasicData] = useState(null);
-
   useEffect(() => {
-    sendIds();
-    setBasicData(JSON.parse(sessionStorage.getItem("studentDetails")) || null);
-  }, []);
-
-  const sendIds = async () => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const isLogin = params.get("isLogin");
-      const userId = params.get("userId");
-
-      const reqId = JSON.parse(sessionStorage.getItem("assessmentId"));
-
-      if (userId) {
-        setUserId(userId);
-        sessionStorage.setItem("userId", userId);
-        console.log("userId", userId);
-      }
-
-      if (userId && reqId) {
-        const data = {
-          reqId,
-          userId,
-        };
-        const res = await dispatch(saveUserIds(data)).unwrap();
-        console.log(res);
-      }
-      if (isLogin === "True") {
-        setIsProfileCompleted(true);
-      }
-      navigate("/careerMatch");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    // if (isProfileCompleted && location.pathname === "/careerMatch") {
     fetchRecommendation();
-    // }
-  }, [isProfileCompleted, location.pathname]);
+  }, []);
 
   const fetchRecommendation = async () => {
     try {
-      console.log("working");
-      const userId = user || JSON.parse(sessionStorage.getItem("userId"));
+      const userId = Cookies.get("userId");
+      setUserId(userId);
       const res = await dispatch(getResult(userId)).unwrap();
       if (res) {
         setRecommendation(res?.career_recommendations);
@@ -95,7 +50,7 @@ const CareerMatchCard = () => {
   const handlePayment = async () => {
     const values = {
       amount: 5,
-      userId: user || JSON.parse(sessionStorage.getItem("userId")),
+      userId: user,
       paymentFor: "Assessment",
       currencyType: "cad",
     };
@@ -222,12 +177,6 @@ const CareerMatchCard = () => {
               </div>
             </div>
           </div>
-
-          {/* {!isProfileCompleted && !basicData && (
-            <div className="fixed inset-0 z-50 flex items-center backdrop-blur-sm justify-center bg-gray-400/30 ">
-              <BasicDetails setIsProfileCompleted={setIsProfileCompleted} />
-            </div>
-          )} */}
 
           {isPaymentCompleted && (
             <div className="fixed inset-0 z-50 flex items-center backdrop-blur-sm justify-center bg-gray-400/30 ">

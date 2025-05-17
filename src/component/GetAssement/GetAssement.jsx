@@ -6,6 +6,7 @@ import { getQuestions } from "../../Redux/Reducers/Assessment/GetQuestionsSlice"
 import logoImg from "../../assets/logo.png";
 import { saveTestReport } from "../../Redux/Reducers/Assessment/SaveTestReport";
 import Loader from "../Loader/Loader";
+import Cookies from "js-cookie";
 
 const QUESTIONS_PER_PAGE = 5;
 
@@ -15,7 +16,7 @@ const GetAssessment = () => {
   const location = useLocation();
 
   const isFetched = useRef(false);
-
+  const [userId, setUserId] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,6 +29,8 @@ const GetAssessment = () => {
     location.state?.selectedInterestOptions || null;
 
   useEffect(() => {
+    setUserId(Cookies.get("userId"));
+
     const selectedInterestOptions =
       location.state?.selectedInterestOptions || {};
 
@@ -138,7 +141,13 @@ const GetAssessment = () => {
         };
 
         console.log("Answers", answers);
-        const res = await dispatch(saveTestReport(answers)).unwrap();
+
+        const data = {
+          user_id: userId,
+          answers,
+        };
+
+        const res = await dispatch(saveTestReport(data)).unwrap();
         // localStorage.setItem("assessmentId", res.result_id);
         sessionStorage.setItem("assessmentId", JSON.stringify(res.result_id));
 
@@ -194,10 +203,11 @@ const GetAssessment = () => {
                     <p className="mt-2 text-lg text-gray-500">Thank You</p>
                     {/* Login Button to View Results */}
                     <button
-                      onClick={() => navigate("/login")}
+                      onClick={() => navigate("/careerMatch")}
                       className="mt-4 cursor-pointer px-6 py-3 bg-[#38B76C] text-white rounded-md shadow-md transition-all"
                     >
-                      Please Login to View the Result
+                      {/* Please Login to View the Result */}
+                      Click to see the Result
                     </button>
                   </div>
                 ) : (

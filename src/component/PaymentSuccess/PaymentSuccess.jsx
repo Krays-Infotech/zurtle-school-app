@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { paymentStatus } from "../../Redux/Reducers/Payment/paymentStatusSlice";
 import Tick from "../../assets/tick.jpeg";
+import Cookies from "js-cookie";
 
 const PaymentSuccess = () => {
   const { session_id } = useParams();
@@ -17,7 +18,7 @@ const PaymentSuccess = () => {
   const handleSuccessPayment = async () => {
     try {
       if (session_id) {
-        const userId = JSON.parse(sessionStorage.getItem("userId"));
+        const userId = Cookies.get("userId");
         if (userId) {
           const result = await dispatch(
             paymentStatus({
@@ -30,11 +31,9 @@ const PaymentSuccess = () => {
           console.log("result", result);
           sessionStorage.setItem("isPaid", true);
 
-          // if (result) {
           setTimeout(() => {
-            navigate("/careerMatch?isLogin=True");
+            navigate("/careerMatch");
           }, 1500);
-          // }
         }
       }
     } catch (err) {
