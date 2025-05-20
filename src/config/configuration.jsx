@@ -14,6 +14,7 @@ const configuration = {
     careerPath: "/generate",
     paymentStatus: "/payments",
     register: "/students",
+    personality: "/personality",
   },
 };
 

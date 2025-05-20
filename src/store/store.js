@@ -10,12 +10,14 @@ import GetQuestionsReducer from "../Redux/Reducers/Assessment/GetQuestionsSlice"
 import getCareerPathByIdReducer from "../Redux/Reducers/Result/getCareerPathById";
 import registerReducer from "../Redux/Reducers/Register/RegisterSLice";
 import paymentReducer from "../Redux/Reducers/Payment/createPaymentSlice";
+import getPersonalityReducer from "../Redux/Reducers/Assessment/GetPersonalitySlice";
 
 export const store = configureStore({
   reducer: {
     school: schoolReducer,
     loginDetails: loginReducer,
     getQuestions: GetQuestionsReducer,
+    getPersonality: getPersonalityReducer,
     saveAssessment: saveAssessmentReducer,
     saveBasics: saveBasicDetailsReducer,
     saveUserIds: saveUserIdsReducer,

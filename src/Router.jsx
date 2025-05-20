@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Navbar from "./component/Nav/Navbar";
 import { Outlet } from "react-router-dom";
+import Sidebar from "./component/Sidebar/Sidebar";
+import GetAssement from "./component/GetAssement/GetAssement";
+import GetInterest from "./component/GetInterest/GetInterest.jsx";
+import Header from "./component/Header/Header.jsx";
+import PaymentSuccess from "./component/PaymentSuccess/PaymentSuccess.jsx";
+import PaymentFailure from "./component/PaymentFailure/PaymentFailure.jsx";
+import CareerMatchCard from "./component/CareerMatchCard/CareerMatchCard.jsx";
+import CareerPath from "./Pages/CareerPath/CareerPath.jsx";
+import Result from "./component/Result.jsx";
+import Register from "./Pages/Register/Register.jsx";
+import Assessment from "./Pages/Assessment/Assessment.jsx";
+import { useSelector } from "react-redux";
 import School from "./Pages/School/School";
 import AddSchool from "./component/AddSchool/AddSchool";
 import Teacher from "./Pages/School/Teacher";
@@ -11,23 +22,13 @@ import Student from "./Pages/School/Student";
 import AddStudent from "./component/AddStudent/AddStudent";
 import Parent from "./Pages/School/Parent";
 import AddParent from "./component/AddParent/AddParent";
-import Login from "./Pages/Login/Login.jsx";
 import DashBoard from "./Pages/DashBoard/DashBoard";
-import Sidebar from "./component/Sidebar/Sidebar";
 import StudentDashboard from "./Pages/DashBoard/StudentDashBoard";
-import GetAssement from "./component/GetAssement/GetAssement";
-import GetInterest from "./component/GetInterest/GetInterest.jsx";
 import TakeTestPage from "./Pages/TakeTestPage/TakeTestPage.jsx";
-import Header from "./component/Header/Header.jsx";
 import StudentReport from "./component/StudentReport/StudentReport.jsx";
-import PaymentSuccess from "./component/PaymentSuccess/PaymentSuccess.jsx";
-import PaymentFailure from "./component/PaymentFailure/PaymentFailure.jsx";
 import ResultPage from "./component/ResultPage/ResultPage.jsx";
-import CareerMatchCard from "./component/CareerMatchCard/CareerMatchCard.jsx";
-import CareerPath from "./Pages/CareerPath/CareerPath.jsx";
-import Result from "./component/Result.jsx";
-import Register from "./Pages/Register/Register.jsx";
-import Assessment from "./Pages/Assessment/Assessment.jsx";
+import Login from "./Pages/Login/Login.jsx";
+import Personality from "./component/Personality/Personality.jsx";
 
 const BarLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -56,40 +57,18 @@ const BarLayout = () => {
 };
 
 const Router = () => {
-  const token =
-    useSelector((state) => state.loginDetails.token) ||
-    localStorage.getItem("token");
-  // const token = true;
-  const ProtectedRoute = ({ children }) => {
-    if (!token) {
-      return <Navigate to="/" replace />;
-    }
-    return children;
-  };
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/login"
-          element={
-            token ? <Navigate to="/studentdashboard" replace /> : <Login />
-          }
-        />
-
-        <Route
-          path="/register"
-          element={
-            token ? <Navigate to="/studentdashboard" replace /> : <Register />
-          }
-        />
-        {/* <Route path="/" element={<TakeTestPage />} /> */}
         <Route path="/" element={<Assessment />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route element={<Header />}>
           <Route path="/result" element={<Result />} />
           <Route path="/getAssement" element={<GetAssement />} />
           <Route path="/getInterest" element={<GetInterest />} />
+          <Route path="/personality" element={<Personality />} />
           <Route path="/careerMatch" element={<CareerMatchCard />} />
           <Route path="/careerPath/:career" element={<CareerPath />} />
         </Route>
@@ -103,10 +82,10 @@ const Router = () => {
           element={<PaymentFailure />}
         />
 
-        <Route element={<BarLayout />}>
+        {/* <Route element={<BarLayout />}>
           <Route path="/studentdashboard" element={<StudentDashboard />} />
           <Route path="dashboard/report" element={<StudentReport />} />
-        </Route>
+        </Route> */}
       </Routes>
     </BrowserRouter>
   );

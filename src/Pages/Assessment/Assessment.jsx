@@ -13,8 +13,6 @@ const TeenBrainTeasers = () => {
   const [userId, setUserId] = useState(null);
   const [onBoarding, setOnBoarding] = useState(null);
 
-  console.log(onBoarding);
-
   const params = new URLSearchParams(window.location.search);
 
   useEffect(() => {
@@ -47,23 +45,28 @@ const TeenBrainTeasers = () => {
         });
         const onBoardedValue = onboarded.toLowerCase();
         setOnBoarding(onBoardedValue);
+
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
       }
     }
   }, [params]);
 
   const assessments = [
-    { id: 1, image: assessment1, title: "Intrest Test" },
-    { id: 2, image: assessment2, title: "Psychometrics Test" },
-    { id: 3, image: assessment3, title: "Personality Test" },
+    { id: 1, image: assessment1, title: "Interest Test", path: "/getInterest" },
+    {
+      id: 2,
+      image: assessment2,
+      title: "Psychometrics Test",
+      path: "/getAssement",
+    },
+    {
+      id: 3,
+      image: assessment3,
+      title: "Personality Test",
+      path: "/personality",
+    },
   ];
-
-  const handleTest = () => {
-    if (userId) {
-      navigate("/getInterest");
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <div className="bg-[#F4F7FE] p-6 flex flex-col items-center font-kite relative min-h-screen">
@@ -111,7 +114,7 @@ const TeenBrainTeasers = () => {
             </p>
             <div className="p-4">
               <button
-                onClick={handleTest}
+                onClick={() => navigate(userId ? assessment.path : "/login")}
                 className="cursor-pointer font-mallanna border border-[#076555] text-[#076555] px-6 py-2 rounded-full hover:bg-[#076555] hover:text-white transition duration-300"
               >
                 Take a Test
